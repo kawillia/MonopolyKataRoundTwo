@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonopolyKata.Core", "Core\MonopolyKata.Core.csproj", "{A77826BC-7917-4643-B6B7-6C73374C725D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonopolyKata.Tests", "Tests\MonopolyKata.Tests.csproj", "{D26E20D0-4764-4F88-9FCC-BB8F8BD44F6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monopoly.Classic", "Classic\Monopoly.Classic.csproj", "{4385E343-CA0E-469B-9ACA-092F46E6BDB7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A77826BC-7917-4643-B6B7-6C73374C725D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A77826BC-7917-4643-B6B7-6C73374C725D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A77826BC-7917-4643-B6B7-6C73374C725D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A77826BC-7917-4643-B6B7-6C73374C725D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D26E20D0-4764-4F88-9FCC-BB8F8BD44F6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D26E20D0-4764-4F88-9FCC-BB8F8BD44F6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D26E20D0-4764-4F88-9FCC-BB8F8BD44F6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D26E20D0-4764-4F88-9FCC-BB8F8BD44F6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4385E343-CA0E-469B-9ACA-092F46E6BDB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4385E343-CA0E-469B-9ACA-092F46E6BDB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4385E343-CA0E-469B-9ACA-092F46E6BDB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4385E343-CA0E-469B-9ACA-092F46E6BDB7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
