@@ -17,7 +17,7 @@ namespace MonopolyKata.Core.Board
 
         public Location GetLocation(Int32 locationIndex)
         {
-            return locations.First(bc => bc.LocationIndex == locationIndex);
+            return locations.ElementAt(locationIndex);
         }
     }
 }

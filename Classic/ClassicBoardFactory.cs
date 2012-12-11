@@ -27,7 +27,7 @@ namespace MonopolyKata.Classic
             for (var i = 0; i < 40; i++)
                 locations.Add(new Location(i));
 
-            locations[GoLocation] = new Go(GoLocation, 200);
+            locations[GoLocation] = new Go(GoLocation, ClassicGameConstants.GoSalaryBonus);
             locations[GoToJailLocation] = new GoToJail(GoToJailLocation, JustVisitingLocation);
             locations[IncomeTaxLocation] = new IncomeTax(IncomeTaxLocation, ClassicGameConstants.IncomeTaxPercentage, ClassicGameConstants.MaximumIncomeTaxPaymentAmount);
             locations[LuxuryTaxLocation] = new LuxuryTax(LuxuryTaxLocation, ClassicGameConstants.LuxuryTaxPaymentAmount);

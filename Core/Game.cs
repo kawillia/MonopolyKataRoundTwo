@@ -9,21 +9,18 @@ namespace MonopolyKata.Core
         private const Int32 MaximumNumberOfPlayers = 8;
         private const Int32 MinimumNumberOfPlayers = 2;
 
-        private TurnTaker turnTaker;
-        private Round currentRound;
         private List<Round> rounds;
         private List<Player> players;
+        private TurnTaker turnTaker;
         private Shuffler<Player> shuffler;
-                
-        public IEnumerable<Round> Rounds
-        {
-            get { return rounds.ToList(); }
-        }
+
+        public IEnumerable<Round> Rounds { get { return rounds.ToList(); } }
 
         public Game(TurnTaker turnTaker)
         {
-            this.turnTaker = turnTaker;
+            this.rounds = new List<Round>();
             this.players = new List<Player>();
+            this.turnTaker = turnTaker;
             this.shuffler = new Shuffler<Player>();
         }
 
@@ -40,13 +37,12 @@ namespace MonopolyKata.Core
             if (players.Count < MinimumNumberOfPlayers || players.Count > MaximumNumberOfPlayers)
                 throw new InvalidOperationException("Cannot start the game with less than the minimum or greater than the maximum number of players.");
 
-            rounds = new List<Round>();
             players = shuffler.Shuffle(players).ToList();
         }
 
         public void PlayRound()
         {
-            currentRound = new Round();
+            var currentRound = new Round();
 
             foreach (var player in players)
             {

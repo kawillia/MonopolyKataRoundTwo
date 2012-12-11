@@ -3,7 +3,7 @@ using MonopolyKata.Classic;
 using MonopolyKata.Core.Board.Locations;
 using MonopolyKata.Core;
 
-namespace MonopolyTests.Board.Locations
+namespace MonopolyKata.Tests.Board.Locations
 {
     [TestClass]
     public class GoTests

@@ -4,7 +4,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonopolyKata.Core;
 
-namespace MonopolyTests
+namespace MonopolyKata.Tests
 {
     [TestClass]
     public class DiceTests

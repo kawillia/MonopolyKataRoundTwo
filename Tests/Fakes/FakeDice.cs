@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using MonopolyKata.Core;
 
-namespace MonopolyTests.Fakes
+namespace MonopolyKata.Tests.Fakes
 {
     public class FakeDice : Dice
     {

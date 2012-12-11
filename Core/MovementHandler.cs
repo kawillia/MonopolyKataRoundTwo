@@ -22,19 +22,16 @@ namespace MonopolyKata.Core
         public void MovePlayer(Player player, Int32 numberOfSpaces)
         {
             ApplyMovementBonus(player, numberOfSpaces);
-            LandOnLocation(player, numberOfSpaces);
+            MoveToLocation(player, numberOfSpaces);
         }
 
         private void ApplyMovementBonus(Player player, Int32 numberOfSpaces)
         {
-            var movementBonus = 0;
-            foreach (var movementBonusStrategy in movementBonusStrategies)
-                movementBonus += movementBonusStrategy.GetBonus(player.CurrentLocation, numberOfSpaces);
-
+            var movementBonus = movementBonusStrategies.Sum(s => s.GetBonus(player.CurrentLocation, numberOfSpaces));
             player.Receive(movementBonus);
         }
 
-        private void LandOnLocation(Player player, Int32 numberOfSpaces)
+        private void MoveToLocation(Player player, Int32 numberOfSpaces)
         {
             player.MoveTo((player.CurrentLocation + numberOfSpaces) % board.TotalNumberOfLocations);
 

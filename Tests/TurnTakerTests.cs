@@ -4,9 +4,9 @@ using MonopolyKata.Classic;
 using MonopolyKata.Core.Board;
 using MonopolyKata.Classic.Strategies;
 using MonopolyKata.Core;
-using MonopolyTests.Fakes;
+using MonopolyKata.Tests.Fakes;
 
-namespace MonopolyTests
+namespace MonopolyKata.Tests
 {
     [TestClass]
     public class TurnTakerTests

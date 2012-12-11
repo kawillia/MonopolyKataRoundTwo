@@ -3,7 +3,7 @@ using MonopolyKata.Classic;
 using MonopolyKata.Core.Board.Locations;
 using MonopolyKata.Core;
 
-namespace MonopolyTests.Board
+namespace MonopolyKata.Tests.Board
 {
     [TestClass]
     public class LuxuryTaxTests
