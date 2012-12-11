@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Monopoly.Board;
-using Monopoly.Board.Locations;
+using MonopolyKata.Core.Board;
+using MonopolyKata.Core.Board.Locations;
 
-namespace Monopoly.Classic
+namespace MonopolyKata.Classic
 {
     public class ClassicBoardFactory
     {
@@ -13,6 +13,7 @@ namespace Monopoly.Classic
         public const Int32 JustVisitingLocation = 10;
         public const Int32 GoToJailLocation = 30;
         public const Int32 LuxuryTaxLocation = 38;
+        public const Int32 NumberOfLocations = 40;
 
         public static GameBoard Create()
         {

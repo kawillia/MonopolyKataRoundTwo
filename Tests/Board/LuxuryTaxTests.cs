@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Monopoly;
-using Monopoly.Board.Locations;
-using Monopoly.Classic;
+using MonopolyKata.Classic;
+using MonopolyKata.Core.Board.Locations;
+using MonopolyKata.Core;
 
 namespace MonopolyTests.Board
 {
@@ -20,18 +20,9 @@ namespace MonopolyTests.Board
         public void PlayerLandingOnLuxuryTaxDecreasesPlayerBalanceByLuxuryTaxAmount()
         {
             horse = new Player("Horse", 1500);
-            luxuryTax.LandedOnByPlayer(horse);
+            luxuryTax.LandedOn(horse);
 
             Assert.AreEqual(1500 - ClassicGameConstants.LuxuryTaxPaymentAmount, horse.Balance);
-        }
-
-        [TestMethod]
-        public void PlayerPassingLuxuryTaxDoesNotAffectPlayerBalance()
-        {
-            horse = new Player("Horse", 1500);
-            luxuryTax.PassedByPlayer(horse);
-
-            Assert.AreEqual(1500, horse.Balance);
         }
     }
 }

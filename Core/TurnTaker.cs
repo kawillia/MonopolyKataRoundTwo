@@ -1,4 +1,4 @@
-﻿namespace Monopoly
+﻿namespace MonopolyKata.Core
 {
     public class TurnTaker
     {
@@ -13,7 +13,7 @@
 
         public void Take(Player player)
         {
-            movementHandler.MovePlayerSpaceBySpace(player, dice.Roll());
+            movementHandler.MovePlayer(player, dice.Roll());
         }
     }
 }

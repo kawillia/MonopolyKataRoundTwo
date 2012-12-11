@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Monopoly
+namespace MonopolyKata.Core
 {
     public class Player
     {

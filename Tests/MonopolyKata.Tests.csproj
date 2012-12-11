@@ -61,12 +61,13 @@
     <Compile Include="PlayerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShufflerTests.cs" />
+    <Compile Include="Strategies\PassGoBonusStrategyTests.cs" />
     <Compile Include="TurnTakerTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Classic\Monopoly.Classic.csproj">
+    <ProjectReference Include="..\Classic\MonopolyKata.Classic.csproj">
       <Project>{4385e343-ca0e-469b-9aca-092f46e6bdb7}</Project>
-      <Name>Monopoly.Classic</Name>
+      <Name>MonopolyKata.Classic</Name>
     </ProjectReference>
     <ProjectReference Include="..\Core\MonopolyKata.Core.csproj">
       <Project>{a77826bc-7917-4643-b6b7-6c73374c725d}</Project>

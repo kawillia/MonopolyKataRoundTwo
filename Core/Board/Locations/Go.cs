@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Monopoly;
+using MonopolyKata;
+using MonopolyKata.Core;
 
-namespace Monopoly.Board.Locations
+namespace MonopolyKata.Core.Board.Locations
 {
     public class Go : Location
     {
@@ -16,17 +17,7 @@ namespace Monopoly.Board.Locations
             GoSalaryBonus = goSalaryBonus;
         }
 
-        public override void LandedOnByPlayer(Player player)
-        {
-            ReceiveGoSalaryBonus(player);
-        }
-
-        public override void PassedByPlayer(Player player)
-        {
-            ReceiveGoSalaryBonus(player);
-        }
-
-        private void ReceiveGoSalaryBonus(Player player)
+        public override void LandedOn(Player player)
         {
             player.Receive(GoSalaryBonus);
         }

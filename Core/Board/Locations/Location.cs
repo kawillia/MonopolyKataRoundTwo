@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Monopoly;
+using MonopolyKata;
+using MonopolyKata.Core;
 
-namespace Monopoly.Board.Locations
+namespace MonopolyKata.Core.Board.Locations
 {
     public class Location
     {
@@ -15,7 +16,6 @@ namespace Monopoly.Board.Locations
             LocationIndex = locationIndex;
         }
 
-        public virtual void LandedOnByPlayer(Player player) { }
-        public virtual void PassedByPlayer(Player player) { }
+        public virtual void LandedOn(Player player) { }
     }
 }

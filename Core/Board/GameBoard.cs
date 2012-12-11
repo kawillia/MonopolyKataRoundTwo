@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Monopoly.Board.Locations;
+using MonopolyKata.Core.Board.Locations;
 
-namespace Monopoly.Board
+namespace MonopolyKata.Core.Board
 {
     public class GameBoard
     {

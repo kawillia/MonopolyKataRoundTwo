@@ -1,46 +1,45 @@
 ﻿using System;
-using Monopoly.Board;
+using System.Collections.Generic;
+using System.Linq;
+using MonopolyKata.Core.Board;
+using MonopolyKata.Core.Strategies;
 
-namespace Monopoly
+namespace MonopolyKata.Core
 {
     public class MovementHandler
     {
         private GameBoard board;
-        public Int32 NumberOfLocationsLandedOn { get; private set; }
+        private IEnumerable<IMovementBonusStrategy> movementBonusStrategies;
 
-        public MovementHandler(GameBoard board)
+        public MovementHandler(GameBoard board) : this(board, Enumerable.Empty<IMovementBonusStrategy>()) { }
+
+        public MovementHandler(GameBoard board, IEnumerable<IMovementBonusStrategy> movementBonusStrategies)
         {
             this.board = board;
+            this.movementBonusStrategies = movementBonusStrategies;
         }
 
-        public void MovePlayerSpaceBySpace(Player player, Int32 numberOfSpaces)
+        public void MovePlayer(Player player, Int32 numberOfSpaces)
         {
-            for (var i = 1; i < numberOfSpaces; i++)
-                PassNextLocation(player);
-
-            LandOnNextLocation(player);
-            NumberOfLocationsLandedOn++;
+            ApplyMovementBonus(player, numberOfSpaces);
+            LandOnLocation(player, numberOfSpaces);
         }
 
-        private void PassNextLocation(Player player)
+        private void ApplyMovementBonus(Player player, Int32 numberOfSpaces)
         {
-            MovePlayerOneLocation(player);
+            var movementBonus = 0;
+            foreach (var movementBonusStrategy in movementBonusStrategies)
+                movementBonus += movementBonusStrategy.GetBonus(player.CurrentLocation, numberOfSpaces);
+
+            player.Receive(movementBonus);
+        }
+
+        private void LandOnLocation(Player player, Int32 numberOfSpaces)
+        {
+            player.MoveTo((player.CurrentLocation + numberOfSpaces) % board.TotalNumberOfLocations);
 
             var location = board.GetLocation(player.CurrentLocation);
-            location.PassedByPlayer(player);
-        }
-
-        private void LandOnNextLocation(Player player)
-        {
-            MovePlayerOneLocation(player);
-
-            var location = board.GetLocation(player.CurrentLocation);
-            location.LandedOnByPlayer(player);
-        }
-
-        private void MovePlayerOneLocation(Player player)
-        {
-            player.MoveTo((player.CurrentLocation + 1) % board.TotalNumberOfLocations);
+            location.LandedOn(player);
         }
     }
 }

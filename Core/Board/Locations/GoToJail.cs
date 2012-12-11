@@ -1,6 +1,7 @@
 ﻿ using System;
+using MonopolyKata.Core;
 
-namespace Monopoly.Board.Locations
+namespace MonopolyKata.Core.Board.Locations
 {
     public class GoToJail : Location
     {
@@ -12,7 +13,7 @@ namespace Monopoly.Board.Locations
             LocationToSendPlayerTo = locationToSendPlayerTo;
         }
 
-        public override void LandedOnByPlayer(Player player)
+        public override void LandedOn(Player player)
         {
             player.MoveTo(LocationToSendPlayerTo);
         }

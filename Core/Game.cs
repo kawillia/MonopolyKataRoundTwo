@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Monopoly
+namespace MonopolyKata.Core
 {
     public class Game
     {

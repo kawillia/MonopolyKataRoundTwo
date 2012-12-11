@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Monopoly;
+using MonopolyKata;
+using MonopolyKata.Core;
 
-namespace Monopoly.Board.Locations
+namespace MonopolyKata.Core.Board.Locations
 {
     public class IncomeTax : Location
     {
@@ -18,7 +19,7 @@ namespace Monopoly.Board.Locations
             MaximumTaxPayment = maximumTaxPayment;
         }
 
-        public override void LandedOnByPlayer(Player player)
+        public override void LandedOn(Player player)
         {
             if (player.NetWorth > 0)
                 player.Pay(Math.Min(player.NetWorth / TaxPercentage, MaximumTaxPayment));

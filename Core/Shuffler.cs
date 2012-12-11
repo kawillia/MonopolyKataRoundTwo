@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Monopoly
+namespace MonopolyKata.Core
 {
     public class Shuffler<T>
     {

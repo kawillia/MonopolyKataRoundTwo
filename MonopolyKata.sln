@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonopolyKata.Core", "Core\M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonopolyKata.Tests", "Tests\MonopolyKata.Tests.csproj", "{D26E20D0-4764-4F88-9FCC-BB8F8BD44F6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monopoly.Classic", "Classic\Monopoly.Classic.csproj", "{4385E343-CA0E-469B-9ACA-092F46E6BDB7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonopolyKata.Classic", "Classic\MonopolyKata.Classic.csproj", "{4385E343-CA0E-469B-9ACA-092F46E6BDB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

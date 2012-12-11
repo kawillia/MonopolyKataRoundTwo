@@ -1,8 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Monopoly.Board.Locations;
-using Monopoly;
-using Monopoly.Classic;
-using System;
+using MonopolyKata.Classic;
+using MonopolyKata.Core.Board.Locations;
+using MonopolyKata.Core;
 
 namespace MonopolyTests.Board
 {
@@ -21,7 +20,7 @@ namespace MonopolyTests.Board
         public void PlayerLandingOnIncomeTaxWhenPercentageOfNetWorthIsBelowMaximumPaymentDecreasesPlayerBalanceByPercentage()
         {
             horse = new Player("Horse", 1800);
-            incomeTax.LandedOnByPlayer(horse);
+            incomeTax.LandedOn(horse);
 
             Assert.AreEqual(1800 - (1800 / ClassicGameConstants.IncomeTaxPercentage), horse.Balance);
         }
@@ -30,7 +29,7 @@ namespace MonopolyTests.Board
         public void PlayerLandingOnIncomeTaxWhenPercentageOfNetWorthIsAboveMaximumPaymentDecreasesPlayerBalanceByMaximumPayment()
         {
             horse = new Player("Horse", 2200);
-            incomeTax.LandedOnByPlayer(horse);
+            incomeTax.LandedOn(horse);
 
             Assert.AreEqual(2200 - ClassicGameConstants.MaximumIncomeTaxPaymentAmount, horse.Balance);
         }
@@ -39,7 +38,7 @@ namespace MonopolyTests.Board
         public void PlayerLandingOnIncomeTaxWheNetWorthIsZeroDecreasesPlayerBalanceByZero()
         {
             horse = new Player("Horse", 0);
-            incomeTax.LandedOnByPlayer(horse);
+            incomeTax.LandedOn(horse);
 
             Assert.AreEqual(0, horse.Balance);
         }
@@ -48,18 +47,9 @@ namespace MonopolyTests.Board
         public void PlayerLandingOnIncomeTaxWhenPercentageOfNetWorthEqualsMaximumPaymentDecreasesPlayerBonusByMaxiumumPayment()
         {
             horse = new Player("Horse", 2000);
-            incomeTax.LandedOnByPlayer(horse);
+            incomeTax.LandedOn(horse);
 
             Assert.AreEqual(2000 - ClassicGameConstants.MaximumIncomeTaxPaymentAmount, horse.Balance);
-        }
-
-        [TestMethod]
-        public void PlayerPassingIncomeTaxDoesNotAffectPlayerBalance()
-        {
-            horse = new Player("Horse", 500);
-            incomeTax.PassedByPlayer(horse);
-
-            Assert.AreEqual(500, horse.Balance);
         }
     }
 }

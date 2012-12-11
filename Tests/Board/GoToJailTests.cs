@@ -1,8 +1,7 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Monopoly;
-using Monopoly.Board.Locations;
-using Monopoly.Classic;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MonopolyKata.Classic;
+using MonopolyKata.Core.Board.Locations;
+using MonopolyKata.Core;
 
 namespace MonopolyKata.Tests.Board
 {
@@ -21,17 +20,9 @@ namespace MonopolyKata.Tests.Board
         [TestMethod]
         public void LandingOnGoToJailMovesPlayerToJustVisiting()
         {
-            goToJail.LandedOnByPlayer(horse);
+            goToJail.LandedOn(horse);
 
             Assert.AreEqual(ClassicBoardFactory.JustVisitingLocation, horse.CurrentLocation);
-        }
-
-        [TestMethod]
-        public void PassingGoToJailDoesNotAffectPlayerLocation()
-        {
-            goToJail.PassedByPlayer(horse);
-
-            Assert.AreEqual(0, horse.CurrentLocation);
         }
     }
 }

@@ -1,7 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Monopoly;
-using Monopoly.Board;
-using Monopoly.Classic;
+﻿using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MonopolyKata.Classic;
+using MonopolyKata.Core.Board;
+using MonopolyKata.Classic.Strategies;
+using MonopolyKata.Core;
 using MonopolyTests.Fakes;
 
 namespace MonopolyTests

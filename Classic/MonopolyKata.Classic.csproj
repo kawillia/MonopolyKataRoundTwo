@@ -7,8 +7,8 @@
     <ProjectGuid>{4385E343-CA0E-469B-9ACA-092F46E6BDB7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Monopoly.Classic</RootNamespace>
-    <AssemblyName>Monopoly.Classic</AssemblyName>
+    <RootNamespace>MonopolyKata.Classic</RootNamespace>
+    <AssemblyName>MonopolyKata.Classic</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -43,6 +43,7 @@
     <Compile Include="ClassicGameConstants.cs" />
     <Compile Include="ClassicGameFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Strategies\PassGoBonusStrategy.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\MonopolyKata.Core.csproj">

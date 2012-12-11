@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Monopoly;
+using MonopolyKata.Core;
 
 namespace MonopolyTests
 {

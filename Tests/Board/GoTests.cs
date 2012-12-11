@@ -1,8 +1,7 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Monopoly;
-using Monopoly.Board.Locations;
-using Monopoly.Classic;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MonopolyKata.Classic;
+using MonopolyKata.Core.Board.Locations;
+using MonopolyKata.Core;
 
 namespace MonopolyTests.Board.Locations
 {
@@ -22,28 +21,9 @@ namespace MonopolyTests.Board.Locations
         public void PlayerLandingOnGoIncreasesPlayerBalanceByGoSalaryBonus()
         {
             var balanceBefore = horse.Balance;
-            go.LandedOnByPlayer(horse);
+            go.LandedOn(horse);
 
             Assert.AreEqual(balanceBefore + ClassicGameConstants.GoSalaryBonus, horse.Balance);
-        }
-
-        [TestMethod]
-        public void PlayerPassingGoIncreasesPlayerBalanceByGoSalaryBonus()
-        {
-            var balanceBefore = horse.Balance;
-            go.PassedByPlayer(horse);
-
-            Assert.AreEqual(balanceBefore + ClassicGameConstants.GoSalaryBonus, horse.Balance);
-        }
-
-        [TestMethod]
-        public void PlayerPassingGoTwiceIncreasesPlayerBalanceByTwoTimesTheGoSalaryBonus()
-        {
-            var balanceBefore = horse.Balance;
-            go.PassedByPlayer(horse);
-            go.PassedByPlayer(horse);
-
-            Assert.AreEqual(balanceBefore + (2 * ClassicGameConstants.GoSalaryBonus), horse.Balance);
         }
     }
 }
