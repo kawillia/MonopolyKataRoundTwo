@@ -15,14 +15,12 @@ namespace MonopolyKata.Tests
     {
         private Player player;
         private GameBoard board;
-        private FakeDice fakeDice;
         private MovementHandler movementHandler;
 
         [TestInitialize]
         public void Initialize()
         {
             player = new Player("Horse");
-            fakeDice = new FakeDice();
             board = ClassicBoardFactory.Create();      
             movementHandler = new MovementHandler(board, new[] { new PassGoBonusStrategy() });
         }

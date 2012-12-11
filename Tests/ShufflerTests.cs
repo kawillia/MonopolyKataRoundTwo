@@ -12,13 +12,13 @@ namespace MonopolyKata.Tests
         [TestMethod]
         public void ShuffleReturnsSameNumberOfItems()
         {
-            List<Player> nonShuffledPlayers = new List<Player>();
+            var nonShuffledPlayers = new List<Player>();
 
             nonShuffledPlayers.Add(new Player("Horse"));
             nonShuffledPlayers.Add(new Player("Car"));
 
-            Shuffler<Player> shuffler = new Shuffler<Player>();
-            IEnumerable<Player> shuffledPlayers = shuffler.Shuffle(nonShuffledPlayers);
+            var shuffler = new Shuffler<Player>();
+            var shuffledPlayers = shuffler.Shuffle(nonShuffledPlayers);
 
             Assert.AreEqual(nonShuffledPlayers.Count, shuffledPlayers.Count());
         }
@@ -26,7 +26,7 @@ namespace MonopolyKata.Tests
         [TestMethod]
         public void ShuffleOneHundredTimesShufflesTwoItemsProperly()
         {
-            List<Player> nonShuffledPlayers = new List<Player>();
+            var nonShuffledPlayers = new List<Player>();
 
             nonShuffledPlayers.Add(new Player("Horse"));
             nonShuffledPlayers.Add(new Player("Car"));
@@ -37,7 +37,7 @@ namespace MonopolyKata.Tests
         [TestMethod]
         public void ShuffleOneHundredTimesShufflesMoreThanTwoItemsProperly()
         {
-            List<Player> nonShuffledPlayers = new List<Player>();
+            var nonShuffledPlayers = new List<Player>();
 
             nonShuffledPlayers.Add(new Player("Horse"));
             nonShuffledPlayers.Add(new Player("Car"));
@@ -49,15 +49,13 @@ namespace MonopolyKata.Tests
 
         private void AssertProperShuffling(List<Player> nonShuffledPlayers)
         {
-            List<IEnumerable<Player>> shuffledLists = new List<IEnumerable<Player>>();
-            Shuffler<Player> shuffler = new Shuffler<Player>();
+            var shuffledLists = new List<IEnumerable<Player>>();
+            var shuffler = new Shuffler<Player>();
 
-            for (Int32 i = 0; i < 100; i++)
-            {
+            for (var i = 0; i < 100; i++)
                 shuffledLists.Add(shuffler.Shuffle(nonShuffledPlayers));
-            }
 
-            IEnumerable<string> firstItems = shuffledLists.Select(l => l.First().Name).Distinct();
+            var firstItems = shuffledLists.Select(l => l.First().Name).Distinct();
 
             Assert.AreEqual(nonShuffledPlayers.Count, firstItems.Count());
         }

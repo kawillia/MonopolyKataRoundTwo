@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MonopolyKata;
-using MonopolyKata.Core;
 
 namespace MonopolyKata.Core.Board.Locations
 {
@@ -16,6 +11,6 @@ namespace MonopolyKata.Core.Board.Locations
             LocationIndex = locationIndex;
         }
 
-        public virtual void LandedOn(Player player) { }
+        public virtual void LandOn(Player player) { }
     }
 }

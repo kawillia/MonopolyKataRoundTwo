@@ -20,7 +20,7 @@ namespace MonopolyKata.Tests.Board
         [TestMethod]
         public void LandingOnGoToJailMovesPlayerToJustVisiting()
         {
-            goToJail.LandedOn(horse);
+            goToJail.LandOn(horse);
 
             Assert.AreEqual(ClassicBoardFactory.JustVisitingLocation, horse.CurrentLocation);
         }

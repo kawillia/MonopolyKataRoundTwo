@@ -17,7 +17,7 @@ namespace MonopolyKata.Core.Board.Locations
             GoSalaryBonus = goSalaryBonus;
         }
 
-        public override void LandedOn(Player player)
+        public override void LandOn(Player player)
         {
             player.Receive(GoSalaryBonus);
         }

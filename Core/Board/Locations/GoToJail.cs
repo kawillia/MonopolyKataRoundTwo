@@ -13,7 +13,7 @@ namespace MonopolyKata.Core.Board.Locations
             LocationToSendPlayerTo = locationToSendPlayerTo;
         }
 
-        public override void LandedOn(Player player)
+        public override void LandOn(Player player)
         {
             player.MoveTo(LocationToSendPlayerTo);
         }

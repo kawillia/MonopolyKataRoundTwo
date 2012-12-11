@@ -20,7 +20,7 @@ namespace MonopolyKata.Tests.Board
         public void PlayerLandingOnLuxuryTaxDecreasesPlayerBalanceByLuxuryTaxAmount()
         {
             horse = new Player("Horse", 1500);
-            luxuryTax.LandedOn(horse);
+            luxuryTax.LandOn(horse);
 
             Assert.AreEqual(1500 - ClassicGameConstants.LuxuryTaxPaymentAmount, horse.Balance);
         }

@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MonopolyKata;
-using MonopolyKata.Core;
 
 namespace MonopolyKata.Core.Board.Locations
 {
@@ -19,7 +14,7 @@ namespace MonopolyKata.Core.Board.Locations
             MaximumTaxPayment = maximumTaxPayment;
         }
 
-        public override void LandedOn(Player player)
+        public override void LandOn(Player player)
         {
             if (player.NetWorth > 0)
                 player.Pay(Math.Min(player.NetWorth / TaxPercentage, MaximumTaxPayment));

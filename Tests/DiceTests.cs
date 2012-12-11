@@ -10,7 +10,6 @@ namespace MonopolyKata.Tests
     public class DiceTests
     {
         private Dice dice;
-        private const Int32 NumberOfPossibleRolledValues = 11;
 
         [TestInitialize]
         public void Initialize()
@@ -30,14 +29,14 @@ namespace MonopolyKata.Tests
         }
 
         [TestMethod]
-        public void UpperAndLowerDieValuesAreRolled()
+        public void AllPossibleValuesAreRolled()
         {
             var rolledValues = new List<Int32>();
 
-            for (Int32 i = 0; i < 100; i++)
+            for (var i = 0; i < 100; i++)
                 rolledValues.Add(dice.Roll());
 
-            Assert.AreEqual(NumberOfPossibleRolledValues, rolledValues.Distinct().Count());
+            Assert.AreEqual(11, rolledValues.Distinct().Count());
         }
     }
 }

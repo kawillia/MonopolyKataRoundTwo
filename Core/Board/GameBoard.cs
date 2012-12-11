@@ -15,9 +15,10 @@ namespace MonopolyKata.Core.Board
             this.locations = locations;
         }
 
-        public Location GetLocation(Int32 locationIndex)
+        public void HavePlayerLandOnCurrentLocation(Player player)
         {
-            return locations.ElementAt(locationIndex);
+            var location = locations.ElementAt(player.CurrentLocation);
+            location.LandOn(player);
         }
     }
 }

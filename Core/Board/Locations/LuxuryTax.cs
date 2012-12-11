@@ -13,7 +13,7 @@ namespace MonopolyKata.Core.Board.Locations
             TaxAmount = taxAmount;
         }
 
-        public override void LandedOn(Player player)
+        public override void LandOn(Player player)
         {
             player.Pay(TaxAmount);
         }

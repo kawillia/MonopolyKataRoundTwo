@@ -6,7 +6,7 @@ namespace MonopolyKata.Core
 {
     public class Round
     {
-        private IList<Player> players;
+        private List<Player> players;
 
         public Round()
         {
@@ -15,12 +15,7 @@ namespace MonopolyKata.Core
 
         public IEnumerable<Player> Players
         {
-            get { return new List<Player>(players); }
-        }
-
-        public Int32 NumberOfPlayers
-        {
-            get { return players.Count(); }
+            get { return players.ToList(); }
         }
 
         public void AddPlayerTurn(Player player)

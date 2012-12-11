@@ -21,7 +21,7 @@ namespace MonopolyKata.Tests.Board.Locations
         public void PlayerLandingOnGoIncreasesPlayerBalanceByGoSalaryBonus()
         {
             var balanceBefore = horse.Balance;
-            go.LandedOn(horse);
+            go.LandOn(horse);
 
             Assert.AreEqual(balanceBefore + ClassicGameConstants.GoSalaryBonus, horse.Balance);
         }

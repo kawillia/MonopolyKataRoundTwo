@@ -47,8 +47,9 @@ namespace MonopolyKata.Tests
                 {
                     var currentRoundPlayerRolls = currentRound.Players;
                     var lastRoundPlayerRolls = lastRound.Players;
+                    var lastRoundCount = lastRound.Players.Count();
 
-                    for (var i = 0; i < lastRound.NumberOfPlayers; i++)
+                    for (var i = 0; i < lastRoundCount; i++)
                         Assert.AreEqual(currentRoundPlayerRolls.ElementAt(i), lastRoundPlayerRolls.ElementAt(i));
                 }
 

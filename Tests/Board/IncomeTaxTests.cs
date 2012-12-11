@@ -20,7 +20,7 @@ namespace MonopolyKata.Tests.Board
         public void PlayerLandingOnIncomeTaxWhenPercentageOfNetWorthIsBelowMaximumPaymentDecreasesPlayerBalanceByPercentage()
         {
             horse = new Player("Horse", 1800);
-            incomeTax.LandedOn(horse);
+            incomeTax.LandOn(horse);
 
             Assert.AreEqual(1800 - (1800 / ClassicGameConstants.IncomeTaxPercentage), horse.Balance);
         }
@@ -29,7 +29,7 @@ namespace MonopolyKata.Tests.Board
         public void PlayerLandingOnIncomeTaxWhenPercentageOfNetWorthIsAboveMaximumPaymentDecreasesPlayerBalanceByMaximumPayment()
         {
             horse = new Player("Horse", 2200);
-            incomeTax.LandedOn(horse);
+            incomeTax.LandOn(horse);
 
             Assert.AreEqual(2200 - ClassicGameConstants.MaximumIncomeTaxPaymentAmount, horse.Balance);
         }
@@ -38,7 +38,7 @@ namespace MonopolyKata.Tests.Board
         public void PlayerLandingOnIncomeTaxWheNetWorthIsZeroDecreasesPlayerBalanceByZero()
         {
             horse = new Player("Horse", 0);
-            incomeTax.LandedOn(horse);
+            incomeTax.LandOn(horse);
 
             Assert.AreEqual(0, horse.Balance);
         }
@@ -47,7 +47,7 @@ namespace MonopolyKata.Tests.Board
         public void PlayerLandingOnIncomeTaxWhenPercentageOfNetWorthEqualsMaximumPaymentDecreasesPlayerBonusByMaxiumumPayment()
         {
             horse = new Player("Horse", 2000);
-            incomeTax.LandedOn(horse);
+            incomeTax.LandOn(horse);
 
             Assert.AreEqual(2000 - ClassicGameConstants.MaximumIncomeTaxPaymentAmount, horse.Balance);
         }
