@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using MonopolyKata.Core.Board;
+using MonopolyKata.Core.Rules;
 using MonopolyKata.Core.Strategies;
 
 namespace MonopolyKata.Core
@@ -9,24 +10,29 @@ namespace MonopolyKata.Core
     public class MovementHandler
     {
         private GameBoard board;
-        private IEnumerable<IMovementBonusStrategy> movementBonusStrategies;
+        private IEnumerable<IMovementBonusRule> movementBonusRules;
 
-        public MovementHandler(GameBoard board) : this(board, Enumerable.Empty<IMovementBonusStrategy>()) { }
+        public MovementHandler(GameBoard board) : this(board, Enumerable.Empty<IMovementBonusRule>()) { }
 
-        public MovementHandler(GameBoard board, IEnumerable<IMovementBonusStrategy> movementBonusStrategies)
+        public MovementHandler(GameBoard board, IEnumerable<IMovementBonusRule> movementBonusRules)
         {
             this.board = board;
-            this.movementBonusStrategies = movementBonusStrategies;
+            this.movementBonusRules = movementBonusRules;
         }
 
-        public void MovePlayer(Player player, Int32 numberOfSpaces)
+        public void MovePlayerSpaceBySpace(Player player, Int32 numberOfSpaces)
         {
-            var movementBonus = movementBonusStrategies.Sum(s => s.GetBonus(player.CurrentLocation, numberOfSpaces));
+            var movementBonus = movementBonusRules.Sum(s => s.GetBonus(player.CurrentLocation, numberOfSpaces));
             player.Receive(movementBonus);
 
             var newLocation = (player.CurrentLocation + numberOfSpaces) % board.TotalNumberOfLocations;
             player.MoveTo(newLocation);
             board.HavePlayerLandOnCurrentLocation(player);
+        }
+
+        public void MovePlayerDirectlyToLocation(Player player, Int32 location)
+        {
+            player.MoveTo(location);
         }
     }
 }

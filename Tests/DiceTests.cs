@@ -22,9 +22,9 @@ namespace MonopolyKata.Tests
         {
             for (var i = 0; i < 100; i++)
             {
-                var diceValue = dice.Roll();
+                dice.Roll();
 
-                Assert.IsTrue(diceValue >= 2 && diceValue <= 12);
+                Assert.IsTrue(dice.CurrentValue >= 2 && dice.CurrentValue <= 12);
             }
         }
 
@@ -34,7 +34,10 @@ namespace MonopolyKata.Tests
             var rolledValues = new List<Int32>();
 
             for (var i = 0; i < 100; i++)
-                rolledValues.Add(dice.Roll());
+            {
+                dice.Roll();
+                rolledValues.Add(dice.CurrentValue);
+            }
 
             Assert.AreEqual(11, rolledValues.Distinct().Count());
         }

@@ -1,7 +1,6 @@
 ﻿ using System;
-using MonopolyKata.Core;
 
-namespace MonopolyKata.Core.Board.Locations
+namespace MonopolyKata.Core.Board
 {
     public class GoToJail : Location
     {

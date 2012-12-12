@@ -1,9 +1,12 @@
 ﻿using System;
+using MonopolyKata.Core.Strategies;
 
 namespace MonopolyKata.Core
 {
     public class Player
     {
+        private IBuyingStrategy buyingStrategy;
+
         public String Name { get; private set; }
         public Int32 Balance { get; private set; }
         public Int32 CurrentLocation { get; private set; }
@@ -15,6 +18,7 @@ namespace MonopolyKata.Core
         {
             Name = name;
             Balance = initialBalance;
+            buyingStrategy = new AlwaysBuy();
         }
 
         public void Pay(Int32 amount)
@@ -30,6 +34,11 @@ namespace MonopolyKata.Core
         public void MoveTo(Int32 location)
         {
             CurrentLocation = location;
+        }
+
+        public Boolean ShouldBuyProperty()
+        {
+            return buyingStrategy.ShouldBuy();
         }
     }
 }

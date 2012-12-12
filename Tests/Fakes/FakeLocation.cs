@@ -1,6 +1,6 @@
 ﻿using System;
 using MonopolyKata.Core;
-using MonopolyKata.Core.Board.Locations;
+using MonopolyKata.Core.Board;
 
 namespace MonopolyKata.Tests.Fakes
 {

@@ -14,8 +14,6 @@ namespace MonopolyKata.Core
 
         public void Play()
         {
-            game.Start();
-
             for (var i = 0; i < NumberOfRoundsToPlay; i++)
                 game.PlayRound();
         }

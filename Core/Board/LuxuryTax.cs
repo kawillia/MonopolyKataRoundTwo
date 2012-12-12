@@ -1,21 +1,20 @@
 ﻿using System;
-using MonopolyKata.Core;
 
-namespace MonopolyKata.Core.Board.Locations
+namespace MonopolyKata.Core.Board
 {
     public class LuxuryTax : Location
     {
-        public Int32 TaxAmount { get; private set; }
+        private Int32 taxAmount;
 
         public LuxuryTax(Int32 locationIndex, Int32 taxAmount)
             : base(locationIndex)
         {
-            TaxAmount = taxAmount;
+            this.taxAmount = taxAmount;
         }
 
         public override void LandOn(Player player)
         {
-            player.Pay(TaxAmount);
+            player.Pay(taxAmount);
         }
     }
 }

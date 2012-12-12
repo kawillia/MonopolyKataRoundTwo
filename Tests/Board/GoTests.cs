@@ -1,9 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonopolyKata.Classic;
-using MonopolyKata.Core.Board.Locations;
 using MonopolyKata.Core;
+using MonopolyKata.Core.Board;
 
-namespace MonopolyKata.Tests.Board.Locations
+namespace MonopolyKata.Tests.Board
 {
     [TestClass]
     public class GoTests

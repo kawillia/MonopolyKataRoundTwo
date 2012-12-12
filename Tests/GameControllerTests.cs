@@ -10,50 +10,50 @@ namespace MonopolyKata.Tests
     [TestClass]
     public class GameControllerTests
     {
-        private Game game;
-
-        public GameControllerTests()
-        {
-            game = ClassicGameFactory.Create();
-        }
-
         [TestMethod]
         public void PlayExecutesSpecifiedNumberOfRounds()
         {
-            game.AddPlayer(new Player("Horse"));
-            game.AddPlayer(new Player("Car"));
-
+            var players = new[] { new Player("Horse"), new Player("Car") };
+            var turnTaker = new FakeTurnTaker();
+            var game = new Game(players, turnTaker, new GuidShuffler<Player>());
             var controller = new GameController(game);
+
             controller.Play();
 
-            Assert.AreEqual(GameController.NumberOfRoundsToPlay, game.Rounds.Count());
+            Assert.AreEqual(GameController.NumberOfRoundsToPlay, turnTaker.Turns.Count() / players.Count());
         }
 
         [TestMethod]
         public void PlayExecutesSamePlayerOrderInEachRound()
         {
-            game.AddPlayer(new Player("Horse"));
-            game.AddPlayer(new Player("Car"));
-            game.AddPlayer(new Player("Hat"));
-
-            var controller = new GameController(game);
-            controller.Play();
-
-            Round lastRound = null;
-
-            foreach (var currentRound in game.Rounds)
+            var players = new[]
             {
-                if (lastRound != null)
-                {
-                    var currentRoundPlayerRolls = currentRound.Players;
-                    var lastRoundPlayerRolls = lastRound.Players;
-                    var lastRoundCount = lastRound.Players.Count();
+                new Player("Horse"),
+                new Player("Car"),
+                new Player("Hat")
+            };
 
-                    for (var i = 0; i < lastRoundCount; i++)
-                        Assert.AreEqual(currentRoundPlayerRolls.ElementAt(i), lastRoundPlayerRolls.ElementAt(i));
+            var turnTaker = new FakeTurnTaker();
+            var game = new Game(players, turnTaker, new GuidShuffler<Player>());
+            var controller = new GameController(game);
+
+            controller.Play();
+            
+            var lastRoundTurns = Enumerable.Empty<Player>();
+            var turnsTaken = turnTaker.Turns;
+
+            while (turnsTaken.Any())
+            {
+                var roundTurns = turnsTaken.Take(players.Count());
+
+                if (lastRoundTurns.Any())
+                {
+                    for (var i = 0; i < lastRoundTurns.Count(); i++)
+                        Assert.AreEqual(roundTurns.ElementAt(i), lastRoundTurns.ElementAt(i));
                 }
 
-                lastRound = currentRound;
+                lastRoundTurns = roundTurns;
+                turnsTaken.RemoveRange(0, players.Count());
             }
         }
     }

@@ -9,48 +9,25 @@ namespace MonopolyKata.Core
         private const Int32 MaximumNumberOfPlayers = 8;
         private const Int32 MinimumNumberOfPlayers = 2;
 
-        private List<Round> rounds;
-        private List<Player> players;
-        private TurnTaker turnTaker;
-        private Shuffler<Player> shuffler;
+        private IEnumerable<Player> players;
+        private ITurnTaker turnTaker;
 
-        public IEnumerable<Round> Rounds { get { return rounds.ToList(); } }
-
-        public Game(TurnTaker turnTaker)
+        public Game(IEnumerable<Player> players, ITurnTaker turnTaker, IShuffler<Player> shuffler)
         {
-            this.rounds = new List<Round>();
-            this.players = new List<Player>();
-            this.turnTaker = turnTaker;
-            this.shuffler = new Shuffler<Player>();
-        }
-
-        public void AddPlayer(Player playerToAdd)
-        {
-            if (players.Any(p => p.Name == playerToAdd.Name))
+            if (players.GroupBy(p => p.Name).Any(g => g.Count() > 1))
                 throw new InvalidOperationException("Cannot add the same player to the game more than once.");
 
-            players.Add(playerToAdd);
-        }
-
-        public void Start()
-        {
-            if (players.Count < MinimumNumberOfPlayers || players.Count > MaximumNumberOfPlayers)
+            if (players.Count() < MinimumNumberOfPlayers || players.Count() > MaximumNumberOfPlayers)
                 throw new InvalidOperationException("Cannot start the game with less than the minimum or greater than the maximum number of players.");
 
-            players = shuffler.Shuffle(players).ToList();
+            this.turnTaker = turnTaker;
+            this.players = shuffler.Shuffle(players).ToList();
         }
 
         public void PlayRound()
         {
-            var currentRound = new Round();
-
             foreach (var player in players)
-            {
                 turnTaker.Take(player);
-                currentRound.AddPlayerTurn(player);
-            }
-
-            rounds.Add(currentRound);
         }
     }
 }

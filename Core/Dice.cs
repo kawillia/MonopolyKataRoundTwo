@@ -1,14 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace MonopolyKata.Core
 {
     public class Dice
     {
-        private static Random randomDieValueGenerator = new Random(1);
+        public Int32 CurrentValue { get { return dieValueOne + dieValueTwo; } }
+        public Boolean IsDoubles { get { return dieValueOne == dieValueTwo; } }
+        public Int32 NumberOfConsecutiveDoubles { get; private set; }
 
-        public virtual Int32 Roll()
+        private static Random randomDieValueGenerator = new Random();
+
+        private Int32 dieValueOne;
+        private Int32 dieValueTwo;
+
+        public Int32 Roll()
         {
-            return randomDieValueGenerator.Next(1, 7) + randomDieValueGenerator.Next(1, 7);
+            dieValueOne = RollDie();
+            dieValueTwo = RollDie();
+
+            if (IsDoubles)
+                NumberOfConsecutiveDoubles++;
+
+            return CurrentValue;
+        }
+
+        public virtual Int32 RollDie()
+        {
+            return randomDieValueGenerator.Next(1, 7);
         }
     }
 }

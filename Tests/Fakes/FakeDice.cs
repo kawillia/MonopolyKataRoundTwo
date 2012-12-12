@@ -13,9 +13,9 @@ namespace MonopolyKata.Tests.Fakes
             this.dieValues = new Queue<Int32>(dieValues);
         }
 
-        public override Int32 Roll()
+        public override Int32 RollDie()
         {
-            return dieValues.Dequeue() + dieValues.Dequeue();
+            return dieValues.Dequeue();
         }
     }
 }

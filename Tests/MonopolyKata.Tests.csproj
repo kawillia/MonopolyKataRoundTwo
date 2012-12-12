@@ -55,6 +55,11 @@
     <Compile Include="Board\LuxuryTaxTests.cs" />
     <Compile Include="Board\GoToJailTests.cs" />
     <Compile Include="Board\GameBoardTests.cs" />
+    <Compile Include="Board\Properties\PropertyGroupTests.cs" />
+    <Compile Include="Fakes\FakeTurnTaker.cs" />
+    <Compile Include="Rules\ClassicPropertyRentRuleTests.cs" />
+    <Compile Include="Rules\ClassicRailroadRentRuleTests.cs" />
+    <Compile Include="Rules\ClassicUtilityRentRuleTests.cs" />
     <Compile Include="DiceTests.cs" />
     <Compile Include="Fakes\FakeDice.cs" />
     <Compile Include="Fakes\FakeLocation.cs" />
@@ -63,7 +68,7 @@
     <Compile Include="PlayerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShufflerTests.cs" />
-    <Compile Include="Strategies\PassGoBonusStrategyTests.cs" />
+    <Compile Include="Rules\PassGoBonusRuleTests.cs" />
     <Compile Include="TurnTakerTests.cs" />
     <Compile Include="GameControllerTests.cs" />
   </ItemGroup>

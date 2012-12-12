@@ -1,24 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MonopolyKata.Core.Board.Locations;
 
 namespace MonopolyKata.Core.Board
 {
     public class GameBoard
     {
-        protected IEnumerable<Location> locations;
-        public Int32 TotalNumberOfLocations { get { return locations.Count(); } }
+        protected IEnumerable<BoardComponent> boardComponents;
+        public Int32 TotalNumberOfLocations { get; private set; }
         
-        public GameBoard(IEnumerable<Location> locations)
+        public GameBoard(IEnumerable<BoardComponent> boardComponents)
         {
-            this.locations = locations;
+            this.boardComponents = boardComponents;
+            TotalNumberOfLocations = boardComponents.Sum(l => l.NumberOfComponents);
         }
 
         public void HavePlayerLandOnCurrentLocation(Player player)
         {
-            var location = locations.ElementAt(player.CurrentLocation);
-            location.LandOn(player);
+            var component = boardComponents.First(bc => bc.ContainsComponentIndex(player.CurrentLocation));
+            component.LandOn(player);
         }
     }
 }

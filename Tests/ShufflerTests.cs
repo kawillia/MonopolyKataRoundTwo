@@ -17,7 +17,7 @@ namespace MonopolyKata.Tests
             nonShuffledPlayers.Add(new Player("Horse"));
             nonShuffledPlayers.Add(new Player("Car"));
 
-            var shuffler = new Shuffler<Player>();
+            var shuffler = new GuidShuffler<Player>();
             var shuffledPlayers = shuffler.Shuffle(nonShuffledPlayers);
 
             Assert.AreEqual(nonShuffledPlayers.Count, shuffledPlayers.Count());
@@ -50,7 +50,7 @@ namespace MonopolyKata.Tests
         private void AssertProperShuffling(List<Player> nonShuffledPlayers)
         {
             var shuffledLists = new List<IEnumerable<Player>>();
-            var shuffler = new Shuffler<Player>();
+            var shuffler = new GuidShuffler<Player>();
 
             for (var i = 0; i < 100; i++)
                 shuffledLists.Add(shuffler.Shuffle(nonShuffledPlayers));

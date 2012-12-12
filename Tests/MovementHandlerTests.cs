@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonopolyKata;
 using MonopolyKata.Classic;
 using MonopolyKata.Core.Board;
-using MonopolyKata.Classic.Strategies;
+using MonopolyKata.Classic.Rules;
 using MonopolyKata.Core;
 using MonopolyKata.Core.Strategies;
 using MonopolyKata.Tests.Fakes;
@@ -21,14 +21,14 @@ namespace MonopolyKata.Tests
         public void Initialize()
         {
             player = new Player("Horse");
-            board = ClassicBoardFactory.Create();      
-            movementHandler = new MovementHandler(board, new[] { new PassGoBonusStrategy() });
+            board = ClassicBoardFactory.Create(new FakeDice());      
+            movementHandler = new MovementHandler(board, new[] { new ClassicPassGoBonusRule() });
         }
 
         [TestMethod]
         public void PlayerIsMoved()
         {
-            movementHandler.MovePlayer(player, 3);
+            movementHandler.MovePlayerSpaceBySpace(player, 3);
 
             Assert.AreEqual(3, player.CurrentLocation);
         }
@@ -37,7 +37,7 @@ namespace MonopolyKata.Tests
         public void PlayerPositionWrapsAtEndOfBoard()
         {
             player.MoveTo(38);
-            movementHandler.MovePlayer(player, 4);
+            movementHandler.MovePlayerSpaceBySpace(player, 4);
 
             Assert.AreEqual(2, player.CurrentLocation);
         }
@@ -47,9 +47,16 @@ namespace MonopolyKata.Tests
         {
             var balanceBefore = player.Balance;
             player.MoveTo(38);
-            movementHandler.MovePlayer(player, 4);
+            movementHandler.MovePlayerSpaceBySpace(player, 4);
 
             Assert.AreEqual(ClassicGameConstants.GoSalaryBonus + balanceBefore, player.Balance);
+        }
+
+        [TestMethod]
+        public void MovePlayerDirectlyToPositionTest()
+        {
+            movementHandler.MovePlayerDirectlyToLocation(player, 20);
+            Assert.AreEqual(20, player.CurrentLocation);
         }
     }
 }

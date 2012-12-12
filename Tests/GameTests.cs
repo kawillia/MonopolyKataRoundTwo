@@ -10,57 +10,57 @@ namespace MonopolyKata.Tests
     [TestClass]
     public class GameTests
     {
-        private Game game;
-
-        [TestInitialize]
-        public void Initialize()
-        {
-            game = ClassicGameFactory.Create();
-        }
-
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
-        public void AddingDuplicatePlayerThrowsException()
+        public void CreatingGameWithDuplicatePlayerThrowsException()
         {
-            game.AddPlayer(new Player("Horse"));
-            game.AddPlayer(new Player("Horse"));
+            var players = new[] { new Player("Horse"), new Player("Horse") };
+            var game = new Game(players, new FakeTurnTaker(), new GuidShuffler<Player>());
         }
         
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
-        public void StartingGameWithLessThanMinimumNumberOfPlayersThrowsException()
+        public void CreatingGameWithLessThanMinimumNumberOfPlayersThrowsException()
         {
-            game.Start();
+            var game = new Game(Enumerable.Empty<Player>(), new FakeTurnTaker(), new GuidShuffler<Player>());
         }
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
-        public void StartingGameWithGreaterThanMaximumNumberOfPlayersThrowsException()
+        public void CreatingGameWithGreaterThanMaximumNumberOfPlayersThrowsException()
         {
-            game.AddPlayer(new Player("Horse"));
-            game.AddPlayer(new Player("Car"));
-            game.AddPlayer(new Player("Iron"));
-            game.AddPlayer(new Player("Ship"));
-            game.AddPlayer(new Player("Thimble"));
-            game.AddPlayer(new Player("Wheelbarrow"));
-            game.AddPlayer(new Player("Cannon"));
-            game.AddPlayer(new Player("Hat"));
-            game.AddPlayer(new Player("Hokie"));
-            game.Start();
+            var players = new[] 
+            {
+                new Player("Horse"),
+                new Player("Car"),
+                new Player("Iron"),
+                new Player("Ship"),
+                new Player("Thimble"),
+                new Player("Wheelbarrow"),
+                new Player("Cannon"),
+                new Player("Hat"),
+                new Player("Hokie")
+            };
+
+            var game = new Game(players, new FakeTurnTaker(), new GuidShuffler<Player>());
         }
 
         [TestMethod]
         public void StartingGameWithValidNumberOfPlayersDoesNotThrowException()
         {
-            game.AddPlayer(new Player("Horse"));
-            game.AddPlayer(new Player("Car"));
-            game.AddPlayer(new Player("Iron"));
-            game.AddPlayer(new Player("Ship"));
-            game.AddPlayer(new Player("Thimble"));
-            game.AddPlayer(new Player("Wheelbarrow"));
-            game.AddPlayer(new Player("Cannon"));
-            game.AddPlayer(new Player("Hat"));
-            game.Start();
+            var players = new[] 
+            {
+                new Player("Horse"),
+                new Player("Car"),
+                new Player("Iron"),
+                new Player("Ship"),
+                new Player("Thimble"),
+                new Player("Wheelbarrow"),
+                new Player("Cannon"),
+                new Player("Hat"),
+            };
+
+            var game = new Game(players, new FakeTurnTaker(), new GuidShuffler<Player>());
         }
     }
 }
