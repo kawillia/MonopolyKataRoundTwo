@@ -6,7 +6,7 @@ using MonopolyKata.Core;
 
 namespace MonopolyKata.Core.Board.Properties
 {
-    public class Property : Location
+    public class Property : Space
     {
         public Int32 Price { get; private set; }
         public Int32 BaseRent { get; private set; }

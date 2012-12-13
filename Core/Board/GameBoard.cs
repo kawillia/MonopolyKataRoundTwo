@@ -9,16 +9,15 @@ namespace MonopolyKata.Core.Board
         protected IEnumerable<BoardComponent> boardComponents;
         public Int32 TotalNumberOfLocations { get; private set; }
         
-        public GameBoard(IEnumerable<BoardComponent> boardComponents)
+        public GameBoard()
         {
             this.boardComponents = boardComponents;
-            TotalNumberOfLocations = boardComponents.Sum(l => l.NumberOfComponents);
+            TotalNumberOfLocations = boardComponents.Sum(l => l.NumberOfChildComponents);
         }
 
-        public void HavePlayerLandOnCurrentLocation(Player player)
+        public BoardComponent GetComponentAtLocation(Int32 location)
         {
-            var component = boardComponents.First(bc => bc.ContainsComponentIndex(player.CurrentLocation));
-            component.LandOn(player);
+            return boardComponents.First(bc => bc.ContainsComponentIndex(location));
         }
     }
 }

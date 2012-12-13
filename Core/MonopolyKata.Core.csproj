@@ -46,7 +46,7 @@
     <Compile Include="Board\Go.cs" />
     <Compile Include="Board\GoToJail.cs" />
     <Compile Include="Board\IncomeTax.cs" />
-    <Compile Include="Board\Location.cs" />
+    <Compile Include="Board\Space.cs" />
     <Compile Include="Board\LuxuryTax.cs" />
     <Compile Include="Board\Properties\Property.cs" />
     <Compile Include="Board\Properties\PropertyGroup.cs" />
@@ -63,7 +63,7 @@
     <Compile Include="Strategies\AlwaysPayToGetOutOfJail.cs" />
     <Compile Include="Rules\IChargeRentRule.cs" />
     <Compile Include="Strategies\IGetOutOfJailStrategy.cs" />
-    <Compile Include="Rules\IMovementBonusRule.cs" />
+    <Compile Include="Rules\IMovementRule.cs" />
     <Compile Include="Strategies\IBuyingStrategy.cs" />
     <Compile Include="Strategies\NeverPayToGetOutOfJail.cs" />
   </ItemGroup>

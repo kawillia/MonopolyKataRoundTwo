@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonopolyKata.Classic;
 using MonopolyKata.Core;
 using MonopolyKata.Core.Board;
@@ -11,7 +13,6 @@ namespace MonopolyKata.Tests
     {
         private FakeDice fakeDice;
         private Player player;
-        private GameBoard board;
         private ClassicTurnTaker turnTaker;
 
         [TestInitialize]
@@ -19,8 +20,9 @@ namespace MonopolyKata.Tests
         {
             fakeDice = new FakeDice();
             player = new Player("Horse");
-            board = ClassicBoardFactory.Create(fakeDice);
-            turnTaker = new ClassicTurnTaker(fakeDice, new MovementHandler(board));
+
+            var boardComponents = ClassicBoardFactory.GetComponents(fakeDice);
+            turnTaker = new ClassicTurnTaker(fakeDice, new MovementHandler(boardComponents));
         }
 
         [TestMethod]

@@ -10,10 +10,10 @@ namespace MonopolyKata.Core.Board.Properties
     public class PropertyGroup : BoardComponent
     {
         private IEnumerable<Property> properties;
-        private Property currentPlayerLocation;
+        private Property propertyLandedOn;
         private IChargeRentRule chargeRentRule;
 
-        public override Int32 NumberOfComponents
+        public override Int32 NumberOfChildComponents
         {
             get { return properties.Count(); }
         }
@@ -31,7 +31,7 @@ namespace MonopolyKata.Core.Board.Properties
 
         public override void LandOn(Player player)
         {
-            currentPlayerLocation = properties.FirstOrDefault(p => p.LocationIndex == player.CurrentLocation);
+            propertyLandedOn = properties.FirstOrDefault(p => p.LocationIndex == player.CurrentLocation);
 
             if (ShouldBuyProperty(player))
                 BuyProperty(player);
@@ -41,26 +41,26 @@ namespace MonopolyKata.Core.Board.Properties
 
         private Boolean ShouldBuyProperty(Player player)
         {
-            return !currentPlayerLocation.IsOwned && player.ShouldBuyProperty();
+            return !propertyLandedOn.IsOwned && player.ShouldBuyProperty();
         }
 
         private Boolean ShouldPayRent(Player player)
         {
-            return currentPlayerLocation.IsOwned && player != currentPlayerLocation.Owner;
+            return propertyLandedOn.IsOwned && player != propertyLandedOn.Owner;
         }
 
         private void BuyProperty(Player player)
         {
-            player.Pay(currentPlayerLocation.Price);
-            currentPlayerLocation.Owner = player;
+            player.Pay(propertyLandedOn.Price);
+            propertyLandedOn.Owner = player;
         }
 
         private void PayRent(Player player)
         {
-            var rentAmount = chargeRentRule.CalculateRent(currentPlayerLocation, properties);
+            var rentAmount = chargeRentRule.CalculateRent(propertyLandedOn, properties);
 
             player.Pay(rentAmount);
-            currentPlayerLocation.Owner.Receive(rentAmount);
+            propertyLandedOn.Owner.Receive(rentAmount);
         }
     }
 }

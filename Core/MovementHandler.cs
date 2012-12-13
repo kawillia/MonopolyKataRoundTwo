@@ -9,25 +9,27 @@ namespace MonopolyKata.Core
 {
     public class MovementHandler
     {
-        private GameBoard board;
-        private IEnumerable<IMovementBonusRule> movementBonusRules;
+        private IEnumerable<BoardComponent> boardComponents;
+        private IEnumerable<IMovementRule> movementRules;
 
-        public MovementHandler(GameBoard board) : this(board, Enumerable.Empty<IMovementBonusRule>()) { }
+        public MovementHandler(IEnumerable<BoardComponent> boardComponents) : this(boardComponents, Enumerable.Empty<IMovementRule>()) { }
 
-        public MovementHandler(GameBoard board, IEnumerable<IMovementBonusRule> movementBonusRules)
+        public MovementHandler(IEnumerable<BoardComponent> boardComponents, IEnumerable<IMovementRule> movementRules)
         {
-            this.board = board;
-            this.movementBonusRules = movementBonusRules;
+            this.boardComponents = boardComponents;
+            this.movementRules = movementRules;
         }
 
         public void MovePlayerSpaceBySpace(Player player, Int32 numberOfSpaces)
         {
-            var movementBonus = movementBonusRules.Sum(s => s.GetBonus(player.CurrentLocation, numberOfSpaces));
-            player.Receive(movementBonus);
+            foreach (var rule in movementRules)
+                rule.Apply(player, numberOfSpaces);
 
-            var newLocation = (player.CurrentLocation + numberOfSpaces) % board.TotalNumberOfLocations;
+            var newLocation = (player.CurrentLocation + numberOfSpaces) % boardComponents.Sum(c => c.NumberOfChildComponents);
             player.MoveTo(newLocation);
-            board.HavePlayerLandOnCurrentLocation(player);
+
+            var componentToLandOn = boardComponents.First(c => c.ContainsComponentIndex(newLocation));
+            componentToLandOn.LandOn(player);
         }
 
         public void MovePlayerDirectlyToLocation(Player player, Int32 location)

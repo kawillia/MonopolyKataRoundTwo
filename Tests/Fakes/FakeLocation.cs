@@ -4,7 +4,7 @@ using MonopolyKata.Core.Board;
 
 namespace MonopolyKata.Tests.Fakes
 {
-    public class FakeLocation : Location
+    public class FakeLocation : Space
     {
         public Boolean LandedOnCalled { get; set; }
 

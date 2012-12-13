@@ -2,7 +2,7 @@
 
 namespace MonopolyKata.Core.Board
 {
-    public class IncomeTax : Location
+    public class IncomeTax : Space
     {
         private Int32 taxPercentage;
         private Int32 maximumTaxPayment;

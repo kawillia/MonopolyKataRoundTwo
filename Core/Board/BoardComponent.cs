@@ -9,6 +9,6 @@ namespace MonopolyKata.Core.Board
     {
         public abstract Boolean ContainsComponentIndex(Int32 index);
         public virtual void LandOn(Player player) { }
-        public abstract Int32 NumberOfComponents { get; }
+        public abstract Int32 NumberOfChildComponents { get; }
     }
 }

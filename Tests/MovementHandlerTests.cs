@@ -7,6 +7,8 @@ using MonopolyKata.Classic.Rules;
 using MonopolyKata.Core;
 using MonopolyKata.Core.Strategies;
 using MonopolyKata.Tests.Fakes;
+using MonopolyKata.Core.Rules;
+using System;
 
 namespace MonopolyKata.Tests
 {
@@ -21,8 +23,9 @@ namespace MonopolyKata.Tests
         public void Initialize()
         {
             player = new Player("Horse");
-            board = ClassicBoardFactory.Create(new FakeDice());      
-            movementHandler = new MovementHandler(board, new[] { new ClassicPassGoBonusRule() });
+
+            var boardComponents = ClassicBoardFactory.GetComponents(new FakeDice());
+            movementHandler = new MovementHandler(boardComponents, new[] { new ClassicPassGoBonusRule() });
         }
 
         [TestMethod]
@@ -43,13 +46,15 @@ namespace MonopolyKata.Tests
         }
 
         [TestMethod]
-        public void PlayerReceivesMovementBonusWhenStrategyIsMet()
+        public void MovementRulesAreApplied()
         {
-            var balanceBefore = player.Balance;
-            player.MoveTo(38);
+            var rules = new[] { new FakeMovementRule(), new FakeMovementRule() };
+            var boardComponents = ClassicBoardFactory.GetComponents(new FakeDice());
+            movementHandler = new MovementHandler(boardComponents, rules);
             movementHandler.MovePlayerSpaceBySpace(player, 4);
 
-            Assert.AreEqual(ClassicGameConstants.GoSalaryBonus + balanceBefore, player.Balance);
+            foreach (var rule in rules)
+                Assert.IsTrue(rule.Applied);
         }
 
         [TestMethod]
@@ -57,6 +62,16 @@ namespace MonopolyKata.Tests
         {
             movementHandler.MovePlayerDirectlyToLocation(player, 20);
             Assert.AreEqual(20, player.CurrentLocation);
+        }
+
+        private class FakeMovementRule : IMovementRule
+        {
+            public Boolean Applied { get; private set; }
+
+            public void Apply(Player player, Int32 numberOfSpaces)
+            {
+                Applied = true;
+            }
         }
     }
 }

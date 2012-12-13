@@ -106,13 +106,8 @@ namespace MonopolyKata.Classic
         public const Int32 LuxuryTaxLocation = 38;
         public const Int32 BoardwalkLocation = 39;
         public const Int32 NumberOfLocations = 40;
-
-        public static GameBoard Create(Dice dice)
-        {
-            return new GameBoard(GetComponents(dice));
-        }
-
-        private static IEnumerable<BoardComponent> GetComponents(Dice dice)
+        
+        public static IEnumerable<BoardComponent> GetComponents(Dice dice)
         {
             var boardComponents = new List<BoardComponent>();
             var go = new Go(GoLocation, GoSalaryBonus);
@@ -125,7 +120,7 @@ namespace MonopolyKata.Classic
             var chanceOne = new Chance(ChanceOneLocation);
             var vermontAvenue = new Property(VermontAvenueLocation, VermontAvenuePrice, VermontAvenueRent);
             var connecticutAvenue = new Property(ConnecticutAvenueLocation, ConnecticutAvenuePrice, ConnecticutAvenueRent);
-            var justVisiting = new Location(JustVisitingLocation);
+            var justVisiting = new Space(JustVisitingLocation);
             var stCharlesPlace = new Property(StCharlesPlaceLocation, StCharlesPlacePrice, StCharlesPlaceRent);
             var electricCompany = new Property(ElectricCompanyLocation, UtilityPrice, 0);
             var statesAvenue = new Property(StatesAvenueLocation, StatesAvenuePrice, StatesAvenueRent);
@@ -135,7 +130,7 @@ namespace MonopolyKata.Classic
             var communityChestTwo = new CommunityChest(CommunityChestTwoLocation);
             var tennesseeAvenue = new Property(TennesseeAvenueLocation, TennesseeAvenuePrice, TennesseeAvenueRent);
             var newYorkAvenue = new Property(NewYorkAvenueLocation, NewYorkAvenuePrice, NewYorkAvenueRent);
-            var freeParking = new Location(FreeParkingLocation);
+            var freeParking = new Space(FreeParkingLocation);
             var kentuckyAvenue = new Property(KentuckyAvenueLocation, KentuckyAvenuePrice, KentuckyAvenueRent);
             var chanceTwo = new Chance(ChanceTwoLocation);
             var indianaAvenue = new Property(IndianaAvenueLocation, IndianaAvenuePrice, IndianaAvenueRent);

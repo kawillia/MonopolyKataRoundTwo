@@ -2,16 +2,16 @@
 
 namespace MonopolyKata.Core.Board
 {
-    public class Location : BoardComponent
+    public class Space : BoardComponent
     {
         public Int32 LocationIndex { get; protected set; }
 
-        public Location(Int32 locationIndex)
+        public Space(Int32 locationIndex)
         {
             LocationIndex = locationIndex;
         }        
 
-        public override Int32 NumberOfComponents
+        public override Int32 NumberOfChildComponents
         {
             get { return 1; }
         }

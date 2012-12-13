@@ -2,7 +2,7 @@
 
 namespace MonopolyKata.Core.Board
 {
-    public class Go : Location
+    public class Go : Space
     {
         public Int32 GoSalaryBonus { get; private set; }
 

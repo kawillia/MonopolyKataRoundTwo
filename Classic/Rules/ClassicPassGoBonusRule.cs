@@ -1,18 +1,17 @@
 ﻿using System;
 using MonopolyKata.Classic;
+using MonopolyKata.Core;
 using MonopolyKata.Core.Rules;
 using MonopolyKata.Core.Strategies;
 
 namespace MonopolyKata.Classic.Rules
 {
-    public class ClassicPassGoBonusRule : IMovementBonusRule
+    public class ClassicPassGoBonusRule : IMovementRule
     {
-        public Int32 GetBonus(Int32 startingLocation, Int32 numberOfSpacesToMove)
+        public void Apply(Player player, Int32 numberOfSpacesToMove)
         {
-            if (startingLocation + numberOfSpacesToMove >= ClassicBoardFactory.NumberOfLocations)
-                return ClassicGameConstants.GoSalaryBonus;
-
-            return 0;
+            if (player.CurrentLocation + numberOfSpacesToMove >= ClassicBoardFactory.NumberOfLocations)
+                player.Receive(ClassicGameConstants.GoSalaryBonus);
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MonopolyKata.Core.Board
 {
-    public class Chance : Location
+    public class Chance : Space
     {
         public Chance(Int32 locationIndex)
             : base(locationIndex)

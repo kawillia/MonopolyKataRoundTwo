@@ -2,7 +2,7 @@
 
 namespace MonopolyKata.Core.Board
 {
-    public class GoToJail : Location
+    public class GoToJail : Space
     {
         public Int32 LocationToSendPlayerTo { get; private set; }
 
