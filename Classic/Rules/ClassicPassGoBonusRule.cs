@@ -10,7 +10,7 @@ namespace MonopolyKata.Classic.Rules
     {
         public void Apply(Player player, Int32 numberOfSpacesToMove)
         {
-            if (player.CurrentLocation + numberOfSpacesToMove >= ClassicBoardFactory.NumberOfLocations)
+            if (player.CurrentLocation + numberOfSpacesToMove >= ClassicBoardFactory.NumberOfSpaces)
                 player.Receive(ClassicGameConstants.GoSalaryBonus);
         }
     }

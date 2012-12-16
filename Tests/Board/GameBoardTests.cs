@@ -10,14 +10,14 @@ using MonopolyKata.Tests.Fakes;
 using MonopolyKata.Core.Rules;
 using System;
 
-namespace MonopolyKata.Tests
+namespace MonopolyKata.Tests.Board
 {
     [TestClass]
-    public class MovementHandlerTests
+    public class GameBoardTests
     {
         private Player player;
         private GameBoard board;
-        private MovementHandler movementHandler;
+        private GameBoard movementHandler;
 
         [TestInitialize]
         public void Initialize()
@@ -25,7 +25,7 @@ namespace MonopolyKata.Tests
             player = new Player("Horse");
 
             var boardComponents = ClassicBoardFactory.GetComponents(new FakeDice());
-            movementHandler = new MovementHandler(boardComponents, new[] { new ClassicPassGoBonusRule() });
+            movementHandler = new GameBoard(boardComponents, new[] { new ClassicPassGoBonusRule() });
         }
 
         [TestMethod]
@@ -50,7 +50,7 @@ namespace MonopolyKata.Tests
         {
             var rules = new[] { new FakeMovementRule(), new FakeMovementRule() };
             var boardComponents = ClassicBoardFactory.GetComponents(new FakeDice());
-            movementHandler = new MovementHandler(boardComponents, rules);
+            movementHandler = new GameBoard(boardComponents, rules);
             movementHandler.MovePlayerSpaceBySpace(player, 4);
 
             foreach (var rule in rules)

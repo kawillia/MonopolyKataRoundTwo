@@ -1,13 +1,14 @@
 ﻿using MonopolyKata.Core;
+using MonopolyKata.Core.Board;
 
 namespace MonopolyKata.Classic
 {
     public class ClassicTurnTaker : ITurnTaker
     {
         private Dice dice;
-        private MovementHandler movementHandler;
+        private GameBoard movementHandler;
 
-        public ClassicTurnTaker(Dice dice, MovementHandler movementHandler)
+        public ClassicTurnTaker(Dice dice, GameBoard movementHandler)
         {
             this.dice = dice;
             this.movementHandler = movementHandler;

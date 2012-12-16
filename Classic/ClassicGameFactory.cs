@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using MonopolyKata.Classic.Rules;
 using MonopolyKata.Core;
+using MonopolyKata.Core.Board;
 
 namespace MonopolyKata.Classic
 {
@@ -10,7 +11,7 @@ namespace MonopolyKata.Classic
         {
             var dice = new Dice();
             var boardComponents = ClassicBoardFactory.GetComponents(dice);
-            var movementHandler = new MovementHandler(boardComponents, new[] { new ClassicPassGoBonusRule() });
+            var movementHandler = new GameBoard(boardComponents, new[] { new ClassicPassGoBonusRule() });
             var turnTaker = new ClassicTurnTaker(dice, movementHandler);
 
             return new Game(players, turnTaker, new GuidShuffler<Player>());

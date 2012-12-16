@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonopolyKata.Classic;
 using MonopolyKata.Core;
 using MonopolyKata.Core.Board;
+using MonopolyKata.Core.Rules;
 using MonopolyKata.Tests.Fakes;
 
 namespace MonopolyKata.Tests
@@ -22,7 +24,7 @@ namespace MonopolyKata.Tests
             player = new Player("Horse");
 
             var boardComponents = ClassicBoardFactory.GetComponents(fakeDice);
-            turnTaker = new ClassicTurnTaker(fakeDice, new MovementHandler(boardComponents));
+            turnTaker = new ClassicTurnTaker(fakeDice, new GameBoard(boardComponents, Enumerable.Empty<IMovementRule>()));
         }
 
         [TestMethod]

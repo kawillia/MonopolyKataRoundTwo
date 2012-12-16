@@ -105,7 +105,7 @@ namespace MonopolyKata.Classic
         public const Int32 ParkPlaceLocation = 37;
         public const Int32 LuxuryTaxLocation = 38;
         public const Int32 BoardwalkLocation = 39;
-        public const Int32 NumberOfLocations = 40;
+        public const Int32 NumberOfSpaces = 40;
         
         public static IEnumerable<BoardComponent> GetComponents(Dice dice)
         {

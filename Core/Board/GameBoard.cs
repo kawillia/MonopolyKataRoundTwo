@@ -1,23 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MonopolyKata.Core.Rules;
+using MonopolyKata.Core.Strategies;
 
 namespace MonopolyKata.Core.Board
 {
     public class GameBoard
     {
-        protected IEnumerable<BoardComponent> boardComponents;
-        public Int32 TotalNumberOfLocations { get; private set; }
-        
-        public GameBoard()
+        private IEnumerable<BoardComponent> boardComponents;
+        private IEnumerable<IMovementRule> movementRules;
+
+        public GameBoard(IEnumerable<BoardComponent> boardComponents, IEnumerable<IMovementRule> movementRules)
         {
             this.boardComponents = boardComponents;
-            TotalNumberOfLocations = boardComponents.Sum(l => l.NumberOfChildComponents);
+            this.movementRules = movementRules;
         }
 
-        public BoardComponent GetComponentAtLocation(Int32 location)
+        public void MovePlayerSpaceBySpace(Player player, Int32 numberOfSpaces)
         {
-            return boardComponents.First(bc => bc.ContainsComponentIndex(location));
+            foreach (var rule in movementRules)
+                rule.Apply(player, numberOfSpaces);
+
+            var newLocation = (player.CurrentLocation + numberOfSpaces) % boardComponents.Sum(c => c.NumberOfChildComponents);
+            player.MoveTo(newLocation);
+
+            var componentToLandOn = boardComponents.First(c => c.ContainsComponentIndex(newLocation));
+            componentToLandOn.LandOn(player);
+        }
+
+        public void MovePlayerDirectlyToLocation(Player player, Int32 location)
+        {
+            player.MoveTo(location);
         }
     }
 }
