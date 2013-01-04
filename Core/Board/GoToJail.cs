@@ -6,8 +6,8 @@ namespace MonopolyKata.Core.Board
     {
         public Int32 LocationToSendPlayerTo { get; private set; }
 
-        public GoToJail(Int32 locationIndex, Int32 locationToSendPlayerTo)
-            : base(locationIndex)
+        public GoToJail(Int32 locationToSendPlayerTo)
+            : base()
         {
             LocationToSendPlayerTo = locationToSendPlayerTo;
         }

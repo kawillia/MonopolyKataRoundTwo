@@ -24,7 +24,7 @@ namespace MonopolyKata.Tests
             player = new Player("Horse");
 
             var boardComponents = ClassicBoardFactory.GetComponents(fakeDice);
-            turnTaker = new ClassicTurnTaker(fakeDice, new GameBoard(boardComponents, Enumerable.Empty<IMovementRule>()));
+            turnTaker = new ClassicTurnTaker(fakeDice, new GameBoard(boardComponents, Enumerable.Empty<IMovementRule>(), ClassicBoardFactory.NumberOfSpaces));
         }
 
         [TestMethod]

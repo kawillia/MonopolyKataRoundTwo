@@ -39,9 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Board\BoardComponent.cs" />
-    <Compile Include="Board\Chance.cs" />
-    <Compile Include="Board\CommunityChest.cs" />
     <Compile Include="Board\Go.cs" />
     <Compile Include="Board\GoToJail.cs" />
     <Compile Include="Board\IncomeTax.cs" />

@@ -6,8 +6,8 @@ namespace MonopolyKata.Core.Board
     {
         private Int32 taxAmount;
 
-        public LuxuryTax(Int32 locationIndex, Int32 taxAmount)
-            : base(locationIndex)
+        public LuxuryTax(Int32 taxAmount)
+            : base()
         {
             this.taxAmount = taxAmount;
         }

@@ -8,12 +8,12 @@ namespace MonopolyKata.Core.Board
 {
     public class GameBoard
     {
-        private IEnumerable<BoardComponent> boardComponents;
+        private IEnumerable<Space> spaces;
         private IEnumerable<IMovementRule> movementRules;
 
-        public GameBoard(IEnumerable<BoardComponent> boardComponents, IEnumerable<IMovementRule> movementRules)
+        public GameBoard(IEnumerable<Space> spaces, IEnumerable<IMovementRule> movementRules)
         {
-            this.boardComponents = boardComponents;
+            this.spaces = spaces;
             this.movementRules = movementRules;
         }
 
@@ -22,11 +22,11 @@ namespace MonopolyKata.Core.Board
             foreach (var rule in movementRules)
                 rule.Apply(player, numberOfSpaces);
 
-            var newLocation = (player.CurrentLocation + numberOfSpaces) % boardComponents.Sum(c => c.NumberOfChildComponents);
+            var newLocation = (player.CurrentLocation + numberOfSpaces) % spaces.Count();
             player.MoveTo(newLocation);
 
-            var componentToLandOn = boardComponents.First(c => c.ContainsComponentIndex(newLocation));
-            componentToLandOn.LandOn(player);
+            var spaceToLandOn = spaces.ElementAt(newLocation);
+            spaceToLandOn.LandOn(player);
         }
 
         public void MovePlayerDirectlyToLocation(Player player, Int32 location)

@@ -6,8 +6,8 @@ namespace MonopolyKata.Core.Board
     {
         public Int32 GoSalaryBonus { get; private set; }
 
-        public Go(Int32 locationIndex, Int32 goSalaryBonus)
-            : base(locationIndex)
+        public Go(Int32 goSalaryBonus)
+            : base()
         {
             GoSalaryBonus = goSalaryBonus;
         }

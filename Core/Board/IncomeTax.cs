@@ -7,8 +7,8 @@ namespace MonopolyKata.Core.Board
         private Int32 taxPercentage;
         private Int32 maximumTaxPayment;
 
-        public IncomeTax(Int32 locationIndex, Int32 taxPercentage, Int32 maximumTaxPayment)
-            : base(locationIndex)
+        public IncomeTax(Int32 taxPercentage, Int32 maximumTaxPayment)
+            : base()
         {
             this.taxPercentage = taxPercentage;
             this.maximumTaxPayment = maximumTaxPayment;
