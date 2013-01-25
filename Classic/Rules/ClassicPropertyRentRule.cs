@@ -15,7 +15,7 @@ namespace MonopolyKata.Classic.Rules
             this.properties = properties;
         }
 
-        public Int32 CalculateRent(Property propertyLandedOn)
+        public Int32 Calculate(Property propertyLandedOn)
         {
             if (AllPropertiesAreOwnedBySamePlayer())
                 return propertyLandedOn.BaseRent * 2;

@@ -29,26 +29,15 @@ namespace MonopolyKata.Core.Spaces
         public override void LandOn(String player)
         {
             if (IsOwned == false)
-                BuyProperty(player);
-            else if (ShouldPayRent(player))
-                PayRent(player);
-        }
-
-        private Boolean ShouldPayRent(String player)
-        {
-            return IsOwned && player != Owner;
-        }
-
-        private void BuyProperty(String player)
-        {
-            banker.Charge(player, Price);
-            Owner = player;
-        }
-
-        private void PayRent(String player)
-        {
-            var rentAmount = chargeRentRule.CalculateRent(this);
-            banker.Transfer(player, Owner, rentAmount);
+            {
+                Owner = player;
+                banker.Charge(player, Price);                
+            }
+            else if (player != Owner)
+            {
+                var rentAmount = chargeRentRule.Calculate(this);
+                banker.Transfer(player, Owner, rentAmount);
+            }
         }
 
         public void ChangeChargeRentRule(IChargeRentRule chargeRentRule)

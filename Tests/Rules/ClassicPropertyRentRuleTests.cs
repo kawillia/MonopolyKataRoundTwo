@@ -29,7 +29,7 @@ namespace MonopolyKata.Tests.Rules
         [TestMethod]
         public void RentForPropertyWhenNotAllAreOwnedBySamePlayerIsBaseRent()
         {
-            var rent = rule.CalculateRent(mediterraneanAvenue);
+            var rent = rule.Calculate(mediterraneanAvenue);
             Assert.AreEqual(mediterraneanAvenue.BaseRent, rent);
         }
 
@@ -39,7 +39,7 @@ namespace MonopolyKata.Tests.Rules
             mediterraneanAvenue.Owner = hat;
             balticAvenue.Owner = hat;
 
-            var rent = rule.CalculateRent(mediterraneanAvenue);
+            var rent = rule.Calculate(mediterraneanAvenue);
             Assert.AreEqual(2 * mediterraneanAvenue.BaseRent, rent);
         }
     }

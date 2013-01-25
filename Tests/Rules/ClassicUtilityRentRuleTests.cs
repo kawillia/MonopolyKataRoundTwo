@@ -41,7 +41,7 @@ namespace MonopolyKata.Tests.Rules
         {
             electricCompany.Owner = hat;
 
-            var rent = rule.CalculateRent(electricCompany);
+            var rent = rule.Calculate(electricCompany);
 
             Assert.AreEqual(4 * fakeDice.CurrentValue, rent);
         }
@@ -52,7 +52,7 @@ namespace MonopolyKata.Tests.Rules
             electricCompany.Owner = hat;
             waterWorks.Owner = hat;
 
-            var rent = rule.CalculateRent(electricCompany);
+            var rent = rule.Calculate(electricCompany);
 
             Assert.AreEqual(10 * fakeDice.CurrentValue, rent);
         }

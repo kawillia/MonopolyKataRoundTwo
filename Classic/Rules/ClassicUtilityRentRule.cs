@@ -18,7 +18,7 @@ namespace MonopolyKata.Classic.Rules
             this.utilities = utilities;
         }
 
-        public Int32 CalculateRent(Property propertyLandedOn)
+        public Int32 Calculate(Property propertyLandedOn)
         {
             if (AllUtilitiesAreOwned())
                 return dice.CurrentValue * 10;

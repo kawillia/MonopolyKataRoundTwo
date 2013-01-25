@@ -12,12 +12,12 @@ using System;
 namespace MonopolyKata.Tests
 {
     [TestClass]
-    public class TurnTakerTests
+    public class ClassicTurnTests
     {
         private FakeDice fakeDice;
         private String horse;
         private Board board;
-        private ClassicTurn turnTaker;
+        private ClassicTurn turn;
 
         [TestInitialize]
         public void Initialize()
@@ -27,14 +27,14 @@ namespace MonopolyKata.Tests
 
             var banker = new Banker(new[] { horse });
             board = ClassicBoardFactory.CreateBoard(fakeDice, Enumerable.Empty<IMovementRule>(), banker, new[] { horse });
-            turnTaker = new ClassicTurn(fakeDice, board);
+            turn = new ClassicTurn(fakeDice, board);
         }
 
         [TestMethod]
         public void StartOnGoRollDoublesOfSixAndNonDoublesOfFourEndsOnTen()
         {
             fakeDice.SetDieValues(3, 3, 1, 3);
-            turnTaker.Take(horse);
+            turn.Take(horse);
 
             Assert.AreEqual(10, board.GetPlayerLocation(horse));
         }
@@ -43,7 +43,7 @@ namespace MonopolyKata.Tests
         public void PlayerDoesNotRollDoublesMovesRollValues()
         {
             fakeDice.SetDieValues(3, 1);
-            turnTaker.Take(horse);
+            turn.Take(horse);
 
             Assert.AreEqual(4, board.GetPlayerLocation(horse));
         }
@@ -52,7 +52,7 @@ namespace MonopolyKata.Tests
         public void RollDoublesTwiceMovesThreeRollsTotal()
         {
             fakeDice.SetDieValues(1, 1, 2, 2, 1, 5);
-            turnTaker.Take(horse);
+            turn.Take(horse);
 
             Assert.AreEqual(12, board.GetPlayerLocation(horse));
         }
@@ -61,7 +61,7 @@ namespace MonopolyKata.Tests
         public void RollDoublesThreeTimesEndOnJustVisiting()
         {
             fakeDice.SetDieValues(1, 1, 2, 2, 3, 3);
-            turnTaker.Take(horse);
+            turn.Take(horse);
 
             Assert.AreEqual(ClassicBoardFactory.JustVisitingLocation, board.GetPlayerLocation(horse));
         }

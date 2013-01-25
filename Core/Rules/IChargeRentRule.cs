@@ -6,6 +6,6 @@ namespace MonopolyKata.Core.Rules
 {
     public interface IChargeRentRule
     {
-        Int32 CalculateRent(Property propertyLandedOn);
+        Int32 Calculate(Property propertyLandedOn);
     }
 }

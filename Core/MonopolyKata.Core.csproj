@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Banker.cs" />
+    <Compile Include="ITurn.cs" />
     <Compile Include="Spaces\GoToJail.cs" />
     <Compile Include="Spaces\IncomeTax.cs" />
     <Compile Include="Spaces\Space.cs" />
@@ -49,7 +50,6 @@
     <Compile Include="Game.cs" />
     <Compile Include="GameController.cs" />
     <Compile Include="IShuffler.cs" />
-    <Compile Include="ITurnTaker.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GuidShuffler.cs" />

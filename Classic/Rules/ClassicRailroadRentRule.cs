@@ -15,7 +15,7 @@ namespace MonopolyKata.Classic.Rules
             this.railroads = railroads;
         }
 
-        public Int32 CalculateRent(Property railroadLandedOn)
+        public Int32 Calculate(Property railroadLandedOn)
         {
             var numberOwned = GetNumberOfRailroadsOwned(railroadLandedOn);
             return (Int32)Math.Pow(2, numberOwned - 1) * railroadLandedOn.BaseRent;
