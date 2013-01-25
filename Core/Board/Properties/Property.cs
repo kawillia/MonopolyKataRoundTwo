@@ -9,20 +9,22 @@ namespace MonopolyKata.Core.Board.Properties
 {
     public class Property : Space
     {
+        private Int32 price;
         private IChargeRentRule chargeRentRule;
         private PropertyGroup propertyGroup;
-
-        public Int32 Price { get; private set; }
+        private Banker banker;
+       
         public Int32 BaseRent { get; private set; }
         public Boolean IsOwned { get { return this.Owner != null; } }
         public Player Owner { get; set; }
 
-        public Property(Int32 price, Int32 baseRent)
+        public Property(Int32 price, Int32 baseRent, Banker banker)
             : base()
         {
-            Price = price;
+            this.price = price;
             BaseRent = baseRent;
             Owner = null;
+            this.banker = banker;
         }
 
         public override void LandOn(Player player)
@@ -45,16 +47,14 @@ namespace MonopolyKata.Core.Board.Properties
 
         private void BuyProperty(Player player)
         {
-            player.Pay(Price);
+            banker.Charge(player, price);
             Owner = player;
         }
 
         private void PayRent(Player player)
         {
             var rentAmount = chargeRentRule.CalculateRent(this, propertyGroup.Properties);
-
-            player.Pay(rentAmount);
-            Owner.Receive(rentAmount);
+            banker.Transfer(player, Owner, rentAmount);
         }
 
         public void ChangeChargeRentRule(IChargeRentRule chargeRentRule)

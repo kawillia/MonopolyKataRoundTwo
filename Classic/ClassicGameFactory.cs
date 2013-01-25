@@ -10,8 +10,9 @@ namespace MonopolyKata.Classic
         public static Game Create(IEnumerable<Player> players)
         {
             var dice = new Dice();
-            var boardComponents = ClassicBoardFactory.GetComponents(dice);
-            var movementHandler = new GameBoard(boardComponents, new[] { new ClassicPassGoBonusRule() });
+            var banker = new Banker(players);
+            var boardComponents = ClassicBoardFactory.GetComponents(dice, banker);
+            var movementHandler = new GameBoard(boardComponents, new[] { new ClassicPassGoBonusRule(banker) });
             var turnTaker = new ClassicTurnTaker(dice, movementHandler);
 
             return new Game(players, turnTaker, new GuidShuffler<Player>());

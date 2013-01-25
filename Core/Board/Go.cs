@@ -4,17 +4,19 @@ namespace MonopolyKata.Core.Board
 {
     public class Go : Space
     {
-        public Int32 GoSalaryBonus { get; private set; }
+        private Int32 goSalaryBonus;
+        private Banker banker;
 
-        public Go(Int32 goSalaryBonus)
+        public Go(Int32 goSalaryBonus, Banker banker)
             : base()
         {
-            GoSalaryBonus = goSalaryBonus;
+            this.goSalaryBonus = goSalaryBonus;
+            this.banker = banker;
         }
 
         public override void LandOn(Player player)
         {
-            player.Receive(GoSalaryBonus);
+            banker.Pay(player, goSalaryBonus);
         }
     }
 }

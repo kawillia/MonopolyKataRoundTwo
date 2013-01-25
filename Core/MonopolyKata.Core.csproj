@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Banker.cs" />
     <Compile Include="Board\Go.cs" />
     <Compile Include="Board\GoToJail.cs" />
     <Compile Include="Board\IncomeTax.cs" />
