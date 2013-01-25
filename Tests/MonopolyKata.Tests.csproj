@@ -69,6 +69,7 @@
     <Compile Include="Rules\PassGoBonusRuleTests.cs" />
     <Compile Include="TurnTakerTests.cs" />
     <Compile Include="GameControllerTests.cs" />
+    <Compile Include="BankerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Classic\MonopolyKata.Classic.csproj">

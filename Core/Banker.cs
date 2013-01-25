@@ -18,11 +18,6 @@ namespace MonopolyKata.Core
                 balances.Add(player, 0);
         }
 
-        public void AddPlayer(Player player)
-        {
-            balances[player] = 0;
-        }
-
         public void Transfer(Player from, Player to, Int32 amount)
         {
             balances[from] -= amount;
