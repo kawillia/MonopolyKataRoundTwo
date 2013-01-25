@@ -9,13 +9,13 @@ namespace MonopolyKata.Tests.Rules
     [TestClass]
     public class PassGoBonusRuleTests
     {
-        private Player horse;
+        private String horse;
         private ClassicPassGoBonusRule rule;
         private Banker banker;
 
         public PassGoBonusRuleTests()
-        {            
-            horse = new Player("Horse");
+        {
+            horse = "Horse";
             banker = new Banker(new[] { horse });
             rule = new ClassicPassGoBonusRule(banker);
         }
@@ -24,7 +24,8 @@ namespace MonopolyKata.Tests.Rules
         public void BonusIsZeroWhenGoIsNotPassed()
         {
             var balanceBefore = banker.GetBalance(horse);
-            rule.Apply(horse, 1);
+            rule.Apply(horse, 1, 1);
+
             Assert.AreEqual(balanceBefore, banker.GetBalance(horse));
         }
 
@@ -32,8 +33,8 @@ namespace MonopolyKata.Tests.Rules
         public void BonusIsTwoHundredWhenGoIsPassed()
         {
             var balanceBefore = banker.GetBalance(horse);
-            horse.MoveTo(38);
-            rule.Apply(horse, 3);
+            rule.Apply(horse, 38, 3);
+
             Assert.AreEqual(200, banker.GetBalance(horse));
         }
 
@@ -41,8 +42,8 @@ namespace MonopolyKata.Tests.Rules
         public void BonusIsTwoHundredWhenGoIsLandedOn()
         {
             var balanceBefore = banker.GetBalance(horse);
-            horse.MoveTo(38);
-            rule.Apply(horse, 2);
+            rule.Apply(horse, 38, 2);
+
             Assert.AreEqual(200, banker.GetBalance(horse));
         }
     }

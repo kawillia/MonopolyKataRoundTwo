@@ -4,6 +4,6 @@ namespace MonopolyKata.Core.Board
 {
     public class Space
     {
-        public virtual void LandOn(Player player) { }
+        public virtual void LandOn(String player) { }
     }
 }

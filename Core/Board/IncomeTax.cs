@@ -16,7 +16,7 @@ namespace MonopolyKata.Core.Board
             this.banker = banker;
         }
 
-        public override void LandOn(Player player)
+        public override void LandOn(String player)
         {
             var playerBalance = banker.GetBalance(player);
             var incomeTaxAmount = (Int32)Math.Min(playerBalance / taxPercentage, maximumTaxPayment);

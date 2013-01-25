@@ -14,7 +14,7 @@ namespace MonopolyKata.Core.Board
             this.banker = banker;
         }
 
-        public override void LandOn(Player player)
+        public override void LandOn(String player)
         {
             banker.Pay(player, goSalaryBonus);
         }

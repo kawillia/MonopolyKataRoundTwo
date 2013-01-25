@@ -9,28 +9,40 @@ namespace MonopolyKata.Core.Board
     {
         private IEnumerable<Space> spaces;
         private IEnumerable<IMovementRule> movementRules;
+        private Dictionary<String, Int32> playerLocations;
 
-        public GameBoard(IEnumerable<Space> spaces, IEnumerable<IMovementRule> movementRules)
+        public GameBoard(IEnumerable<Space> spaces, IEnumerable<IMovementRule> movementRules, IEnumerable<String> players)
         {
             this.spaces = spaces;
             this.movementRules = movementRules;
+            this.playerLocations = new Dictionary<String, Int32>();
+
+            foreach (var player in players)
+                playerLocations.Add(player, 0);
         }
 
-        public void MovePlayerSpaceBySpace(Player player, Int32 numberOfSpaces)
+        public void MovePlayerSpaceBySpace(String player, Int32 numberOfSpaces)
         {
-            foreach (var rule in movementRules)
-                rule.Apply(player, numberOfSpaces);
+            var currentLocation = playerLocations[player];
 
-            var newLocation = (player.CurrentLocation + numberOfSpaces) % spaces.Count();
-            player.MoveTo(newLocation);
+            foreach (var rule in movementRules)
+                rule.Apply(player, currentLocation, numberOfSpaces);
+            
+            var newLocation = (currentLocation + numberOfSpaces) % spaces.Count();
+            playerLocations[player] = newLocation;
 
             var spaceToLandOn = spaces.ElementAt(newLocation);
             spaceToLandOn.LandOn(player);
         }
 
-        public void MovePlayerDirectlyToLocation(Player player, Int32 location)
+        public void MovePlayerDirectlyToLocation(String player, Int32 location)
         {
-            player.MoveTo(location);
+            playerLocations[player] = location;
+        }
+
+        public Int32 GetPlayerLocation(string player)
+        {
+            return playerLocations[player];
         }
     }
 }

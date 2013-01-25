@@ -9,12 +9,12 @@ namespace MonopolyKata.Core
         private const Int32 MaximumNumberOfPlayers = 8;
         private const Int32 MinimumNumberOfPlayers = 2;
 
-        private IEnumerable<Player> players;
+        private IEnumerable<String> players;
         private ITurnTaker turnTaker;
 
-        public Game(IEnumerable<Player> players, ITurnTaker turnTaker, IShuffler<Player> shuffler)
+        public Game(IEnumerable<String> players, ITurnTaker turnTaker, IShuffler<String> shuffler)
         {
-            if (players.GroupBy(p => p.Name).Any(g => g.Count() > 1))
+            if (players.GroupBy(p => p).Any(g => g.Count() > 1))
                 throw new InvalidOperationException("Cannot add the same player to the game more than once.");
 
             if (players.Count() < MinimumNumberOfPlayers || players.Count() > MaximumNumberOfPlayers)

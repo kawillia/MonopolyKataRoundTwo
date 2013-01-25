@@ -1,26 +1,25 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonopolyKata.Classic;
 using MonopolyKata.Classic.Rules;
 using MonopolyKata.Core;
 using MonopolyKata.Core.Board;
-using MonopolyKata.Core.Rules;
+using System;
 
-namespace MonopolyKata.Tests.Board.Properties
+namespace MonopolyKata.Tests.Board
 {
     [TestClass]
     public class PropertyTests
     {
-        private Player hat;
-        private Player horse;
+        private String hat;
+        private String horse;
         private Property mediterraneanAvenue;
         private Property balticAvenue;
         private Banker banker;
 
         public PropertyTests()
         {
-            hat = new Player("Hat");
-            horse = new Player("Horse");
+            hat = "Hat";
+            horse = "Horse";
             banker = new Banker(new[] { hat, horse });
             mediterraneanAvenue = new Property(ClassicBoardFactory.MediterraneanAvenuePrice, ClassicBoardFactory.MediterraneanAvenueRent, banker);
             balticAvenue = new Property(ClassicBoardFactory.BalticAvenuePrice, ClassicBoardFactory.BalticAvenueRent, banker);

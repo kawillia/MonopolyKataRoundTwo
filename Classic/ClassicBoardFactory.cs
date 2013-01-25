@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using MonopolyKata.Classic.Rules;
 using MonopolyKata.Core;
 using MonopolyKata.Core.Board;
+using MonopolyKata.Core.Rules;
 
 namespace MonopolyKata.Classic
 {
@@ -66,8 +67,11 @@ namespace MonopolyKata.Classic
         public const Int32 JustVisitingLocation = 10;
         public const Int32 NumberOfSpaces = 40;
 
-        public static IEnumerable<Space> GetSpaces(Dice dice, Banker banker)
+        public static GameBoard CreateBoard(Dice dice, IEnumerable<IMovementRule> movementRules, Banker banker, IEnumerable<String> players)
         {
+            var spaces = new List<Space>();
+            var board = new GameBoard(spaces, movementRules, players);
+
             var go = new Go(GoSalaryBonus, banker);
             var mediterraneanAvenue = new Property(MediterraneanAvenuePrice, MediterraneanAvenueRent, banker);
             var communityChestOne = new Space();
@@ -98,7 +102,7 @@ namespace MonopolyKata.Classic
             var ventnorAvenue = new Property(VentnorAvenuePrice, VentnorAvenueRent, banker);
             var waterWorks = new Property(UtilityPrice, 0, banker);
             var marvinGardens = new Property(MarvinGardensPrice, MarvinGardensRent, banker);
-            var goToJail = new GoToJail(JustVisitingLocation);
+            var goToJail = new GoToJail(JustVisitingLocation, board);
             var pacificAvenue = new Property(PacificAvenuePrice, PacificAvenueRent, banker);
             var northCarolinaAvenue = new Property(NorthCarolinaAvenuePrice, NorthCarolinaAvenueRent, banker);
             var communityChestThree = new Space();
@@ -150,7 +154,6 @@ namespace MonopolyKata.Classic
             parkPlace.ChangeChargeRentRule(darkBlueGroupRentRule);
             boardwalk.ChangeChargeRentRule(darkBlueGroupRentRule);
 
-            var spaces = new List<Space>();
             spaces.Add(go);
             spaces.Add(mediterraneanAvenue);
             spaces.Add(communityChestOne);
@@ -192,7 +195,7 @@ namespace MonopolyKata.Classic
             spaces.Add(luxuryTax);
             spaces.Add(boardwalk);
 
-            return spaces;
+            return board;
         }
     }
 }

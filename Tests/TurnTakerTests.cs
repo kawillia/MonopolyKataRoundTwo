@@ -7,6 +7,7 @@ using MonopolyKata.Core;
 using MonopolyKata.Core.Board;
 using MonopolyKata.Core.Rules;
 using MonopolyKata.Tests.Fakes;
+using System;
 
 namespace MonopolyKata.Tests
 {
@@ -14,18 +15,19 @@ namespace MonopolyKata.Tests
     public class TurnTakerTests
     {
         private FakeDice fakeDice;
-        private Player horse;
+        private String horse;
+        private GameBoard board;
         private ClassicTurnTaker turnTaker;
 
         [TestInitialize]
         public void Initialize()
         {
             fakeDice = new FakeDice();
-            horse = new Player("Horse");
+            horse = "Horse";
 
             var banker = new Banker(new[] { horse });
-            var spaces = ClassicBoardFactory.GetSpaces(fakeDice, banker);
-            turnTaker = new ClassicTurnTaker(fakeDice, new GameBoard(spaces, Enumerable.Empty<IMovementRule>()));
+            board = ClassicBoardFactory.CreateBoard(fakeDice, Enumerable.Empty<IMovementRule>(), banker, new[] { horse });
+            turnTaker = new ClassicTurnTaker(fakeDice, board);
         }
 
         [TestMethod]
@@ -34,7 +36,7 @@ namespace MonopolyKata.Tests
             fakeDice.SetDieValues(3, 3, 1, 3);
             turnTaker.Take(horse);
 
-            Assert.AreEqual(10, horse.CurrentLocation);
+            Assert.AreEqual(10, board.GetPlayerLocation(horse));
         }
 
         [TestMethod]
@@ -43,7 +45,7 @@ namespace MonopolyKata.Tests
             fakeDice.SetDieValues(3, 1);
             turnTaker.Take(horse);
 
-            Assert.AreEqual(4, horse.CurrentLocation);
+            Assert.AreEqual(4, board.GetPlayerLocation(horse));
         }
 
         [TestMethod]
@@ -52,7 +54,7 @@ namespace MonopolyKata.Tests
             fakeDice.SetDieValues(1, 1, 2, 2, 1, 5);
             turnTaker.Take(horse);
 
-            Assert.AreEqual(12, horse.CurrentLocation);
+            Assert.AreEqual(12, board.GetPlayerLocation(horse));
         }
 
         [TestMethod]
@@ -61,7 +63,7 @@ namespace MonopolyKata.Tests
             fakeDice.SetDieValues(1, 1, 2, 2, 3, 3);
             turnTaker.Take(horse);
 
-            Assert.AreEqual(ClassicBoardFactory.JustVisitingLocation, horse.CurrentLocation);
+            Assert.AreEqual(ClassicBoardFactory.JustVisitingLocation, board.GetPlayerLocation(horse));
         }
     }
 }

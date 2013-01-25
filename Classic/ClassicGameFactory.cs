@@ -7,15 +7,14 @@ namespace MonopolyKata.Classic
 {
     public class ClassicGameFactory
     {
-        public static Game Create(IEnumerable<Player> players)
+        public static Game Create(IEnumerable<string> players)
         {
             var dice = new Dice();
             var banker = new Banker(players);
-            var spaces = ClassicBoardFactory.GetSpaces(dice, banker);
-            var movementHandler = new GameBoard(spaces, new[] { new ClassicPassGoBonusRule(banker) });
-            var turnTaker = new ClassicTurnTaker(dice, movementHandler);
+            var board = ClassicBoardFactory.CreateBoard(dice, new[] { new ClassicPassGoBonusRule(banker) }, banker, players);
+            var turnTaker = new ClassicTurnTaker(dice, board);
 
-            return new Game(players, turnTaker, new GuidShuffler<Player>());
+            return new Game(players, turnTaker, new GuidShuffler<string>());
         }
     }
 }

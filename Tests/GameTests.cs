@@ -14,15 +14,15 @@ namespace MonopolyKata.Tests
         [ExpectedException(typeof(InvalidOperationException))]
         public void CreatingGameWithDuplicatePlayerThrowsException()
         {
-            var players = new[] { new Player("Horse"), new Player("Horse") };
-            var game = new Game(players, new FakeTurnTaker(), new GuidShuffler<Player>());
+            var players = new[] { "Horse", "Horse" };
+            var game = new Game(players, new FakeTurnTaker(), new GuidShuffler<String>());
         }
         
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
         public void CreatingGameWithLessThanMinimumNumberOfPlayersThrowsException()
         {
-            var game = new Game(Enumerable.Empty<Player>(), new FakeTurnTaker(), new GuidShuffler<Player>());
+            var game = new Game(Enumerable.Empty<String>(), new FakeTurnTaker(), new GuidShuffler<String>());
         }
 
         [TestMethod]
@@ -31,18 +31,18 @@ namespace MonopolyKata.Tests
         {
             var players = new[] 
             {
-                new Player("Horse"),
-                new Player("Car"),
-                new Player("Iron"),
-                new Player("Ship"),
-                new Player("Thimble"),
-                new Player("Wheelbarrow"),
-                new Player("Cannon"),
-                new Player("Hat"),
-                new Player("Hokie")
+                "Horse",
+                "Car",
+                "Iron",
+                "Ship",
+                "Thimble",
+                "Wheelbarrow",
+                "Cannon",
+                "Hat",
+                "Hokie"
             };
 
-            var game = new Game(players, new FakeTurnTaker(), new GuidShuffler<Player>());
+            var game = new Game(players, new FakeTurnTaker(), new GuidShuffler<String>());
         }
 
         [TestMethod]
@@ -50,17 +50,17 @@ namespace MonopolyKata.Tests
         {
             var players = new[] 
             {
-                new Player("Horse"),
-                new Player("Car"),
-                new Player("Iron"),
-                new Player("Ship"),
-                new Player("Thimble"),
-                new Player("Wheelbarrow"),
-                new Player("Cannon"),
-                new Player("Hat"),
+                "Horse",
+                "Car",
+                "Iron",
+                "Ship",
+                "Thimble",
+                "Wheelbarrow",
+                "Cannon",
+                "Hat",
             };
 
-            var game = new Game(players, new FakeTurnTaker(), new GuidShuffler<Player>());
+            var game = new Game(players, new FakeTurnTaker(), new GuidShuffler<String>());
         }
     }
 }

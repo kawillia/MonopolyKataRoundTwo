@@ -4,17 +4,19 @@ namespace MonopolyKata.Core.Board
 {
     public class GoToJail : Space
     {
-        public Int32 LocationToSendPlayerTo { get; private set; }
+        private Int32 locationToSendPlayerTo;
+        private GameBoard board;
 
-        public GoToJail(Int32 locationToSendPlayerTo)
+        public GoToJail(Int32 locationToSendPlayerTo, GameBoard board)
             : base()
         {
-            LocationToSendPlayerTo = locationToSendPlayerTo;
+            this.locationToSendPlayerTo = locationToSendPlayerTo;
+            this.board = board;
         }
 
-        public override void LandOn(Player player)
+        public override void LandOn(String player)
         {
-            player.MoveTo(LocationToSendPlayerTo);
+            board.MovePlayerDirectlyToLocation(player, locationToSendPlayerTo);
         }
     }
 }

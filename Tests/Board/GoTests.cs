@@ -2,19 +2,20 @@
 using MonopolyKata.Classic;
 using MonopolyKata.Core;
 using MonopolyKata.Core.Board;
+using System;
 
 namespace MonopolyKata.Tests.Board
 {
     [TestClass]
     public class GoTests
     {
-        private Player horse;
+        private String horse;
         private Banker banker;
         private Go go;
 
         public GoTests()
         {
-            horse = new Player("Horse");
+            horse = "Horse";
             banker = new Banker(new[] { horse });
             go = new Go(ClassicGameConstants.GoSalaryBonus, banker);
         }

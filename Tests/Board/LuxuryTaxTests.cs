@@ -2,19 +2,20 @@
 using MonopolyKata.Classic;
 using MonopolyKata.Core;
 using MonopolyKata.Core.Board;
+using System;
 
 namespace MonopolyKata.Tests.Board
 {
     [TestClass]
     public class LuxuryTaxTests
     {
-        private Player horse;
+        private String horse;
         private Banker banker;
         private LuxuryTax luxuryTax;
 
         public LuxuryTaxTests()
         {
-            horse = new Player("Horse");
+            horse = "Horse";
             banker = new Banker(new[] { horse });
             luxuryTax = new LuxuryTax(ClassicGameConstants.LuxuryTaxPaymentAmount, banker);
         }

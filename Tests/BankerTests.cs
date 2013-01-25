@@ -7,14 +7,14 @@ namespace MonopolyKata.Tests
     [TestClass]
     public class BankerTests
     {
-        private Player hat;
-        private Player horse;
+        private String hat;
+        private String horse;
         private Banker banker;
 
         public BankerTests()
         {
-            hat = new Player("Hat");
-            horse = new Player("Horse");
+            hat = "Hat";
+            horse = "Horse";
             banker = new Banker(new[] { hat, horse });
         }
 

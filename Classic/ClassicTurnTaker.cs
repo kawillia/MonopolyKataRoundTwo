@@ -1,5 +1,6 @@
 ﻿using MonopolyKata.Core;
 using MonopolyKata.Core.Board;
+using System;
 
 namespace MonopolyKata.Classic
 {
@@ -8,13 +9,13 @@ namespace MonopolyKata.Classic
         private Dice dice;
         private GameBoard movementHandler;
 
-        public ClassicTurnTaker(Dice dice, GameBoard movementHandler)
+        public ClassicTurnTaker(Dice dice, GameBoard board)
         {
             this.dice = dice;
-            this.movementHandler = movementHandler;
+            this.movementHandler = board;
         }
 
-        public void Take(Player player)
+        public void Take(String player)
         {
             do
             {

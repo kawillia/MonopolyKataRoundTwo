@@ -2,19 +2,20 @@
 using MonopolyKata.Classic;
 using MonopolyKata.Core;
 using MonopolyKata.Core.Board;
+using System;
 
 namespace MonopolyKata.Tests.Board
 {
     [TestClass]
     public class IncomeTaxTests
     {
-        private Player horse;
+        private String horse;
         private Banker banker;
         private IncomeTax incomeTax;
 
         public IncomeTaxTests()
         {
-            horse = new Player("Horse");
+            horse = "Horse";
             banker = new Banker(new[] { horse });
             incomeTax = new IncomeTax(ClassicGameConstants.IncomeTaxPercentage, ClassicGameConstants.MaximumIncomeTaxPaymentAmount, banker);
         }

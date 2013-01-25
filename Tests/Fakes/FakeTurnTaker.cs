@@ -9,15 +9,15 @@ namespace MonopolyKata.Tests.Fakes
 {
     public class FakeTurnTaker : ITurnTaker
     {
-        private List<Player> turns;
-        public List<Player> Turns { get { return turns.ToList(); } }
+        private List<String> turns;
+        public List<String> Turns { get { return turns.ToList(); } }
 
         public FakeTurnTaker()
         {
-            turns = new List<Player>();
+            turns = new List<String>();
         }
 
-        public void Take(Player player) 
+        public void Take(String player) 
         {
             turns.Add(player);
         }

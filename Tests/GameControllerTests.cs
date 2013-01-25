@@ -13,9 +13,9 @@ namespace MonopolyKata.Tests
         [TestMethod]
         public void PlayExecutesSpecifiedNumberOfRounds()
         {
-            var players = new[] { new Player("Horse"), new Player("Car") };
+            var players = new[] { "Horse", "Car" };
             var turnTaker = new FakeTurnTaker();
-            var game = new Game(players, turnTaker, new GuidShuffler<Player>());
+            var game = new Game(players, turnTaker, new GuidShuffler<String>());
             var controller = new GameController(game);
 
             controller.Play();
@@ -28,18 +28,18 @@ namespace MonopolyKata.Tests
         {
             var players = new[]
             {
-                new Player("Horse"),
-                new Player("Car"),
-                new Player("Hat")
+                "Horse",
+                "Car",
+                "Hat"
             };
 
             var turnTaker = new FakeTurnTaker();
-            var game = new Game(players, turnTaker, new GuidShuffler<Player>());
+            var game = new Game(players, turnTaker, new GuidShuffler<String>());
             var controller = new GameController(game);
 
             controller.Play();
-            
-            var lastRoundTurns = Enumerable.Empty<Player>();
+
+            var lastRoundTurns = Enumerable.Empty<String>();
             var turnsTaken = turnTaker.Turns;
 
             while (turnsTaken.Any())

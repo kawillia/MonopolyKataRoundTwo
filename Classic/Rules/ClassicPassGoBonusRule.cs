@@ -2,6 +2,7 @@
 using MonopolyKata.Classic;
 using MonopolyKata.Core;
 using MonopolyKata.Core.Rules;
+using MonopolyKata.Core.Board;
 
 namespace MonopolyKata.Classic.Rules
 {
@@ -14,9 +15,9 @@ namespace MonopolyKata.Classic.Rules
             this.banker = banker;
         }
 
-        public void Apply(Player player, Int32 numberOfSpacesToMove)
+        public void Apply(String player, Int32 currentLocation, Int32 numberOfSpacesToMove)
         {
-            if (player.CurrentLocation + numberOfSpacesToMove >= ClassicBoardFactory.NumberOfSpaces)
+            if (currentLocation + numberOfSpacesToMove >= ClassicBoardFactory.NumberOfSpaces)
                 banker.Pay(player, ClassicGameConstants.GoSalaryBonus);
         }
     }

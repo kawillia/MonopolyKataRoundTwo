@@ -52,7 +52,6 @@
     <Compile Include="IShuffler.cs" />
     <Compile Include="ITurnTaker.cs" />
     <Compile Include="Board\GameBoard.cs" />
-    <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GuidShuffler.cs" />
     <Compile Include="Rules\IChargeRentRule.cs" />
