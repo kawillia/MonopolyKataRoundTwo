@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using MonopolyKata.Classic.Rules;
 using MonopolyKata.Core;
 using MonopolyKata.Core.Board;
-using MonopolyKata.Core.Board.Properties;
 
 namespace MonopolyKata.Classic
 {
@@ -64,49 +63,9 @@ namespace MonopolyKata.Classic
         public const Int32 ParkPlacePrice = 350;
         public const Int32 BoardwalkPrice = 400;
 
-        public const Int32 GoLocation = 0;
-        public const Int32 MediterraneanAvenueLocation = 1;
-        public const Int32 CommunityChestOneLocation = 2;
-        public const Int32 BalticAvenueLocation = 3;
-        public const Int32 IncomeTaxLocation = 4;
-        public const Int32 ReadingRailroadLocation = 5;
-        public const Int32 OrientalAvenueLocation = 6;
-        public const Int32 ChanceOneLocation = 7;
-        public const Int32 VermontAvenueLocation = 8;
-        public const Int32 ConnecticutAvenueLocation = 9;
-        public const Int32 JailLocation = 10;
         public const Int32 JustVisitingLocation = 10;
-        public const Int32 StCharlesPlaceLocation = 11;
-        public const Int32 ElectricCompanyLocation = 12;
-        public const Int32 StatesAvenueLocation = 13;
-        public const Int32 VirginiaAvenueLocation = 14;
-        public const Int32 PennsylvaniaRailroadLocation = 15;
-        public const Int32 StJamesPlaceLocation = 16;
-        public const Int32 CommunityChestTwoLocation = 17;
-        public const Int32 TennesseeAvenueLocation = 18;
-        public const Int32 NewYorkAvenueLocation = 19;
-        public const Int32 FreeParkingLocation = 20;
-        public const Int32 KentuckyAvenueLocation = 21;
-        public const Int32 ChanceTwoLocation = 22;
-        public const Int32 IndianaAvenueLocation = 23;
-        public const Int32 IllinoisAvenueLocation = 24;
-        public const Int32 BORailroadLocation = 25;
-        public const Int32 AtlanticAvenueLocation = 26;
-        public const Int32 VentnorAvenueLocation = 27;
-        public const Int32 WaterWorksLocation = 28;
-        public const Int32 MarvinGardensLocation = 29;
-        public const Int32 GoToJailLocation = 30;
-        public const Int32 PacificAvenueLocation = 31;
-        public const Int32 NorthCarolinaAvenueLocation = 32;
-        public const Int32 CommunityChestThreeLocation = 33;
-        public const Int32 PennsylvaniaAvenueLocation = 34;
-        public const Int32 ShortLineLocation = 35;
-        public const Int32 ChanceThreeLocation = 36;
-        public const Int32 ParkPlaceLocation = 37;
-        public const Int32 LuxuryTaxLocation = 38;
-        public const Int32 BoardwalkLocation = 39;
         public const Int32 NumberOfSpaces = 40;
-        
+
         public static IEnumerable<Space> GetSpaces(Dice dice, Banker banker)
         {
             var go = new Go(GoSalaryBonus, banker);
@@ -114,7 +73,7 @@ namespace MonopolyKata.Classic
             var communityChestOne = new Space();
             var balticAvenue = new Property(BalticAvenuePrice, BalticAvenueRent, banker);
             var incomeTax = new IncomeTax(IncomeTaxPercentage, MaximumIncomeTaxPaymentAmount, banker);
-            var readingRailrod = new Property(RailroadPrice, BaseRailroadRent, banker);
+            var readingRailroad = new Property(RailroadPrice, BaseRailroadRent, banker);
             var orientalAvenue = new Property(OrientalAvenuePrice, OrientalAvenueRent, banker);
             var chanceOne = new Space();
             var vermontAvenue = new Property(VermontAvenuePrice, VermontAvenueRent, banker);
@@ -150,18 +109,46 @@ namespace MonopolyKata.Classic
             var luxuryTax = new LuxuryTax(LuxuryTaxPaymentAmount, banker);
             var boardwalk = new Property(BoardwalkPrice, BoardwalkRent, banker);
 
-            var classicPropertyRentRule = new ClassicPropertyRentRule();
+            var purpleGroupRentRule = new ClassicPropertyRentRule(new[] { mediterraneanAvenue, balticAvenue });
+            var lightBlueGroupRentRule = new ClassicPropertyRentRule(new[] { orientalAvenue, vermontAvenue, connecticutAvenue });
+            var violetGroupRentRule = new ClassicPropertyRentRule(new[] { stCharlesPlace, statesAvenue, virginiaAvenue });
+            var orangeGroupRentRule = new ClassicPropertyRentRule(new[] { stJamesPlace, tennesseeAvenue, newYorkAvenue });
+            var redGroupRentRule = new ClassicPropertyRentRule(new[] { kentuckyAvenue, indianaAvenue, illinoisAvenue });
+            var yellowGroupRentRule = new ClassicPropertyRentRule(new[] { atlanticAvenue, ventnorAvenue, marvinGardens });
+            var darkGreenGroupRentRule = new ClassicPropertyRentRule(new[] { pacificAvenue, northCarolinaAvenue, pennsylvaniaAvenue });
+            var darkBlueGroupRentRule = new ClassicPropertyRentRule(new[] { parkPlace, boardwalk });
+            var railroadGroupRentRule = new ClassicPropertyRentRule(new[] { readingRailroad, pennsylvaniaRailroad, boRailroad, shortLine });
+            var utilityGroupRentRule = new ClassicPropertyRentRule(new[] { electricCompany, waterWorks });
 
-            var purpleGroup = new PropertyGroup(mediterraneanAvenue, balticAvenue);
-            var lightBlueGroup = new PropertyGroup(orientalAvenue, vermontAvenue, connecticutAvenue);
-            var violetGroup = new PropertyGroup(stCharlesPlace, statesAvenue, virginiaAvenue);
-            var orangeGroup = new PropertyGroup(stJamesPlace, tennesseeAvenue, newYorkAvenue);
-            var redGroup = new PropertyGroup(kentuckyAvenue, indianaAvenue, illinoisAvenue);
-            var yellowGroup = new PropertyGroup(atlanticAvenue, ventnorAvenue, marvinGardens);
-            var darkGreenGroup = new PropertyGroup(pacificAvenue, northCarolinaAvenue, pennsylvaniaAvenue);
-            var darkBlueGroup = new PropertyGroup(parkPlace, boardwalk);
-            var railroadGroup = new PropertyGroup(readingRailrod, pennsylvaniaRailroad, boRailroad, shortLine);
-            var utilityGroup = new PropertyGroup(electricCompany, waterWorks);
+            mediterraneanAvenue.ChangeChargeRentRule(purpleGroupRentRule);
+            balticAvenue.ChangeChargeRentRule(purpleGroupRentRule);
+
+            orientalAvenue.ChangeChargeRentRule(lightBlueGroupRentRule);
+            vermontAvenue.ChangeChargeRentRule(lightBlueGroupRentRule);
+            connecticutAvenue.ChangeChargeRentRule(lightBlueGroupRentRule);
+
+            stCharlesPlace.ChangeChargeRentRule(violetGroupRentRule);
+            statesAvenue.ChangeChargeRentRule(violetGroupRentRule);
+            virginiaAvenue.ChangeChargeRentRule(violetGroupRentRule);
+
+            stJamesPlace.ChangeChargeRentRule(orangeGroupRentRule);
+            tennesseeAvenue.ChangeChargeRentRule(orangeGroupRentRule);
+            newYorkAvenue.ChangeChargeRentRule(orangeGroupRentRule);
+
+            kentuckyAvenue.ChangeChargeRentRule(redGroupRentRule);
+            indianaAvenue.ChangeChargeRentRule(redGroupRentRule);
+            illinoisAvenue.ChangeChargeRentRule(redGroupRentRule);
+
+            atlanticAvenue.ChangeChargeRentRule(yellowGroupRentRule);
+            ventnorAvenue.ChangeChargeRentRule(yellowGroupRentRule);
+            marvinGardens.ChangeChargeRentRule(yellowGroupRentRule);
+
+            pacificAvenue.ChangeChargeRentRule(darkGreenGroupRentRule);
+            northCarolinaAvenue.ChangeChargeRentRule(darkGreenGroupRentRule);
+            pennsylvaniaAvenue.ChangeChargeRentRule(darkGreenGroupRentRule);
+
+            parkPlace.ChangeChargeRentRule(darkBlueGroupRentRule);
+            boardwalk.ChangeChargeRentRule(darkBlueGroupRentRule);
 
             var spaces = new List<Space>();
             spaces.Add(go);
@@ -169,7 +156,7 @@ namespace MonopolyKata.Classic
             spaces.Add(communityChestOne);
             spaces.Add(balticAvenue);
             spaces.Add(incomeTax);
-            spaces.Add(readingRailrod);
+            spaces.Add(readingRailroad);
             spaces.Add(orientalAvenue);
             spaces.Add(chanceOne);
             spaces.Add(vermontAvenue);

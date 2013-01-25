@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonopolyKata.Classic;
 using MonopolyKata.Classic.Rules;
 using MonopolyKata.Core;
-using MonopolyKata.Core.Board.Properties;
+using MonopolyKata.Core.Board;
 using MonopolyKata.Tests.Fakes;
 
 namespace MonopolyKata.Tests.Rules
@@ -12,7 +12,6 @@ namespace MonopolyKata.Tests.Rules
     public class ClassicUtilityRentRuleTests
     {
         private ClassicUtilityRentRule strategy;
-        private IEnumerable<Property> properties;
         private Player hat;
         private FakeDice fakeDice;
         private Property electricCompany;
@@ -20,15 +19,13 @@ namespace MonopolyKata.Tests.Rules
 
         public ClassicUtilityRentRuleTests()
         {
-            fakeDice = new FakeDice();
-            strategy = new ClassicUtilityRentRule(fakeDice);
+            fakeDice = new FakeDice();            
             hat = new Player("Hat");
 
             var banker = new Banker(new[] { hat });
             electricCompany = new Property(ClassicBoardFactory.UtilityPrice, 0, banker);
             waterWorks = new Property(ClassicBoardFactory.UtilityPrice, 0, banker);
-
-            properties = new[] { electricCompany, waterWorks };
+            strategy = new ClassicUtilityRentRule(fakeDice, new[] { electricCompany, waterWorks });
         }
 
         [TestInitialize]
@@ -43,7 +40,7 @@ namespace MonopolyKata.Tests.Rules
         {
             electricCompany.Owner = hat;
 
-            var rent = strategy.CalculateRent(electricCompany, properties);
+            var rent = strategy.CalculateRent(electricCompany);
 
             Assert.AreEqual(4 * fakeDice.CurrentValue, rent);
         }
@@ -54,7 +51,7 @@ namespace MonopolyKata.Tests.Rules
             electricCompany.Owner = hat;
             waterWorks.Owner = hat;
 
-            var rent = strategy.CalculateRent(electricCompany, properties);
+            var rent = strategy.CalculateRent(electricCompany);
 
             Assert.AreEqual(10 * fakeDice.CurrentValue, rent);
         }

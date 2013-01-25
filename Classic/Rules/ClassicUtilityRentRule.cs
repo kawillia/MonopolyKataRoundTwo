@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using MonopolyKata.Core;
 using MonopolyKata.Core.Board;
-using MonopolyKata.Core.Board.Properties;
 using MonopolyKata.Core.Rules;
 
 namespace MonopolyKata.Classic.Rules
@@ -11,23 +10,25 @@ namespace MonopolyKata.Classic.Rules
     public class ClassicUtilityRentRule : IChargeRentRule
     {
         private Dice dice;
+        private IEnumerable<Property> utilities;
 
-        public ClassicUtilityRentRule(Dice dice)
+        public ClassicUtilityRentRule(Dice dice, IEnumerable<Property> utilities)
         {
             this.dice = dice;
+            this.utilities = utilities;
         }
 
-        public Int32 CalculateRent(Property propertyLandedOn, IEnumerable<Property> propertiesInGroup)
+        public Int32 CalculateRent(Property propertyLandedOn)
         {
-            if (AllUtilitiesAreOwned(propertiesInGroup))
+            if (AllUtilitiesAreOwned())
                 return dice.CurrentValue * 10;
 
             return dice.CurrentValue * 4;
         }
 
-        private static Boolean AllUtilitiesAreOwned(IEnumerable<Property> utilitiesInGroup)
+        private Boolean AllUtilitiesAreOwned()
         {
-            return utilitiesInGroup.All(u => u.IsOwned);
+            return utilities.All(u => u.IsOwned);
         }
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonopolyKata.Classic;
 using MonopolyKata.Classic.Rules;
 using MonopolyKata.Core;
-using MonopolyKata.Core.Board.Properties;
+using MonopolyKata.Core.Board;
 
 namespace MonopolyKata.Tests.Rules
 {
@@ -11,7 +11,6 @@ namespace MonopolyKata.Tests.Rules
     public class ClassicPropertyRentRuleTests
     {
         private ClassicPropertyRentRule strategy;
-        private IEnumerable<Property> properties;
         private Player hat;
         private Property mediterraneanAvenue;
         private Property balticAvenue;
@@ -19,18 +18,18 @@ namespace MonopolyKata.Tests.Rules
 
         public ClassicPropertyRentRuleTests()
         {
-            strategy = new ClassicPropertyRentRule();
+            
             hat = new Player("Hat");
             banker = new Banker(new[] { hat });
             mediterraneanAvenue = new Property(ClassicBoardFactory.MediterraneanAvenuePrice, ClassicBoardFactory.MediterraneanAvenueRent, banker);
             balticAvenue = new Property(ClassicBoardFactory.BalticAvenuePrice, ClassicBoardFactory.BalticAvenueRent, banker);
-            properties = new[] { mediterraneanAvenue, balticAvenue };
+            strategy = new ClassicPropertyRentRule(new[] { mediterraneanAvenue, balticAvenue });
         }
 
         [TestMethod]
         public void RentForPropertyWhenNotAllAreOwnedBySamePlayerIsBaseRent()
         {
-            var rent = strategy.CalculateRent(mediterraneanAvenue, properties);
+            var rent = strategy.CalculateRent(mediterraneanAvenue);
             Assert.AreEqual(mediterraneanAvenue.BaseRent, rent);
         }
 
@@ -40,7 +39,7 @@ namespace MonopolyKata.Tests.Rules
             mediterraneanAvenue.Owner = hat;
             balticAvenue.Owner = hat;
 
-            var rent = strategy.CalculateRent(mediterraneanAvenue, properties);
+            var rent = strategy.CalculateRent(mediterraneanAvenue);
             Assert.AreEqual(2 * mediterraneanAvenue.BaseRent, rent);
         }
     }

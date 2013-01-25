@@ -1,25 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MonopolyKata.Core.Board.Properties;
+using MonopolyKata.Core.Board;
 using MonopolyKata.Core.Rules;
 
 namespace MonopolyKata.Classic.Rules
 {
     public class ClassicPropertyRentRule : IChargeRentRule
     {
-        public Int32 CalculateRent(Property propertyLandedOn, IEnumerable<Property> propertiesInGroup)
+        private IEnumerable<Property> properties;
+
+        public ClassicPropertyRentRule(IEnumerable<Property> properties)
         {
-            if (AllPropertiesAreOwnedBySamePlayer(propertiesInGroup))
+            this.properties = properties;
+        }
+
+        public Int32 CalculateRent(Property propertyLandedOn)
+        {
+            if (AllPropertiesAreOwnedBySamePlayer())
                 return propertyLandedOn.BaseRent * 2;
 
             return propertyLandedOn.BaseRent;
         }
 
-        private static Boolean AllPropertiesAreOwnedBySamePlayer(IEnumerable<Property> propertiesInGroup)
+        private Boolean AllPropertiesAreOwnedBySamePlayer()
         {
-            return propertiesInGroup.All(l => l.IsOwned) &&
-                   propertiesInGroup.Select(l => l.Owner).Distinct().Count() == 1;
+            return properties.All(l => l.IsOwned) &&
+                   properties.Select(l => l.Owner).Distinct().Count() == 1;
         }
     }
 }

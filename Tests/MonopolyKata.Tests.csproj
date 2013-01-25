@@ -54,7 +54,7 @@
     <Compile Include="Board\IncomeTaxTests.cs" />
     <Compile Include="Board\LuxuryTaxTests.cs" />
     <Compile Include="Board\GoToJailTests.cs" />
-    <Compile Include="Board\Properties\PropertyGroupTests.cs" />
+    <Compile Include="Board\Properties\PropertyTests.cs" />
     <Compile Include="Fakes\FakeTurnTaker.cs" />
     <Compile Include="Rules\ClassicPropertyRentRuleTests.cs" />
     <Compile Include="Rules\ClassicRailroadRentRuleTests.cs" />

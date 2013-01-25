@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonopolyKata.Classic;
 using MonopolyKata.Classic.Rules;
 using MonopolyKata.Core;
-using MonopolyKata.Core.Board.Properties;
+using MonopolyKata.Core.Board;
 
 namespace MonopolyKata.Tests.Rules
 {
@@ -11,7 +11,6 @@ namespace MonopolyKata.Tests.Rules
     public class ClassicRailroadRentRuleTests
     {
         private ClassicRailroadRentRule strategy;
-        private IEnumerable<Property> properties;
         private Player horse;
         private Player hat;
         private Property readingRailroad;
@@ -21,7 +20,7 @@ namespace MonopolyKata.Tests.Rules
 
         public ClassicRailroadRentRuleTests()
         {
-            strategy = new ClassicRailroadRentRule();
+            
             horse = new Player("Horse");
             hat = new Player("Hat");
 
@@ -31,7 +30,7 @@ namespace MonopolyKata.Tests.Rules
             pennsylvaniaRailroad = new Property(ClassicBoardFactory.RailroadPrice, ClassicBoardFactory.BaseRailroadRent, banker);
             boRailroad = new Property(ClassicBoardFactory.RailroadPrice, ClassicBoardFactory.BaseRailroadRent, banker);
             shortLine = new Property(ClassicBoardFactory.RailroadPrice, ClassicBoardFactory.BaseRailroadRent, banker);
-            properties = new[] { readingRailroad, pennsylvaniaRailroad, boRailroad, shortLine };
+            strategy = new ClassicRailroadRentRule(new[] { readingRailroad, pennsylvaniaRailroad, boRailroad, shortLine });
         }
 
         [TestMethod]
@@ -39,7 +38,7 @@ namespace MonopolyKata.Tests.Rules
         {
             readingRailroad.Owner = hat;
 
-            var rent = strategy.CalculateRent(readingRailroad, properties);
+            var rent = strategy.CalculateRent(readingRailroad);
 
             Assert.AreEqual(25, rent);
         }
@@ -50,7 +49,7 @@ namespace MonopolyKata.Tests.Rules
             readingRailroad.Owner = hat;
             pennsylvaniaRailroad.Owner = hat;
 
-            var rent = strategy.CalculateRent(readingRailroad, properties);
+            var rent = strategy.CalculateRent(readingRailroad);
 
             Assert.AreEqual(50, rent);
         }
@@ -62,7 +61,7 @@ namespace MonopolyKata.Tests.Rules
             pennsylvaniaRailroad.Owner = hat;
             boRailroad.Owner = hat;
 
-            var rent = strategy.CalculateRent(readingRailroad, properties);
+            var rent = strategy.CalculateRent(readingRailroad);
 
             Assert.AreEqual(100, rent);
         }
@@ -75,7 +74,7 @@ namespace MonopolyKata.Tests.Rules
             boRailroad.Owner = hat;
             shortLine.Owner = hat;
 
-            var rent = strategy.CalculateRent(readingRailroad, properties);
+            var rent = strategy.CalculateRent(readingRailroad);
 
             Assert.AreEqual(200, rent);
         }

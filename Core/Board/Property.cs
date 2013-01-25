@@ -5,12 +5,11 @@ using System.Text;
 using MonopolyKata.Core;
 using MonopolyKata.Core.Rules;
 
-namespace MonopolyKata.Core.Board.Properties
+namespace MonopolyKata.Core.Board
 {
     public class Property : Space
     {
         private IChargeRentRule chargeRentRule;
-        private PropertyGroup propertyGroup;
         private Banker banker;
 
         public Int32 Price { get; private set; }
@@ -53,18 +52,13 @@ namespace MonopolyKata.Core.Board.Properties
 
         private void PayRent(Player player)
         {
-            var rentAmount = chargeRentRule.CalculateRent(this, propertyGroup.Properties);
+            var rentAmount = chargeRentRule.CalculateRent(this);
             banker.Transfer(player, Owner, rentAmount);
         }
 
         public void ChangeChargeRentRule(IChargeRentRule chargeRentRule)
         {
             this.chargeRentRule = chargeRentRule;
-        }
-
-        public void ChangePropertyGroup(PropertyGroup propertyGroup)
-        {
-            this.propertyGroup = propertyGroup;
         }
     }
 }

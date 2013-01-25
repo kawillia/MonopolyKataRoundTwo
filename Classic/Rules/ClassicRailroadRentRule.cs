@@ -1,22 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MonopolyKata.Core.Board.Properties;
+using MonopolyKata.Core.Board;
 using MonopolyKata.Core.Rules;
 
 namespace MonopolyKata.Classic.Rules
 {
     public class ClassicRailroadRentRule : IChargeRentRule
     {
-        public Int32 CalculateRent(Property railroadLandedOn, IEnumerable<Property> railroadsInGroup)
+        private IEnumerable<Property> railroads;
+
+        public ClassicRailroadRentRule(IEnumerable<Property> railroads)
         {
-            var numberOwned = GetNumberOfRailroadsOwned(railroadLandedOn, railroadsInGroup);
+            this.railroads = railroads;
+        }
+
+        public Int32 CalculateRent(Property railroadLandedOn)
+        {
+            var numberOwned = GetNumberOfRailroadsOwned(railroadLandedOn);
             return (Int32)Math.Pow(2, numberOwned - 1) * railroadLandedOn.BaseRent;
         }
 
-        private static Int32 GetNumberOfRailroadsOwned(Property railroadLandedOn, IEnumerable<Property> railroadsInGroup)
+        private Int32 GetNumberOfRailroadsOwned(Property railroadLandedOn)
         {
-            return railroadsInGroup.Count(l => l.IsOwned && l.Owner == railroadLandedOn.Owner);
+            return railroads.Count(l => l.IsOwned && l.Owner == railroadLandedOn.Owner);
         }
     }
 }

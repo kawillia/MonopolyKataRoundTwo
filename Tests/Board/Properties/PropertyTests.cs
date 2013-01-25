@@ -3,30 +3,31 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonopolyKata.Classic;
 using MonopolyKata.Classic.Rules;
 using MonopolyKata.Core;
-using MonopolyKata.Core.Board.Properties;
+using MonopolyKata.Core.Board;
 using MonopolyKata.Core.Rules;
 
 namespace MonopolyKata.Tests.Board.Properties
 {
     [TestClass]
-    public class PropertyGroupTests
+    public class PropertyTests
     {
         private Player hat;
         private Player horse;
         private Property mediterraneanAvenue;
         private Property balticAvenue;
-        private PropertyGroup purpleGroup;
         private Banker banker;
 
-        public PropertyGroupTests()
+        public PropertyTests()
         {
             hat = new Player("Hat");
             horse = new Player("Horse");
             banker = new Banker(new[] { hat, horse });
             mediterraneanAvenue = new Property(ClassicBoardFactory.MediterraneanAvenuePrice, ClassicBoardFactory.MediterraneanAvenueRent, banker);
             balticAvenue = new Property(ClassicBoardFactory.BalticAvenuePrice, ClassicBoardFactory.BalticAvenueRent, banker);
-            balticAvenue.ChangeChargeRentRule(new ClassicPropertyRentRule());
-            purpleGroup = new PropertyGroup(mediterraneanAvenue, balticAvenue);
+
+            var chargeRentRule = new ClassicPropertyRentRule(new[] { mediterraneanAvenue, balticAvenue });
+            mediterraneanAvenue.ChangeChargeRentRule(chargeRentRule);
+            balticAvenue.ChangeChargeRentRule(chargeRentRule);
         }
 
         [TestMethod]
@@ -51,16 +52,6 @@ namespace MonopolyKata.Tests.Board.Properties
             Assert.AreEqual(hat, balticAvenue.Owner);
             Assert.AreEqual(horseBalanceBeforeRentPayment - balticAvenue.BaseRent, banker.GetBalance(horse));
             Assert.AreEqual(hatBalanceBeforeRentPayment + balticAvenue.BaseRent, banker.GetBalance(hat));
-        }
-
-        private class FakeRentRule : IChargeRentRule
-        {
-            public const Int32 RentAmount = 1000;
-
-            public Int32 CalculateRent(Property propertyLandedOn, System.Collections.Generic.IEnumerable<Property> locationsInGroup)
-            {
-                return RentAmount;
-            }
         }
     }
 }

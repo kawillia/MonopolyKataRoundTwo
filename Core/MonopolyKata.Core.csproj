@@ -45,8 +45,7 @@
     <Compile Include="Board\IncomeTax.cs" />
     <Compile Include="Board\Space.cs" />
     <Compile Include="Board\LuxuryTax.cs" />
-    <Compile Include="Board\Properties\Property.cs" />
-    <Compile Include="Board\Properties\PropertyGroup.cs" />
+    <Compile Include="Board\Property.cs" />
     <Compile Include="Dice.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameController.cs" />
