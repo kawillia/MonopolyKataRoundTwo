@@ -2,19 +2,20 @@
 using MonopolyKata.Classic.Rules;
 using MonopolyKata.Core;
 using MonopolyKata.Core.Spaces;
+using System;
 
 namespace MonopolyKata.Classic
 {
     public class ClassicGameFactory
     {
-        public static Game Create(IEnumerable<string> players)
+        public static Game Create(IEnumerable<String> players)
         {
             var dice = new Dice();
             var banker = new Banker(players);
             var board = ClassicBoardFactory.CreateBoard(dice, new[] { new ClassicGoBonusRule(banker) }, banker, players);
-            var turnTaker = new ClassicTurnTaker(dice, board);
+            var turnTaker = new ClassicTurn(dice, board);
 
-            return new Game(players, turnTaker, new GuidShuffler<string>());
+            return new Game(players, turnTaker, new GuidShuffler<String>());
         }
     }
 }

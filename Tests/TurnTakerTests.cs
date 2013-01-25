@@ -17,7 +17,7 @@ namespace MonopolyKata.Tests
         private FakeDice fakeDice;
         private String horse;
         private Board board;
-        private ClassicTurnTaker turnTaker;
+        private ClassicTurn turnTaker;
 
         [TestInitialize]
         public void Initialize()
@@ -27,7 +27,7 @@ namespace MonopolyKata.Tests
 
             var banker = new Banker(new[] { horse });
             board = ClassicBoardFactory.CreateBoard(fakeDice, Enumerable.Empty<IMovementRule>(), banker, new[] { horse });
-            turnTaker = new ClassicTurnTaker(fakeDice, board);
+            turnTaker = new ClassicTurn(fakeDice, board);
         }
 
         [TestMethod]

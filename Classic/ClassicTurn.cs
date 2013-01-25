@@ -4,12 +4,12 @@ using System;
 
 namespace MonopolyKata.Classic
 {
-    public class ClassicTurnTaker : ITurnTaker
+    public class ClassicTurn : ITurn
     {
         private Dice dice;
         private Board board;
 
-        public ClassicTurnTaker(Dice dice, Board board)
+        public ClassicTurn(Dice dice, Board board)
         {
             this.dice = dice;
             this.board = board;

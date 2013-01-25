@@ -2,7 +2,7 @@
 
 namespace MonopolyKata.Core
 {
-    public interface ITurnTaker
+    public interface ITurn
     {
         void Take(String player);
     }
