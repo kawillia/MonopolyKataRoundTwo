@@ -28,15 +28,10 @@ namespace MonopolyKata.Core.Board
 
         public override void LandOn(Player player)
         {
-            if (ShouldBuyProperty(player))
+            if (IsOwned == false)
                 BuyProperty(player);
             else if (ShouldPayRent(player))
                 PayRent(player);
-        }
-
-        private Boolean ShouldBuyProperty(Player player)
-        {
-            return !IsOwned && player.ShouldBuyProperty();
         }
 
         private Boolean ShouldPayRent(Player player)
