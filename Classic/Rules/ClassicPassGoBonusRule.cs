@@ -2,7 +2,6 @@
 using MonopolyKata.Classic;
 using MonopolyKata.Core;
 using MonopolyKata.Core.Rules;
-using MonopolyKata.Core.Strategies;
 
 namespace MonopolyKata.Classic.Rules
 {

@@ -5,7 +5,6 @@ using MonopolyKata.Classic;
 using MonopolyKata.Core.Board;
 using MonopolyKata.Classic.Rules;
 using MonopolyKata.Core;
-using MonopolyKata.Core.Strategies;
 using MonopolyKata.Tests.Fakes;
 using MonopolyKata.Core.Rules;
 using System;

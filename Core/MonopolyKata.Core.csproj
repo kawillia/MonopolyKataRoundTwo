@@ -55,11 +55,8 @@
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GuidShuffler.cs" />
-    <Compile Include="Strategies\AlwaysPayToGetOutOfJail.cs" />
     <Compile Include="Rules\IChargeRentRule.cs" />
-    <Compile Include="Strategies\IGetOutOfJailStrategy.cs" />
     <Compile Include="Rules\IMovementRule.cs" />
-    <Compile Include="Strategies\NeverPayToGetOutOfJail.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
