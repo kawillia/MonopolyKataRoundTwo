@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using MonopolyKata.Classic.Rules;
 using MonopolyKata.Core;
-using MonopolyKata.Core.Board;
+using MonopolyKata.Core.Spaces;
 using MonopolyKata.Core.Rules;
 
 namespace MonopolyKata.Classic
@@ -67,10 +67,10 @@ namespace MonopolyKata.Classic
         public const Int32 JustVisitingLocation = 10;
         public const Int32 NumberOfSpaces = 40;
 
-        public static GameBoard CreateBoard(Dice dice, IEnumerable<IMovementRule> movementRules, Banker banker, IEnumerable<String> players)
+        public static Board CreateBoard(Dice dice, IEnumerable<IMovementRule> movementRules, Banker banker, IEnumerable<String> players)
         {
             var spaces = new List<Space>();
-            var board = new GameBoard(spaces, movementRules, players);
+            var board = new Board(spaces, movementRules, players);
 
             var go = new Space();
             var mediterraneanAvenue = new Property(MediterraneanAvenuePrice, MediterraneanAvenueRent, banker);

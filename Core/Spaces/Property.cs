@@ -5,7 +5,7 @@ using System.Text;
 using MonopolyKata.Core;
 using MonopolyKata.Core.Rules;
 
-namespace MonopolyKata.Core.Board
+namespace MonopolyKata.Core.Spaces
 {
     public class Property : Space
     {

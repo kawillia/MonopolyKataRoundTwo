@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonopolyKata;
 using MonopolyKata.Classic;
-using MonopolyKata.Core.Board;
+using MonopolyKata.Core.Spaces;
 using MonopolyKata.Classic.Rules;
 using MonopolyKata.Core;
 using MonopolyKata.Tests.Fakes;
@@ -10,13 +10,13 @@ using MonopolyKata.Core.Rules;
 using System;
 using System.Collections.Generic;
 
-namespace MonopolyKata.Tests.Board
+namespace MonopolyKata.Tests
 {
     [TestClass]
-    public class GameBoardTests
+    public class BoardTests
     {
         private String horse;
-        private GameBoard board;
+        private Board board;
         private IEnumerable<FakeMovementRule> movementRules;
 
         [TestInitialize]

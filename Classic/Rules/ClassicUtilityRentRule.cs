@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using MonopolyKata.Core;
-using MonopolyKata.Core.Board;
+using MonopolyKata.Core.Spaces;
 using MonopolyKata.Core.Rules;
 
 namespace MonopolyKata.Classic.Rules

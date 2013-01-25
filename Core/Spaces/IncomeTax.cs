@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MonopolyKata.Core.Board
+namespace MonopolyKata.Core.Spaces
 {
     public class IncomeTax : Space
     {

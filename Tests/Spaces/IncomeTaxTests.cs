@@ -1,10 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonopolyKata.Classic;
 using MonopolyKata.Core;
-using MonopolyKata.Core.Board;
+using MonopolyKata.Core.Spaces;
 using System;
 
-namespace MonopolyKata.Tests.Board
+namespace MonopolyKata.Tests.Spaces
 {
     [TestClass]
     public class IncomeTaxTests

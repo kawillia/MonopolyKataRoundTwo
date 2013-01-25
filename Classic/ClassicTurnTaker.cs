@@ -1,5 +1,5 @@
 ﻿using MonopolyKata.Core;
-using MonopolyKata.Core.Board;
+using MonopolyKata.Core.Spaces;
 using System;
 
 namespace MonopolyKata.Classic
@@ -7,12 +7,12 @@ namespace MonopolyKata.Classic
     public class ClassicTurnTaker : ITurnTaker
     {
         private Dice dice;
-        private GameBoard movementHandler;
+        private Board board;
 
-        public ClassicTurnTaker(Dice dice, GameBoard board)
+        public ClassicTurnTaker(Dice dice, Board board)
         {
             this.dice = dice;
-            this.movementHandler = board;
+            this.board = board;
         }
 
         public void Take(String player)
@@ -22,9 +22,9 @@ namespace MonopolyKata.Classic
                 dice.Roll();
 
                 if (dice.NumberOfConsecutiveDoubles == 3)
-                    movementHandler.TeleportPlayer(player, 10);
+                    board.TeleportPlayer(player, 10);
                 else
-                    movementHandler.MovePlayer(player, dice.CurrentValue);
+                    board.MovePlayer(player, dice.CurrentValue);
             }
             while (dice.IsDoubles && dice.NumberOfConsecutiveDoubles < 3);
         }

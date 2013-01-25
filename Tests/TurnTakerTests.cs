@@ -4,7 +4,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonopolyKata.Classic;
 using MonopolyKata.Core;
-using MonopolyKata.Core.Board;
+using MonopolyKata.Core.Spaces;
 using MonopolyKata.Core.Rules;
 using MonopolyKata.Tests.Fakes;
 using System;
@@ -16,7 +16,7 @@ namespace MonopolyKata.Tests
     {
         private FakeDice fakeDice;
         private String horse;
-        private GameBoard board;
+        private Board board;
         private ClassicTurnTaker turnTaker;
 
         [TestInitialize]

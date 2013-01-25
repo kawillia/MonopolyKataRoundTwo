@@ -50,10 +50,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Board\IncomeTaxTests.cs" />
-    <Compile Include="Board\LuxuryTaxTests.cs" />
-    <Compile Include="Board\GoToJailTests.cs" />
-    <Compile Include="Board\PropertyTests.cs" />
+    <Compile Include="Spaces\IncomeTaxTests.cs" />
+    <Compile Include="Spaces\LuxuryTaxTests.cs" />
+    <Compile Include="Spaces\GoToJailTests.cs" />
+    <Compile Include="Spaces\PropertyTests.cs" />
     <Compile Include="Fakes\FakeTurnTaker.cs" />
     <Compile Include="Rules\ClassicPropertyRentRuleTests.cs" />
     <Compile Include="Rules\ClassicRailroadRentRuleTests.cs" />
@@ -62,7 +62,7 @@
     <Compile Include="Fakes\FakeDice.cs" />
     <Compile Include="Fakes\FakeLocation.cs" />
     <Compile Include="GameTests.cs" />
-    <Compile Include="Board\GameBoardTests.cs" />
+    <Compile Include="BoardTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GuidShufflerTests.cs" />
     <Compile Include="Rules\ClassicGoBonusRuleTests.cs" />

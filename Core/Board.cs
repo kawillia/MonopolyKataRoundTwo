@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using MonopolyKata.Core.Rules;
+using MonopolyKata.Core.Spaces;
 
-namespace MonopolyKata.Core.Board
+namespace MonopolyKata.Core
 {
-    public class GameBoard
+    public class Board
     {
         private IEnumerable<Space> spaces;
         private IEnumerable<IMovementRule> movementRules;
         private Dictionary<String, Int32> playerLocations;
 
-        public GameBoard(IEnumerable<Space> spaces, IEnumerable<IMovementRule> movementRules, IEnumerable<String> players)
+        public Board(IEnumerable<Space> spaces, IEnumerable<IMovementRule> movementRules, IEnumerable<String> players)
         {
             this.spaces = spaces;
             this.movementRules = movementRules;

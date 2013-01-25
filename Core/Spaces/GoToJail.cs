@@ -1,13 +1,13 @@
 ﻿ using System;
 
-namespace MonopolyKata.Core.Board
+namespace MonopolyKata.Core.Spaces
 {
     public class GoToJail : Space
     {
         private Int32 locationToSendPlayerTo;
-        private GameBoard board;
+        private Board board;
 
-        public GoToJail(Int32 locationToSendPlayerTo, GameBoard board)
+        public GoToJail(Int32 locationToSendPlayerTo, Board board)
             : base()
         {
             this.locationToSendPlayerTo = locationToSendPlayerTo;

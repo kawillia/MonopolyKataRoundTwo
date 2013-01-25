@@ -2,7 +2,7 @@
 using MonopolyKata.Classic;
 using MonopolyKata.Core;
 using MonopolyKata.Core.Rules;
-using MonopolyKata.Core.Board;
+using MonopolyKata.Core.Spaces;
 
 namespace MonopolyKata.Classic.Rules
 {

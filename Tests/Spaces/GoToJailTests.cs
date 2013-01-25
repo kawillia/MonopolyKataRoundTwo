@@ -1,23 +1,24 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonopolyKata.Classic;
-using MonopolyKata.Core.Board;
+using MonopolyKata.Core.Spaces;
 using MonopolyKata.Core.Rules;
 using System;
 using System.Linq;
+using MonopolyKata.Core;
 
-namespace MonopolyKata.Tests.Board
+namespace MonopolyKata.Tests.Spaces
 {
     [TestClass]
     public class GoToJailTests
     {
         private String horse;
-        private GameBoard board;
+        private Board board;
         private GoToJail goToJail;
 
         public GoToJailTests()
         {
             horse = "Horse";
-            board = new GameBoard(Enumerable.Empty<Space>(), Enumerable.Empty<IMovementRule>(), new[] { horse });
+            board = new Board(Enumerable.Empty<Space>(), Enumerable.Empty<IMovementRule>(), new[] { horse });
             goToJail = new GoToJail(ClassicBoardFactory.JustVisitingLocation, board);            
         }
 

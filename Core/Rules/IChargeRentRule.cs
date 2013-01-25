@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using MonopolyKata.Core.Board;
+using MonopolyKata.Core.Spaces;
 
 namespace MonopolyKata.Core.Rules
 {

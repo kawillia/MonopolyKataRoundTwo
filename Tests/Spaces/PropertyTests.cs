@@ -2,10 +2,10 @@
 using MonopolyKata.Classic;
 using MonopolyKata.Classic.Rules;
 using MonopolyKata.Core;
-using MonopolyKata.Core.Board;
+using MonopolyKata.Core.Spaces;
 using System;
 
-namespace MonopolyKata.Tests.Board
+namespace MonopolyKata.Tests.Spaces
 {
     [TestClass]
     public class PropertyTests
@@ -30,7 +30,7 @@ namespace MonopolyKata.Tests.Board
         }
 
         [TestMethod]
-        public void PlayerLandingOnUnownedPropertyBuysPropertyWhenStrategyAllows()
+        public void PlayerLandingOnUnownedPropertyBuysProperty()
         {
             var balanceBeforePurchase = banker.GetBalance(horse);
             balticAvenue.LandOn(horse);

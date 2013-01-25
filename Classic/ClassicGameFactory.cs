@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using MonopolyKata.Classic.Rules;
 using MonopolyKata.Core;
-using MonopolyKata.Core.Board;
+using MonopolyKata.Core.Spaces;
 
 namespace MonopolyKata.Classic
 {
