@@ -6,11 +6,11 @@ using MonopolyKata.Core.Board;
 
 namespace MonopolyKata.Classic.Rules
 {
-    public class ClassicPassGoBonusRule : IMovementRule
+    public class ClassicGoBonusRule : IMovementRule
     {
         private Banker banker;
 
-        public ClassicPassGoBonusRule(Banker banker)
+        public ClassicGoBonusRule(Banker banker)
         {
             this.banker = banker;
         }

@@ -7,17 +7,17 @@ using MonopolyKata.Core;
 namespace MonopolyKata.Tests.Rules
 {
     [TestClass]
-    public class PassGoBonusRuleTests
+    public class ClassicGoBonusRuleTests
     {
         private String horse;
-        private ClassicPassGoBonusRule rule;
+        private ClassicGoBonusRule rule;
         private Banker banker;
 
-        public PassGoBonusRuleTests()
+        public ClassicGoBonusRuleTests()
         {
             horse = "Horse";
             banker = new Banker(new[] { horse });
-            rule = new ClassicPassGoBonusRule(banker);
+            rule = new ClassicGoBonusRule(banker);
         }
 
         [TestMethod]

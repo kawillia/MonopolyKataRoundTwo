@@ -33,7 +33,7 @@ namespace MonopolyKata.Tests.Board
         [TestMethod]
         public void PlayerIsMoved()
         {
-            board.MovePlayerSpaceBySpace(horse, 3);
+            board.MovePlayer(horse, 3);
 
             Assert.AreEqual(3, board.GetPlayerLocation(horse));
         }
@@ -41,8 +41,8 @@ namespace MonopolyKata.Tests.Board
         [TestMethod]
         public void PlayerPositionWrapsAtEndOfBoard()
         {
-            board.MovePlayerDirectlyToLocation(horse, 38);
-            board.MovePlayerSpaceBySpace(horse, 4);
+            board.TeleportPlayer(horse, 38);
+            board.MovePlayer(horse, 4);
 
             Assert.AreEqual(2, board.GetPlayerLocation(horse));
         }
@@ -50,7 +50,7 @@ namespace MonopolyKata.Tests.Board
         [TestMethod]
         public void MovementRulesAreApplied()
         {
-            board.MovePlayerSpaceBySpace(horse, 4);
+            board.MovePlayer(horse, 4);
 
             foreach (var rule in movementRules)
                 Assert.IsTrue(rule.Applied);
@@ -59,7 +59,7 @@ namespace MonopolyKata.Tests.Board
         [TestMethod]
         public void PlayerIsMovedDirectlyToPosition()
         {
-            board.MovePlayerDirectlyToLocation(horse, 20);
+            board.TeleportPlayer(horse, 20);
             Assert.AreEqual(20, board.GetPlayerLocation(horse));
         }
 

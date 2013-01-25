@@ -72,7 +72,7 @@ namespace MonopolyKata.Classic
             var spaces = new List<Space>();
             var board = new GameBoard(spaces, movementRules, players);
 
-            var go = new Go(GoSalaryBonus, banker);
+            var go = new Space();
             var mediterraneanAvenue = new Property(MediterraneanAvenuePrice, MediterraneanAvenueRent, banker);
             var communityChestOne = new Space();
             var balticAvenue = new Property(BalticAvenuePrice, BalticAvenueRent, banker);

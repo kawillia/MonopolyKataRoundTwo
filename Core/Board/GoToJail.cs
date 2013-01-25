@@ -16,7 +16,7 @@ namespace MonopolyKata.Core.Board
 
         public override void LandOn(String player)
         {
-            board.MovePlayerDirectlyToLocation(player, locationToSendPlayerTo);
+            board.TeleportPlayer(player, locationToSendPlayerTo);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace MonopolyKata.Core.Board
                 playerLocations.Add(player, 0);
         }
 
-        public void MovePlayerSpaceBySpace(String player, Int32 numberOfSpaces)
+        public void MovePlayer(String player, Int32 numberOfSpaces)
         {
             var currentLocation = playerLocations[player];
 
@@ -35,7 +35,7 @@ namespace MonopolyKata.Core.Board
             spaceToLandOn.LandOn(player);
         }
 
-        public void MovePlayerDirectlyToLocation(String player, Int32 location)
+        public void TeleportPlayer(String player, Int32 location)
         {
             playerLocations[player] = location;
         }

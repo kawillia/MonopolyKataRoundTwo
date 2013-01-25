@@ -46,7 +46,7 @@
     <Compile Include="Rules\ClassicPropertyRentRule.cs" />
     <Compile Include="Rules\ClassicRailroadRentRule.cs" />
     <Compile Include="Rules\ClassicUtilityRentRule.cs" />
-    <Compile Include="Rules\ClassicPassGoBonusRule.cs" />
+    <Compile Include="Rules\ClassicGoBonusRule.cs" />
     <Compile Include="ClassicTurnTaker.cs" />
   </ItemGroup>
   <ItemGroup>

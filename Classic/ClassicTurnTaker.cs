@@ -22,9 +22,9 @@ namespace MonopolyKata.Classic
                 dice.Roll();
 
                 if (dice.NumberOfConsecutiveDoubles == 3)
-                    movementHandler.MovePlayerDirectlyToLocation(player, 10);
+                    movementHandler.TeleportPlayer(player, 10);
                 else
-                    movementHandler.MovePlayerSpaceBySpace(player, dice.CurrentValue);
+                    movementHandler.MovePlayer(player, dice.CurrentValue);
             }
             while (dice.IsDoubles && dice.NumberOfConsecutiveDoubles < 3);
         }
