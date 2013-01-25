@@ -107,7 +107,7 @@ namespace MonopolyKata.Classic
         public const Int32 BoardwalkLocation = 39;
         public const Int32 NumberOfSpaces = 40;
         
-        public static IEnumerable<Space> GetComponents(Dice dice, Banker banker)
+        public static IEnumerable<Space> GetSpaces(Dice dice, Banker banker)
         {
             var go = new Go(GoSalaryBonus, banker);
             var mediterraneanAvenue = new Property(MediterraneanAvenuePrice, MediterraneanAvenueRent, banker);

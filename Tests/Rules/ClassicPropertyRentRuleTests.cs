@@ -15,13 +15,15 @@ namespace MonopolyKata.Tests.Rules
         private Player hat;
         private Property mediterraneanAvenue;
         private Property balticAvenue;
+        private Banker banker;
 
         public ClassicPropertyRentRuleTests()
         {
             strategy = new ClassicPropertyRentRule();
-            hat = new Player("Hat", 1500);
-            mediterraneanAvenue = new Property(ClassicBoardFactory.MediterraneanAvenueLocation, ClassicBoardFactory.MediterraneanAvenuePrice, ClassicBoardFactory.MediterraneanAvenueRent);
-            balticAvenue = new Property(ClassicBoardFactory.BalticAvenueLocation, ClassicBoardFactory.BalticAvenuePrice, ClassicBoardFactory.BalticAvenueRent);
+            hat = new Player("Hat");
+            banker = new Banker(new[] { hat });
+            mediterraneanAvenue = new Property(ClassicBoardFactory.MediterraneanAvenuePrice, ClassicBoardFactory.MediterraneanAvenueRent, banker);
+            balticAvenue = new Property(ClassicBoardFactory.BalticAvenuePrice, ClassicBoardFactory.BalticAvenueRent, banker);
             properties = new[] { mediterraneanAvenue, balticAvenue };
         }
 

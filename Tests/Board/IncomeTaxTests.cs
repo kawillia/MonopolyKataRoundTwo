@@ -9,47 +9,49 @@ namespace MonopolyKata.Tests.Board
     public class IncomeTaxTests
     {
         private Player horse;
+        private Banker banker;
         private IncomeTax incomeTax;
 
         public IncomeTaxTests()
         {
-            incomeTax = new IncomeTax(ClassicBoardFactory.IncomeTaxLocation, ClassicGameConstants.IncomeTaxPercentage, ClassicGameConstants.MaximumIncomeTaxPaymentAmount);
+            horse = new Player("Horse");
+            banker = new Banker(new[] { horse });
+            incomeTax = new IncomeTax(ClassicGameConstants.IncomeTaxPercentage, ClassicGameConstants.MaximumIncomeTaxPaymentAmount, banker);
         }
 
         [TestMethod]
         public void PlayerLandingOnIncomeTaxWhenPercentageOfNetWorthIsBelowMaximumPaymentDecreasesPlayerBalanceByPercentage()
         {
-            horse = new Player("Horse", 1800);
+            banker.Pay(horse, 1800);
             incomeTax.LandOn(horse);
 
-            Assert.AreEqual(1800 - (1800 / ClassicGameConstants.IncomeTaxPercentage), horse.Balance);
+            Assert.AreEqual(1800 - (1800 / ClassicGameConstants.IncomeTaxPercentage), banker.GetBalance(horse));
         }
 
         [TestMethod]
         public void PlayerLandingOnIncomeTaxWhenPercentageOfNetWorthIsAboveMaximumPaymentDecreasesPlayerBalanceByMaximumPayment()
         {
-            horse = new Player("Horse", 2200);
+            banker.Pay(horse, 2200);
             incomeTax.LandOn(horse);
 
-            Assert.AreEqual(2200 - ClassicGameConstants.MaximumIncomeTaxPaymentAmount, horse.Balance);
+            Assert.AreEqual(2200 - ClassicGameConstants.MaximumIncomeTaxPaymentAmount, banker.GetBalance(horse));
         }
 
         [TestMethod]
         public void PlayerLandingOnIncomeTaxWheNetWorthIsZeroDecreasesPlayerBalanceByZero()
         {
-            horse = new Player("Horse", 0);
             incomeTax.LandOn(horse);
 
-            Assert.AreEqual(0, horse.Balance);
+            Assert.AreEqual(0, banker.GetBalance(horse));
         }
 
         [TestMethod]
         public void PlayerLandingOnIncomeTaxWhenPercentageOfNetWorthEqualsMaximumPaymentDecreasesPlayerBonusByMaxiumumPayment()
         {
-            horse = new Player("Horse", 2000);
+            banker.Pay(horse, 2000);
             incomeTax.LandOn(horse);
 
-            Assert.AreEqual(2000 - ClassicGameConstants.MaximumIncomeTaxPaymentAmount, horse.Balance);
+            Assert.AreEqual(2000 - ClassicGameConstants.MaximumIncomeTaxPaymentAmount, banker.GetBalance(horse));
         }
     }
 }

@@ -9,21 +9,23 @@ namespace MonopolyKata.Tests.Board
     public class GoTests
     {
         private Player horse;
+        private Banker banker;
         private Go go;
 
         public GoTests()
         {
             horse = new Player("Horse");
-            go = new Go(ClassicBoardFactory.GoLocation, ClassicGameConstants.GoSalaryBonus);
+            banker = new Banker(new[] { horse });
+            go = new Go(ClassicGameConstants.GoSalaryBonus, banker);
         }
 
         [TestMethod]
         public void PlayerLandingOnGoIncreasesPlayerBalanceByGoSalaryBonus()
         {
-            var balanceBefore = horse.Balance;
+            var balanceBefore = banker.GetBalance(horse);
             go.LandOn(horse);
 
-            Assert.AreEqual(balanceBefore + ClassicGameConstants.GoSalaryBonus, horse.Balance);
+            Assert.AreEqual(balanceBefore + ClassicGameConstants.GoSalaryBonus, banker.GetBalance(horse));
         }
     }
 }

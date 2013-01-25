@@ -22,9 +22,11 @@ namespace MonopolyKata.Tests.Rules
         {
             fakeDice = new FakeDice();
             strategy = new ClassicUtilityRentRule(fakeDice);
-            hat = new Player("Hat", 1000);
-            electricCompany = new Property(ClassicBoardFactory.ElectricCompanyLocation, ClassicBoardFactory.UtilityPrice, 0);
-            waterWorks = new Property(ClassicBoardFactory.ElectricCompanyLocation, ClassicBoardFactory.UtilityPrice, 0);
+            hat = new Player("Hat");
+
+            var banker = new Banker(new[] { hat });
+            electricCompany = new Property(ClassicBoardFactory.UtilityPrice, 0, banker);
+            waterWorks = new Property(ClassicBoardFactory.UtilityPrice, 0, banker);
 
             properties = new[] { electricCompany, waterWorks };
         }

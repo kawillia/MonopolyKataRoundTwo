@@ -16,7 +16,7 @@ namespace MonopolyKata.Core.Board
 
         public override void LandOn(Player player)
         {
-            banker.Pay(player, taxAmount);
+            banker.Charge(player, taxAmount);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace MonopolyKata.Tests.Fakes
     {
         public Boolean LandedOnCalled { get; set; }
 
-        public FakeLocation(Int32 locationIndex) : base(locationIndex) { }
+        public FakeLocation() : base() { }
 
         public override void LandOn(Player player)
         {

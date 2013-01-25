@@ -64,7 +64,6 @@
     <Compile Include="Fakes\FakeLocation.cs" />
     <Compile Include="GameTests.cs" />
     <Compile Include="Board\GameBoardTests.cs" />
-    <Compile Include="PlayerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GuidShufflerTests.cs" />
     <Compile Include="Rules\PassGoBonusRuleTests.cs" />

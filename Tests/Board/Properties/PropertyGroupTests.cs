@@ -16,41 +16,41 @@ namespace MonopolyKata.Tests.Board.Properties
         private Property mediterraneanAvenue;
         private Property balticAvenue;
         private PropertyGroup purpleGroup;
+        private Banker banker;
 
         public PropertyGroupTests()
         {
-            hat = new Player("Hat", 1500);
-            horse = new Player("Horse", 1500);
-            mediterraneanAvenue = new Property(ClassicBoardFactory.MediterraneanAvenueLocation, ClassicBoardFactory.MediterraneanAvenuePrice, ClassicBoardFactory.MediterraneanAvenueRent);
-            balticAvenue = new Property(ClassicBoardFactory.BalticAvenueLocation, ClassicBoardFactory.BalticAvenuePrice, ClassicBoardFactory.BalticAvenueRent);
-            purpleGroup = new PropertyGroup(new FakeRentRule(), mediterraneanAvenue, balticAvenue);
+            hat = new Player("Hat");
+            horse = new Player("Horse");
+            banker = new Banker(new[] { hat, horse });
+            mediterraneanAvenue = new Property(ClassicBoardFactory.MediterraneanAvenuePrice, ClassicBoardFactory.MediterraneanAvenueRent, banker);
+            balticAvenue = new Property(ClassicBoardFactory.BalticAvenuePrice, ClassicBoardFactory.BalticAvenueRent, banker);
+            balticAvenue.ChangeChargeRentRule(new ClassicPropertyRentRule());
+            purpleGroup = new PropertyGroup(mediterraneanAvenue, balticAvenue);
         }
 
         [TestMethod]
         public void PlayerLandingOnUnownedPropertyBuysPropertyWhenStrategyAllows()
         {
-            var balanceBeforePurchase = horse.Balance;
-
-            horse.MoveTo(ClassicBoardFactory.BalticAvenueLocation);
-            purpleGroup.LandOn(horse);
+            var balanceBeforePurchase = banker.GetBalance(horse);
+            balticAvenue.LandOn(horse);
 
             Assert.AreEqual(horse, balticAvenue.Owner);
-            Assert.AreEqual(balanceBeforePurchase - balticAvenue.Price, horse.Balance);
+            Assert.AreEqual(balanceBeforePurchase - balticAvenue.Price, banker.GetBalance(horse));
         }
 
         [TestMethod]
         public void PlayerLandingOnOwnedPropertyPlayerPaysRent()
         {
-            var horseBalanceBeforeRentPayment = horse.Balance;
-            var hatBalanceBeforeRentPayment = hat.Balance;
+            var horseBalanceBeforeRentPayment = banker.GetBalance(horse);
+            var hatBalanceBeforeRentPayment = banker.GetBalance(hat);
 
             balticAvenue.Owner = hat;
-            horse.MoveTo(ClassicBoardFactory.BalticAvenueLocation);
-            purpleGroup.LandOn(horse);
+            balticAvenue.LandOn(horse);
 
             Assert.AreEqual(hat, balticAvenue.Owner);
-            Assert.AreEqual(horseBalanceBeforeRentPayment - FakeRentRule.RentAmount, horse.Balance);
-            Assert.AreEqual(hatBalanceBeforeRentPayment + FakeRentRule.RentAmount, hat.Balance);
+            Assert.AreEqual(horseBalanceBeforeRentPayment - balticAvenue.BaseRent, banker.GetBalance(horse));
+            Assert.AreEqual(hatBalanceBeforeRentPayment + balticAvenue.BaseRent, banker.GetBalance(hat));
         }
 
         private class FakeRentRule : IChargeRentRule

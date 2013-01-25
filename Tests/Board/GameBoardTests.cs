@@ -15,42 +15,44 @@ namespace MonopolyKata.Tests.Board
     [TestClass]
     public class GameBoardTests
     {
-        private Player player;
+        private Player horse;
         private GameBoard board;
 
         [TestInitialize]
         public void Initialize()
         {
-            player = new Player("Horse");
+            horse = new Player("Horse");
 
-            var boardComponents = ClassicBoardFactory.GetComponents(new FakeDice());
-            board = new GameBoard(boardComponents, new[] { new ClassicPassGoBonusRule() }, ClassicBoardFactory.NumberOfSpaces);
+            var banker = new Banker(new[] { horse });
+            var boardComponents = ClassicBoardFactory.GetSpaces(new FakeDice(), banker);
+            board = new GameBoard(boardComponents, new[] { new ClassicPassGoBonusRule(banker) });
         }
 
         [TestMethod]
         public void PlayerIsMoved()
         {
-            board.MovePlayerSpaceBySpace(player, 3);
+            board.MovePlayerSpaceBySpace(horse, 3);
 
-            Assert.AreEqual(3, player.CurrentLocation);
+            Assert.AreEqual(3, horse.CurrentLocation);
         }
 
         [TestMethod]
         public void PlayerPositionWrapsAtEndOfBoard()
         {
-            player.MoveTo(38);
-            board.MovePlayerSpaceBySpace(player, 4);
+            horse.MoveTo(38);
+            board.MovePlayerSpaceBySpace(horse, 4);
 
-            Assert.AreEqual(2, player.CurrentLocation);
+            Assert.AreEqual(2, horse.CurrentLocation);
         }
 
         [TestMethod]
         public void MovementRulesAreApplied()
         {
             var rules = new[] { new FakeMovementRule(), new FakeMovementRule() };
-            var boardComponents = ClassicBoardFactory.GetComponents(new FakeDice());
-            board = new GameBoard(boardComponents, rules, ClassicBoardFactory.NumberOfSpaces);
-            board.MovePlayerSpaceBySpace(player, 4);
+            var banker = new Banker(new[] { horse });
+            var boardComponents = ClassicBoardFactory.GetSpaces(new FakeDice(), banker);
+            board = new GameBoard(boardComponents, rules);
+            board.MovePlayerSpaceBySpace(horse, 4);
 
             foreach (var rule in rules)
                 Assert.IsTrue(rule.Applied);
@@ -59,8 +61,8 @@ namespace MonopolyKata.Tests.Board
         [TestMethod]
         public void MovePlayerDirectlyToPositionTest()
         {
-            board.MovePlayerDirectlyToLocation(player, 20);
-            Assert.AreEqual(20, player.CurrentLocation);
+            board.MovePlayerDirectlyToLocation(horse, 20);
+            Assert.AreEqual(20, horse.CurrentLocation);
         }
 
         private class FakeMovementRule : IMovementRule

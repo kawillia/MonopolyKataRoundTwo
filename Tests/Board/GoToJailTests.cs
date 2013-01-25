@@ -13,7 +13,7 @@ namespace MonopolyKata.Tests.Board
 
         public GoToJailTests()
         {
-            goToJail = new GoToJail(ClassicBoardFactory.GoToJailLocation, ClassicBoardFactory.JustVisitingLocation);
+            goToJail = new GoToJail(ClassicBoardFactory.JustVisitingLocation);
             horse = new Player("Horse");
         }
 

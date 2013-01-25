@@ -22,13 +22,15 @@ namespace MonopolyKata.Tests.Rules
         public ClassicRailroadRentRuleTests()
         {
             strategy = new ClassicRailroadRentRule();
-            horse = new Player("Horse", 1500);
-            hat = new Player("Hat", 1000);
+            horse = new Player("Horse");
+            hat = new Player("Hat");
 
-            readingRailroad = new Property(ClassicBoardFactory.ReadingRailroadLocation, ClassicBoardFactory.RailroadPrice, ClassicBoardFactory.BaseRailroadRent);
-            pennsylvaniaRailroad = new Property(ClassicBoardFactory.PennsylvaniaAvenueLocation, ClassicBoardFactory.RailroadPrice, ClassicBoardFactory.BaseRailroadRent);
-            boRailroad = new Property(ClassicBoardFactory.BORailroadLocation, ClassicBoardFactory.RailroadPrice, ClassicBoardFactory.BaseRailroadRent);
-            shortLine = new Property(ClassicBoardFactory.ShortLineLocation, ClassicBoardFactory.RailroadPrice, ClassicBoardFactory.BaseRailroadRent);
+            var banker = new Banker(new[] { horse, hat });
+
+            readingRailroad = new Property(ClassicBoardFactory.RailroadPrice, ClassicBoardFactory.BaseRailroadRent, banker);
+            pennsylvaniaRailroad = new Property(ClassicBoardFactory.RailroadPrice, ClassicBoardFactory.BaseRailroadRent, banker);
+            boRailroad = new Property(ClassicBoardFactory.RailroadPrice, ClassicBoardFactory.BaseRailroadRent, banker);
+            shortLine = new Property(ClassicBoardFactory.RailroadPrice, ClassicBoardFactory.BaseRailroadRent, banker);
             properties = new[] { readingRailroad, pennsylvaniaRailroad, boRailroad, shortLine };
         }
 
