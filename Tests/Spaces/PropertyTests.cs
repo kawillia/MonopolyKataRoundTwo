@@ -25,12 +25,11 @@ namespace MonopolyKata.Tests.Spaces
             banker.Pay(hat, 2000);
             banker.Pay(horse, 2000);
 
-            var purpleGroup = new List<Property>();
-            mediterraneanAvenue = new Property(ClassicBoardFactory.MediterraneanAvenuePrice, ClassicBoardFactory.MediterraneanAvenueRent, banker, purpleGroup);
-            balticAvenue = new Property(ClassicBoardFactory.BalticAvenuePrice, ClassicBoardFactory.BalticAvenueRent, banker, purpleGroup);
+            var propertyManager = new PropertyManager();
+            mediterraneanAvenue = new Property(ClassicBoardFactory.MediterraneanAvenuePrice, ClassicBoardFactory.MediterraneanAvenueRent, ClassicBoardFactory.PurpleGroup, banker, propertyManager);
+            balticAvenue = new Property(ClassicBoardFactory.BalticAvenuePrice, ClassicBoardFactory.BalticAvenueRent, ClassicBoardFactory.PurpleGroup, banker, propertyManager);
 
-            purpleGroup.Add(mediterraneanAvenue);
-            purpleGroup.Add(balticAvenue);
+            propertyManager.ManageProperties(new[] { mediterraneanAvenue, balticAvenue });
         }
 
         [TestMethod]

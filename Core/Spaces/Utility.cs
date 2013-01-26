@@ -10,14 +10,15 @@ namespace MonopolyKata.Core.Spaces
     {
         private Dice dice;
 
-        public Utility(Int32 price, Banker banker, IEnumerable<Property> propertiesInGroup, Dice dice) : base(price, 0, banker, propertiesInGroup)
+        public Utility(Int32 price, String group, Banker banker, PropertyManager propertyManager, Dice dice) 
+            : base(price, 0, group, banker, propertyManager)
         {
             this.dice = dice;
         }
 
         public override Int32 CalculateRent()
         {
-            if (propertiesInGroup.All(u => u.IsOwned))
+            if (propertyManager.GroupIsOwned(Group))
                 return dice.CurrentValue * 10;
 
             return dice.CurrentValue * 4;

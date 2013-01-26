@@ -25,16 +25,13 @@ namespace MonopolyKata.Tests.Spaces
             horse = "Horse";
             banker = new Banker(new[] { hat, horse });
 
-            var railroadGroup = new List<Property>();
-            readingRailroad = new Railroad(ClassicBoardFactory.RailroadPrice, ClassicBoardFactory.BaseRailroadRent, banker, railroadGroup);
-            pennsylvaniaRailroad = new Railroad(ClassicBoardFactory.RailroadPrice, ClassicBoardFactory.BaseRailroadRent, banker, railroadGroup);
-            boRailroad = new Railroad(ClassicBoardFactory.RailroadPrice, ClassicBoardFactory.BaseRailroadRent, banker, railroadGroup);
-            shortLine = new Railroad(ClassicBoardFactory.RailroadPrice, ClassicBoardFactory.BaseRailroadRent, banker, railroadGroup);
+            var propertyManager = new PropertyManager();
+            readingRailroad = new Railroad(ClassicBoardFactory.RailroadPrice, ClassicBoardFactory.BaseRailroadRent, ClassicBoardFactory.RailroadGroup, banker, propertyManager);
+            pennsylvaniaRailroad = new Railroad(ClassicBoardFactory.RailroadPrice, ClassicBoardFactory.BaseRailroadRent, ClassicBoardFactory.RailroadGroup, banker, propertyManager);
+            boRailroad = new Railroad(ClassicBoardFactory.RailroadPrice, ClassicBoardFactory.BaseRailroadRent, ClassicBoardFactory.RailroadGroup, banker, propertyManager);
+            shortLine = new Railroad(ClassicBoardFactory.RailroadPrice, ClassicBoardFactory.BaseRailroadRent, ClassicBoardFactory.RailroadGroup, banker, propertyManager);
 
-            railroadGroup.Add(readingRailroad);
-            railroadGroup.Add(pennsylvaniaRailroad);
-            railroadGroup.Add(boRailroad);
-            railroadGroup.Add(shortLine);
+            propertyManager.ManageProperties(new[] { readingRailroad, pennsylvaniaRailroad, boRailroad, shortLine });
         }
 
         [TestMethod]

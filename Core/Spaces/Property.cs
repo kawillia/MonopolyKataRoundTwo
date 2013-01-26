@@ -10,22 +10,23 @@ namespace MonopolyKata.Core.Spaces
     public class Property : Space
     {
         private Banker banker;
-        protected IEnumerable<Property> propertiesInGroup;
+        protected PropertyManager propertyManager;
 
         public Int32 Price { get; private set; }
         public Int32 BaseRent { get; private set; }
+        public String Group { get; private set; }
         public Boolean IsMortgaged { get; private set; }
         public Boolean IsOwned { get { return this.Owner != null; } }        
         public String Owner { get; set; }
 
-        public Property(Int32 price, Int32 baseRent, Banker banker, IEnumerable<Property> propertiesInGroup)
+        public Property(Int32 price, Int32 baseRent, String group, Banker banker, PropertyManager propertyManager)
             : base()
         {
             Price = price;
             BaseRent = baseRent;
-            Owner = null;
+            Group = group;
             this.banker = banker;
-            this.propertiesInGroup = propertiesInGroup;
+            this.propertyManager = propertyManager;
         }
 
         public override void LandOn(String player)
@@ -49,11 +50,7 @@ namespace MonopolyKata.Core.Spaces
 
         public virtual Int32 CalculateRent()
         {
-            var allPropertiesAreOwnedBySamePlayer = 
-                propertiesInGroup.All(l => l.IsOwned) &&
-                propertiesInGroup.Select(l => l.Owner).Distinct().Count() == 1;
-
-            if (allPropertiesAreOwnedBySamePlayer)
+            if (propertyManager.GroupIsOwnedByOnePlayer(Group))
                 return BaseRent * 2;
 
             return BaseRent;

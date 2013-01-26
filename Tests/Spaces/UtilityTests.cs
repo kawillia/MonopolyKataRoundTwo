@@ -22,12 +22,11 @@ namespace MonopolyKata.Tests.Spaces
             hat = "Hat";
 
             var banker = new Banker(new[] { hat });
-            var utilityGroup = new List<Utility>();
-            electricCompany = new Utility(ClassicBoardFactory.UtilityPrice, banker, utilityGroup, fakeDice);
-            waterWorks = new Utility(ClassicBoardFactory.UtilityPrice, banker, utilityGroup, fakeDice);
+            var propertyManager = new PropertyManager();
+            electricCompany = new Utility(ClassicBoardFactory.UtilityPrice, ClassicBoardFactory.UtilityGroup, banker, propertyManager, fakeDice);
+            waterWorks = new Utility(ClassicBoardFactory.UtilityPrice, ClassicBoardFactory.UtilityGroup, banker, propertyManager, fakeDice);
 
-            utilityGroup.Add(electricCompany);
-            utilityGroup.Add(waterWorks);
+            propertyManager.ManageProperties(new[] { electricCompany, waterWorks });
         }
 
         [TestInitialize]

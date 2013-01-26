@@ -67,6 +67,17 @@ namespace MonopolyKata.Classic
         public const Int32 JustVisitingLocation = 10;
         public const Int32 NumberOfSpaces = 40;
 
+        public const String PurpleGroup = "Purple";
+        public const String LightBlueGroup = "LightBlue";
+        public const String VioletGroup = "Violet";
+        public const String OrangeGroup = "Orange";
+        public const String RedGroup = "Red";
+        public const String YellowGroup = "Yellow";
+        public const String DarkGreenGroup = "DarkGreen";
+        public const String DarkBlueGroup = "DarkBlue";
+        public const String RailroadGroup = "Railroad";
+        public const String UtilityGroup = "Utility";
+
         public static Board CreateBoard(Dice dice, IEnumerable<IMovementRule> movementRules, IEnumerable<Property> properties, Banker banker, IEnumerable<String> players)
         {
             var spaces = new List<Space>();
@@ -103,86 +114,37 @@ namespace MonopolyKata.Classic
             return board;
         }
 
-        public static IEnumerable<Property> CreateProperties(Banker banker)
+        public static IEnumerable<Property> CreateProperties(Banker banker, PropertyManager propertyManager)
         {
-            var purpleGroup = new List<Property>();
-            var lightBlueGroup = new List<Property>();
-            var violetGroup = new List<Property>();
-            var orangeGroup = new List<Property>();
-            var redGroup = new List<Property>();
-            var yellowGroup = new List<Property>();
-            var darkGreenGroup = new List<Property>();
-            var darkBlueGroup = new List<Property>();
-            var railroadGroup = new List<Property>();
-            var utilitiesGroup = new List<Property>();
-
-            var mediterraneanAvenue = new Property(MediterraneanAvenuePrice, MediterraneanAvenueRent, banker, purpleGroup);
-            var balticAvenue = new Property(BalticAvenuePrice, BalticAvenueRent, banker, purpleGroup);
-            var readingRailroad = new Property(RailroadPrice, BaseRailroadRent, banker, railroadGroup);
-            var orientalAvenue = new Property(OrientalAvenuePrice, OrientalAvenueRent, banker, lightBlueGroup);
-            var vermontAvenue = new Property(VermontAvenuePrice, VermontAvenueRent, banker, lightBlueGroup);
-            var connecticutAvenue = new Property(ConnecticutAvenuePrice, ConnecticutAvenueRent, banker, lightBlueGroup);
-            var stCharlesPlace = new Property(StCharlesPlacePrice, StCharlesPlaceRent, banker, violetGroup);
-            var electricCompany = new Property(UtilityPrice, 0, banker, utilitiesGroup);
-            var statesAvenue = new Property(StatesAvenuePrice, StatesAvenueRent, banker, violetGroup);
-            var virginiaAvenue = new Property(VirginiaAvenuePrice, VirginiaAvenueRent, banker, violetGroup);
-            var pennsylvaniaRailroad = new Property(RailroadPrice, BaseRailroadRent, banker, railroadGroup);
-            var stJamesPlace = new Property(StJamesPlacePrice, StJamesPlaceRent, banker, orangeGroup);
-            var tennesseeAvenue = new Property(TennesseeAvenuePrice, TennesseeAvenueRent, banker, orangeGroup);
-            var newYorkAvenue = new Property(NewYorkAvenuePrice, NewYorkAvenueRent, banker, orangeGroup);
-            var kentuckyAvenue = new Property(KentuckyAvenuePrice, KentuckyAvenueRent, banker, redGroup);
-            var indianaAvenue = new Property(IndianaAvenuePrice, IndianaAvenueRent, banker, redGroup);
-            var illinoisAvenue = new Property(IllinoisAvenuePrice, IllinoisAvenueRent, banker, redGroup);
-            var boRailroad = new Property(RailroadPrice, BaseRailroadRent, banker, railroadGroup);
-            var atlanticAvenue = new Property(AtlanticAvenuePrice, AtlanticAvenueRent, banker, yellowGroup);
-            var ventnorAvenue = new Property(VentnorAvenuePrice, VentnorAvenueRent, banker, yellowGroup);
-            var waterWorks = new Property(UtilityPrice, 0, banker, utilitiesGroup);
-            var marvinGardens = new Property(MarvinGardensPrice, MarvinGardensRent, banker, yellowGroup);
-            var pacificAvenue = new Property(PacificAvenuePrice, PacificAvenueRent, banker, darkGreenGroup);
-            var northCarolinaAvenue = new Property(NorthCarolinaAvenuePrice, NorthCarolinaAvenueRent, banker, darkGreenGroup);
-            var pennsylvaniaAvenue = new Property(PennsylvaniaAvenuePrice, PennsylvaniaAvenueRent, banker, darkGreenGroup);
-            var shortLine = new Property(RailroadPrice, BaseRailroadRent, banker, railroadGroup);
-            var parkPlace = new Property(ParkPlacePrice, ParkPlaceRent, banker, darkBlueGroup);
-            var boardwalk = new Property(BoardwalkPrice, BoardwalkRent, banker, darkBlueGroup);
-
-            purpleGroup.Add(mediterraneanAvenue);
-            purpleGroup.Add(balticAvenue);
-
-            lightBlueGroup.Add(orientalAvenue);
-            lightBlueGroup.Add(vermontAvenue);
-            lightBlueGroup.Add(connecticutAvenue);
-
-            violetGroup.Add(stCharlesPlace);
-            violetGroup.Add(statesAvenue);
-            violetGroup.Add(virginiaAvenue);
-
-            orangeGroup.Add(stJamesPlace);
-            orangeGroup.Add(tennesseeAvenue);
-            orangeGroup.Add(newYorkAvenue);
-
-            redGroup.Add(kentuckyAvenue);
-            redGroup.Add(indianaAvenue);
-            redGroup.Add(illinoisAvenue);
-
-            yellowGroup.Add(atlanticAvenue);
-            yellowGroup.Add(ventnorAvenue);
-            yellowGroup.Add(marvinGardens);
-
-            darkGreenGroup.Add(pacificAvenue);
-            darkGreenGroup.Add(northCarolinaAvenue);
-            darkGreenGroup.Add(pennsylvaniaAvenue);
-
-            darkBlueGroup.Add(parkPlace);
-            darkBlueGroup.Add(boardwalk);
-
-            railroadGroup.Add(readingRailroad);
-            railroadGroup.Add(pennsylvaniaRailroad);
-            railroadGroup.Add(boRailroad);
-            railroadGroup.Add(shortLine);
-
-            utilitiesGroup.Add(electricCompany);
-            utilitiesGroup.Add(waterWorks);
-
+            var mediterraneanAvenue = new Property(MediterraneanAvenuePrice, MediterraneanAvenueRent, PurpleGroup, banker, propertyManager);
+            var balticAvenue = new Property(BalticAvenuePrice, BalticAvenueRent, PurpleGroup, banker, propertyManager);
+            var readingRailroad = new Property(RailroadPrice, BaseRailroadRent, RailroadGroup, banker, propertyManager);
+            var orientalAvenue = new Property(OrientalAvenuePrice, OrientalAvenueRent, LightBlueGroup, banker, propertyManager);
+            var vermontAvenue = new Property(VermontAvenuePrice, VermontAvenueRent, LightBlueGroup, banker, propertyManager);
+            var connecticutAvenue = new Property(ConnecticutAvenuePrice, ConnecticutAvenueRent, LightBlueGroup, banker, propertyManager);
+            var stCharlesPlace = new Property(StCharlesPlacePrice, StCharlesPlaceRent, VioletGroup, banker, propertyManager);
+            var electricCompany = new Property(UtilityPrice, 0, UtilityGroup, banker, propertyManager);
+            var statesAvenue = new Property(StatesAvenuePrice, StatesAvenueRent, VioletGroup, banker, propertyManager);
+            var virginiaAvenue = new Property(VirginiaAvenuePrice, VirginiaAvenueRent, VioletGroup, banker, propertyManager);
+            var pennsylvaniaRailroad = new Property(RailroadPrice, BaseRailroadRent, RailroadGroup, banker, propertyManager);
+            var stJamesPlace = new Property(StJamesPlacePrice, StJamesPlaceRent, OrangeGroup, banker, propertyManager);
+            var tennesseeAvenue = new Property(TennesseeAvenuePrice, TennesseeAvenueRent, OrangeGroup, banker, propertyManager);
+            var newYorkAvenue = new Property(NewYorkAvenuePrice, NewYorkAvenueRent, OrangeGroup, banker, propertyManager);
+            var kentuckyAvenue = new Property(KentuckyAvenuePrice, KentuckyAvenueRent, RedGroup, banker, propertyManager);
+            var indianaAvenue = new Property(IndianaAvenuePrice, IndianaAvenueRent, RedGroup, banker, propertyManager);
+            var illinoisAvenue = new Property(IllinoisAvenuePrice, IllinoisAvenueRent, RedGroup, banker, propertyManager);
+            var boRailroad = new Property(RailroadPrice, BaseRailroadRent, RailroadGroup, banker, propertyManager);
+            var atlanticAvenue = new Property(AtlanticAvenuePrice, AtlanticAvenueRent, YellowGroup, banker, propertyManager);
+            var ventnorAvenue = new Property(VentnorAvenuePrice, VentnorAvenueRent, YellowGroup, banker, propertyManager);
+            var waterWorks = new Property(UtilityPrice, 0, UtilityGroup, banker, propertyManager);
+            var marvinGardens = new Property(MarvinGardensPrice, MarvinGardensRent, YellowGroup, banker, propertyManager);
+            var pacificAvenue = new Property(PacificAvenuePrice, PacificAvenueRent, DarkGreenGroup, banker, propertyManager);
+            var northCarolinaAvenue = new Property(NorthCarolinaAvenuePrice, NorthCarolinaAvenueRent, DarkGreenGroup, banker, propertyManager);
+            var pennsylvaniaAvenue = new Property(PennsylvaniaAvenuePrice, PennsylvaniaAvenueRent, DarkGreenGroup, banker, propertyManager);
+            var shortLine = new Property(RailroadPrice, BaseRailroadRent, RailroadGroup, banker, propertyManager);
+            var parkPlace = new Property(ParkPlacePrice, ParkPlaceRent, DarkBlueGroup, banker, propertyManager);
+            var boardwalk = new Property(BoardwalkPrice, BoardwalkRent, DarkBlueGroup, banker, propertyManager);
+            
             var properties = new List<Property>();
             properties.Add(mediterraneanAvenue);
             properties.Add(balticAvenue);

@@ -12,8 +12,10 @@ namespace MonopolyKata.Classic
         {
             var dice = new Dice();
             var banker = new Banker(players);
-            var properties = ClassicBoardFactory.CreateProperties(banker);
-            var propertyManager = new PropertyManager(properties);
+            var propertyManager = new PropertyManager();
+            var properties = ClassicBoardFactory.CreateProperties(banker, propertyManager);
+            propertyManager.ManageProperties(properties);
+
             var board = ClassicBoardFactory.CreateBoard(dice, new[] { new ClassicGoBonusRule(banker) }, properties, banker, players);
             var turnTaker = new ClassicTurn(dice, board, banker, propertyManager);
 

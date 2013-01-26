@@ -27,7 +27,8 @@ namespace MonopolyKata.Tests
 
             var players = new[] { horse };
             var banker = new Banker(players);
-            var properties = ClassicBoardFactory.CreateProperties(banker);
+            var propertyManager = new PropertyManager();
+            var properties = ClassicBoardFactory.CreateProperties(banker, propertyManager);
             board = ClassicBoardFactory.CreateBoard(new FakeDice(), movementRules, properties, banker, players);
         }
 

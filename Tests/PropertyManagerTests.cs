@@ -21,8 +21,9 @@ namespace MonopolyKata.Tests
             horse = "Horse";
             hat = "Hat";
             var banker = new Banker(new[] { horse, hat });
-            properties = ClassicBoardFactory.CreateProperties(banker);
-            propertyManager = new PropertyManager(properties);
+            propertyManager = new PropertyManager();
+            properties = ClassicBoardFactory.CreateProperties(banker, propertyManager);
+            propertyManager.ManageProperties(properties);
         }
 
         [TestMethod]
