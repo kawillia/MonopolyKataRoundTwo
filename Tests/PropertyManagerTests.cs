@@ -26,24 +26,51 @@ namespace MonopolyKata.Tests
         }
 
         [TestMethod]
-        public void GetPropertiesOwnedByPlayerWithOneOwner()
+        public void GetUnmortgagedPropertiesOwnedByPlayerWithOneOwner()
         {
             properties.ElementAt(0).LandOn(horse);
 
-            var ownedProperties = propertyManager.GetPropertiesOwnedByPlayer(horse);
+            var ownedProperties = propertyManager.GetUnmortgagedProperties(horse);
 
             Assert.AreEqual(1, ownedProperties.Count());
         }
 
         [TestMethod]
-        public void GetPropertiesOwnedByPlayerWithMultipleOwners()
+        public void GetUnmortgagedPropertiesOwnedByPlayerWithMultipleOwners()
         {
             properties.ElementAt(0).LandOn(horse);
             properties.ElementAt(1).LandOn(hat);
 
-            var ownedProperties = propertyManager.GetPropertiesOwnedByPlayer(horse);
+            var ownedProperties = propertyManager.GetUnmortgagedProperties(horse);
 
             Assert.AreEqual(1, ownedProperties.Count());
+        }
+
+        [TestMethod]
+        public void GetMortgagedPropertiesWithOneOwners()
+        {
+            var propertyOne = properties.ElementAt(0);
+            propertyOne.Sell(horse);
+            propertyOne.Mortgage();
+
+            var mortgagedProperties = propertyManager.GetMortgagedProperties(horse);
+
+            Assert.AreEqual(1, mortgagedProperties.Count());
+        }
+
+        [TestMethod]
+        public void GetMortgagedPropertiesWithMultipleOwners()
+        {
+            var propertyOne = properties.ElementAt(0);
+            propertyOne.Sell(horse);
+            propertyOne.Mortgage();
+
+            var propertyTwo = properties.ElementAt(1);
+            propertyTwo.Sell(hat);
+
+            var mortgagedProperties = propertyManager.GetMortgagedProperties(horse);
+
+            Assert.AreEqual(1, mortgagedProperties.Count());
         }
     }
 }

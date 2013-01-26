@@ -1,6 +1,7 @@
 ﻿using MonopolyKata.Core;
 using MonopolyKata.Core.Spaces;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MonopolyKata.Classic
@@ -51,24 +52,28 @@ namespace MonopolyKata.Classic
 
         private void MakePropertyDecisions(String player)
         {
-            var ownedProperties = propertyManager.GetPropertiesOwnedByPlayer(player);
-
             if (banker.GetBalance(player) < 200)
-            {
-                var propertiesToMortgage = ownedProperties.Where(p => !p.IsMortgaged);
-
-                foreach (var property in ownedProperties)
-                    if (banker.GetBalance(player) < 200)
-                        property.Mortgage();
-            }
+                MortgageProperties(player);
             else
-            {
-                var propertiesToUnmortgage = ownedProperties.Where(p => p.IsMortgaged);
+                UnmortgageProperties(player);
+        }
 
-                foreach (var property in ownedProperties)
-                    if (banker.GetBalance(player) > property.Price)
-                        property.Unmortgage();
-            }
+        private void MortgageProperties(String player)
+        {
+            var properties = propertyManager.GetUnmortgagedProperties(player);
+
+            foreach (var property in properties)
+                if (banker.GetBalance(player) < 200)
+                    property.Mortgage();
+        }
+
+        private void UnmortgageProperties(String player)
+        {
+            var properties = propertyManager.GetMortgagedProperties(player);
+
+            foreach (var property in properties)
+                if (banker.GetBalance(player) > property.Price)
+                    property.Unmortgage();
         }
     }
 }

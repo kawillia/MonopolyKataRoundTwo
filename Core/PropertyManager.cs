@@ -14,7 +14,12 @@ namespace MonopolyKata.Core
             this.properties = properties;
         }
 
-        public IEnumerable<Property> GetPropertiesOwnedByPlayer(String player)
+        public IEnumerable<Property> GetMortgagedProperties(String player)
+        {
+            return properties.Where(p => p.Owner == player && p.IsMortgaged);
+        }
+
+        public IEnumerable<Property> GetUnmortgagedProperties(String player)
         {
             return properties.Where(p => p.Owner == player);
         }
