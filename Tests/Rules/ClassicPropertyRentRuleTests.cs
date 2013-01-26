@@ -27,14 +27,23 @@ namespace MonopolyKata.Tests.Rules
         }
 
         [TestMethod]
-        public void RentForPropertyWhenNotAllAreOwnedBySamePlayerIsBaseRent()
+        public void RentForPropertyWhenNoneAreOwnedIsBaseRent()
         {
             var rent = rule.Calculate(mediterraneanAvenue);
             Assert.AreEqual(mediterraneanAvenue.BaseRent, rent);
         }
 
         [TestMethod]
-        public void PlayerLandingOnOwnedPropertyGroupBySameOwnerPlayerPaysStatedRentTimesTwo()
+        public void RentForPropertyWhenNotAllAreOwnedBySamePlayerIsBaseRent()
+        {
+            mediterraneanAvenue.Owner = hat;
+
+            var rent = rule.Calculate(mediterraneanAvenue);
+            Assert.AreEqual(mediterraneanAvenue.BaseRent, rent);
+        }
+
+        [TestMethod]
+        public void RentForPropertyDoublesWhenAllAreOwnedBySamePlayer()
         {
             mediterraneanAvenue.Owner = hat;
             balticAvenue.Owner = hat;

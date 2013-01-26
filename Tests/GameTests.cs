@@ -15,14 +15,14 @@ namespace MonopolyKata.Tests
         public void CreatingGameWithDuplicatePlayerThrowsException()
         {
             var players = new[] { "Horse", "Horse" };
-            var game = new Game(players, new FakeTurnTaker(), new GuidShuffler<String>());
+            var game = new Game(players, new FakeTurn(), new GuidShuffler<String>());
         }
         
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
         public void CreatingGameWithLessThanMinimumNumberOfPlayersThrowsException()
         {
-            var game = new Game(Enumerable.Empty<String>(), new FakeTurnTaker(), new GuidShuffler<String>());
+            var game = new Game(Enumerable.Empty<String>(), new FakeTurn(), new GuidShuffler<String>());
         }
 
         [TestMethod]
@@ -42,7 +42,7 @@ namespace MonopolyKata.Tests
                 "Hokie"
             };
 
-            var game = new Game(players, new FakeTurnTaker(), new GuidShuffler<String>());
+            var game = new Game(players, new FakeTurn(), new GuidShuffler<String>());
         }
 
         [TestMethod]
@@ -60,7 +60,7 @@ namespace MonopolyKata.Tests
                 "Hat",
             };
 
-            var game = new Game(players, new FakeTurnTaker(), new GuidShuffler<String>());
+            var game = new Game(players, new FakeTurn(), new GuidShuffler<String>());
         }
     }
 }

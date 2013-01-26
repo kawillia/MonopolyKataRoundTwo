@@ -14,7 +14,7 @@ namespace MonopolyKata.Tests
         public void PlayExecutesSpecifiedNumberOfRounds()
         {
             var players = new[] { "Horse", "Car" };
-            var turnTaker = new FakeTurnTaker();
+            var turnTaker = new FakeTurn();
             var game = new Game(players, turnTaker, new GuidShuffler<String>());
             var controller = new GameController(game);
 
@@ -33,7 +33,7 @@ namespace MonopolyKata.Tests
                 "Hat"
             };
 
-            var turnTaker = new FakeTurnTaker();
+            var turnTaker = new FakeTurn();
             var game = new Game(players, turnTaker, new GuidShuffler<String>());
             var controller = new GameController(game);
 

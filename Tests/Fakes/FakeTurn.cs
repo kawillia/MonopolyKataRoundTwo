@@ -7,12 +7,12 @@ using MonopolyKata.Core;
 
 namespace MonopolyKata.Tests.Fakes
 {
-    public class FakeTurnTaker : ITurn
+    public class FakeTurn : ITurn
     {
         private List<String> turns;
         public List<String> Turns { get { return turns.ToList(); } }
 
-        public FakeTurnTaker()
+        public FakeTurn()
         {
             turns = new List<String>();
         }
