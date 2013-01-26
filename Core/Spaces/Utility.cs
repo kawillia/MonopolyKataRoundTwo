@@ -18,7 +18,7 @@ namespace MonopolyKata.Core.Spaces
 
         public override Int32 CalculateRent()
         {
-            if (propertyManager.GroupIsOwned(Group))
+            if (propertyManager.GroupIsOwned(group))
                 return dice.CurrentValue * 10;
 
             return dice.CurrentValue * 4;

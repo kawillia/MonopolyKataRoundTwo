@@ -12,7 +12,7 @@ namespace MonopolyKata.Core.Spaces
 
         public override Int32 CalculateRent()
         {
-            var numberOwned = propertyManager.GetNumberOwnedByPlayer(Group, Owner);
+            var numberOwned = propertyManager.GetNumberOwnedByPlayer(group, owner);
             return (Int32)Math.Pow(2, numberOwned - 1) * BaseRent;
         }
     }

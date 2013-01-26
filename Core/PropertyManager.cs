@@ -27,10 +27,10 @@ namespace MonopolyKata.Core
         public Boolean GroupIsOwnedByOnePlayer(String group)
         {
             var propertiesInGroup = GetPropertiesInGroup(group);
-            var allOwned = propertiesInGroup.All(l => l.IsOwned);
+            var allAreOwned = propertiesInGroup.All(l => l.IsOwned);
             var oneOwner = propertiesInGroup.Select(l => l.Owner).Distinct().Count() == 1;
 
-            return allOwned && oneOwner;
+            return allAreOwned && oneOwner;
         }
 
         public Int32 GetNumberOwnedByPlayer(String group, String owner)

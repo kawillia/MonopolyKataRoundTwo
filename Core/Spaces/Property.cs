@@ -9,12 +9,12 @@ namespace MonopolyKata.Core.Spaces
 {
     public class Property : Space
     {
-        private Int32 price;
-        private Int32 baseRent;
-        private String group;
-        private Banker banker;
-        private String owner;
-        private Boolean isMortgaged;
+        protected Int32 price;
+        protected Int32 baseRent;
+        protected String group;
+        protected Banker banker;
+        protected String owner;
+        protected Boolean isMortgaged;
         protected PropertyManager propertyManager;
 
         public Int32 Price { get { return price; } }
