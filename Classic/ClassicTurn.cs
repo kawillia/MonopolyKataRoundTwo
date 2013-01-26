@@ -22,7 +22,7 @@ namespace MonopolyKata.Classic
 
         public void Begin(String player)
         {
-            AllowPlayerToMortgageProperties(player);
+            MakePropertyDecisions(player);
         }
 
         public void Take(String player)
@@ -42,23 +42,33 @@ namespace MonopolyKata.Classic
                 board.MovePlayer(player, dice.CurrentValue);
             }
             while (dice.IsDoubles);
-
-            AllowPlayerToMortgageProperties(player);
         }
 
         public void End(String player)
         {
-            AllowPlayerToMortgageProperties(player);
+            MakePropertyDecisions(player);
         }
 
-        private void AllowPlayerToMortgageProperties(String player)
+        private void MakePropertyDecisions(String player)
         {
             var ownedProperties = propertyManager.GetPropertiesOwnedByPlayer(player);
-            var propertiesToMortgage = ownedProperties.Where(p => !p.IsMortgaged);
 
-            foreach (var property in ownedProperties)
-                if (banker.GetBalance(player) < 200)
-                    property.Mortgage();
+            if (banker.GetBalance(player) < 200)
+            {
+                var propertiesToMortgage = ownedProperties.Where(p => !p.IsMortgaged);
+
+                foreach (var property in ownedProperties)
+                    if (banker.GetBalance(player) < 200)
+                        property.Mortgage();
+            }
+            else
+            {
+                var propertiesToUnmortgage = ownedProperties.Where(p => p.IsMortgaged);
+
+                foreach (var property in ownedProperties)
+                    if (banker.GetBalance(player) > property.Price)
+                        property.Unmortgage();
+            }
         }
     }
 }

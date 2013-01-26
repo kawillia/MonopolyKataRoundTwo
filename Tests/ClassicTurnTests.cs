@@ -87,18 +87,19 @@ namespace MonopolyKata.Tests
         }
 
         [TestMethod]
-        public void PlayerDoesNotMortgagePropertiesAtBeginningOfTurnWhenBalanceIsMoreThanTwoHundred()
+        public void PlayerUnmortgagesPropertiesAtBeginningOfTurnWhenBalanceIsMoreThanTwoHundred()
         {
             banker.Pay(horse, 2000);            
 
-            var propertyToMortgage = properties.ElementAt(0);
-            propertyToMortgage.LandOn(horse);
+            var property = properties.ElementAt(0);
+            property.Sell(horse);
+            property.Mortgage();
 
             var balanceBeforeTurn = banker.GetBalance(horse);
             turn.Begin(horse);
 
-            Assert.IsFalse(propertyToMortgage.IsMortgaged);
-            Assert.AreEqual(balanceBeforeTurn, banker.GetBalance(horse));
+            Assert.IsFalse(property.IsMortgaged);
+            Assert.AreEqual(balanceBeforeTurn - property.Price, banker.GetBalance(horse));
         }
 
         [TestMethod]
@@ -117,18 +118,19 @@ namespace MonopolyKata.Tests
         }
 
         [TestMethod]
-        public void PlayerDoesNotMortgagePropertiesAtEndOfTurnWhenBalanceIsMoreThanTwoHundred()
+        public void PlayerUnmortgagesPropertiesAtEndOfTurnWhenBalanceIsMoreThanTwoHundred()
         {
             banker.Pay(horse, 2000);
 
-            var propertyToMortgage = properties.ElementAt(0);
-            propertyToMortgage.LandOn(horse);
+            var property = properties.ElementAt(0);
+            property.Sell(horse);
+            property.Mortgage();
 
             var balanceBeforeTurn = banker.GetBalance(horse);
             turn.End(horse);
 
-            Assert.IsFalse(propertyToMortgage.IsMortgaged);
-            Assert.AreEqual(balanceBeforeTurn, banker.GetBalance(horse));
+            Assert.IsFalse(property.IsMortgaged);
+            Assert.AreEqual(balanceBeforeTurn - property.Price, banker.GetBalance(horse));
         }
     }
 }
