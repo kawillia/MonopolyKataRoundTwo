@@ -50,14 +50,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Spaces\RailroadTests.cs" />
     <Compile Include="Spaces\IncomeTaxTests.cs" />
     <Compile Include="Spaces\LuxuryTaxTests.cs" />
     <Compile Include="Spaces\GoToJailTests.cs" />
     <Compile Include="Spaces\PropertyTests.cs" />
     <Compile Include="Fakes\FakeTurn.cs" />
-    <Compile Include="Rules\ClassicPropertyRentRuleTests.cs" />
-    <Compile Include="Rules\ClassicRailroadRentRuleTests.cs" />
-    <Compile Include="Rules\ClassicUtilityRentRuleTests.cs" />
     <Compile Include="DiceTests.cs" />
     <Compile Include="Fakes\FakeDice.cs" />
     <Compile Include="Fakes\FakeLocation.cs" />
@@ -69,6 +67,8 @@
     <Compile Include="ClassicTurnTests.cs" />
     <Compile Include="GameControllerTests.cs" />
     <Compile Include="BankerTests.cs" />
+    <Compile Include="Spaces\UtilityTests.cs" />
+    <Compile Include="PropertyManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Classic\MonopolyKata.Classic.csproj">

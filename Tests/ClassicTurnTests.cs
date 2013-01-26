@@ -26,8 +26,10 @@ namespace MonopolyKata.Tests
             horse = "Horse";
 
             var banker = new Banker(new[] { horse });
-            board = ClassicBoardFactory.CreateBoard(fakeDice, Enumerable.Empty<IMovementRule>(), banker, new[] { horse });
-            turn = new ClassicTurn(fakeDice, board);
+            var properties = ClassicBoardFactory.CreateProperties(banker);
+            var propertyManager = new PropertyManager(properties);
+            board = ClassicBoardFactory.CreateBoard(fakeDice, Enumerable.Empty<IMovementRule>(), properties, banker, new[] { horse });
+            turn = new ClassicTurn(fakeDice, board, banker, propertyManager);
         }
 
         [TestMethod]

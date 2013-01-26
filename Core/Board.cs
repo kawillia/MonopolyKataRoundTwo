@@ -31,9 +31,7 @@ namespace MonopolyKata.Core
             
             var newLocation = (currentLocation + numberOfSpaces) % spaces.Count();
             playerLocations[player] = newLocation;
-
-            var spaceToLandOn = spaces.ElementAt(newLocation);
-            spaceToLandOn.LandOn(player);
+            spaces.ElementAt(newLocation).LandOn(player);
         }
 
         public void TeleportPlayer(String player, Int32 location)
@@ -41,7 +39,7 @@ namespace MonopolyKata.Core
             playerLocations[player] = location;
         }
 
-        public Int32 GetPlayerLocation(string player)
+        public Int32 GetPlayerLocation(String player)
         {
             return playerLocations[player];
         }

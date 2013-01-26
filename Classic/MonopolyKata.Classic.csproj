@@ -44,9 +44,6 @@
     <Compile Include="ClassicGameFactory.cs" />
     <Compile Include="ClassicTurn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rules\ClassicPropertyRentRule.cs" />
-    <Compile Include="Rules\ClassicRailroadRentRule.cs" />
-    <Compile Include="Rules\ClassicUtilityRentRule.cs" />
     <Compile Include="Rules\ClassicGoBonusRule.cs" />
   </ItemGroup>
   <ItemGroup>

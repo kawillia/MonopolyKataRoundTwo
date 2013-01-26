@@ -9,21 +9,23 @@ namespace MonopolyKata.Core.Spaces
 {
     public class Property : Space
     {
-        private IChargeRentRule chargeRentRule;
         private Banker banker;
+        protected IEnumerable<Property> propertiesInGroup;
 
         public Int32 Price { get; private set; }
         public Int32 BaseRent { get; private set; }
-        public Boolean IsOwned { get { return this.Owner != null; } }
+        public Boolean IsMortgaged { get; private set; }
+        public Boolean IsOwned { get { return this.Owner != null; } }        
         public String Owner { get; set; }
 
-        public Property(Int32 price, Int32 baseRent, Banker banker)
+        public Property(Int32 price, Int32 baseRent, Banker banker, IEnumerable<Property> propertiesInGroup)
             : base()
         {
             Price = price;
             BaseRent = baseRent;
             Owner = null;
             this.banker = banker;
+            this.propertiesInGroup = propertiesInGroup;
         }
 
         public override void LandOn(String player)
@@ -31,18 +33,38 @@ namespace MonopolyKata.Core.Spaces
             if (IsOwned == false)
             {
                 Owner = player;
-                banker.Charge(player, Price);                
+                banker.Charge(player, Price);
             }
             else if (player != Owner)
             {
-                var rentAmount = chargeRentRule.Calculate(this);
+                var rentAmount = CalculateRent();
                 banker.Transfer(player, Owner, rentAmount);
             }
         }
 
-        public void ChangeChargeRentRule(IChargeRentRule chargeRentRule)
+        public virtual Int32 CalculateRent()
         {
-            this.chargeRentRule = chargeRentRule;
+            var allPropertiesAreOwnedBySamePlayer = 
+                propertiesInGroup.All(l => l.IsOwned) &&
+                propertiesInGroup.Select(l => l.Owner).Distinct().Count() == 1;
+
+            if (allPropertiesAreOwnedBySamePlayer)
+                return BaseRent * 2;
+
+            return BaseRent;
+        }
+
+        public void Mortgage()
+        {
+            var mortgageAmount = Price * 9 / 10;
+            banker.Pay(Owner, mortgageAmount);
+            IsMortgaged = true;
+        }
+
+        public void Unmortgage()
+        {
+            banker.Charge(Owner, Price);
+            IsMortgaged = false;
         }
     }
 }

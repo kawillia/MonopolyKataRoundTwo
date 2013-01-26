@@ -41,8 +41,10 @@
   <ItemGroup>
     <Compile Include="Banker.cs" />
     <Compile Include="ITurn.cs" />
+    <Compile Include="PropertyManager.cs" />
     <Compile Include="Spaces\GoToJail.cs" />
     <Compile Include="Spaces\IncomeTax.cs" />
+    <Compile Include="Spaces\Railroad.cs" />
     <Compile Include="Spaces\Space.cs" />
     <Compile Include="Spaces\LuxuryTax.cs" />
     <Compile Include="Spaces\Property.cs" />
@@ -55,6 +57,7 @@
     <Compile Include="GuidShuffler.cs" />
     <Compile Include="Rules\IChargeRentRule.cs" />
     <Compile Include="Rules\IMovementRule.cs" />
+    <Compile Include="Spaces\Utility.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

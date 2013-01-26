@@ -1,32 +1,33 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MonopolyKata.Classic;
-using MonopolyKata.Classic.Rules;
-using MonopolyKata.Core;
 using MonopolyKata.Core.Spaces;
 using MonopolyKata.Tests.Fakes;
-using System;
+using MonopolyKata.Core;
+using MonopolyKata.Classic;
+using System.Collections.Generic;
 
-namespace MonopolyKata.Tests.Rules
+namespace MonopolyKata.Tests.Spaces
 {
     [TestClass]
-    public class ClassicUtilityRentRuleTests
+    public class UtilityTests
     {
-        private ClassicUtilityRentRule rule;
-        private String hat;
+       private String hat;
         private FakeDice fakeDice;
-        private Property electricCompany;
-        private Property waterWorks;
+        private Utility electricCompany;
+        private Utility waterWorks;
 
-        public ClassicUtilityRentRuleTests()
+        public UtilityTests()
         {
             fakeDice = new FakeDice();            
             hat = "Hat";
 
             var banker = new Banker(new[] { hat });
-            electricCompany = new Property(ClassicBoardFactory.UtilityPrice, 0, banker);
-            waterWorks = new Property(ClassicBoardFactory.UtilityPrice, 0, banker);
-            rule = new ClassicUtilityRentRule(fakeDice, new[] { electricCompany, waterWorks });
+            var utilityGroup = new List<Utility>();
+            electricCompany = new Utility(ClassicBoardFactory.UtilityPrice, banker, utilityGroup, fakeDice);
+            waterWorks = new Utility(ClassicBoardFactory.UtilityPrice, banker, utilityGroup, fakeDice);
+
+            utilityGroup.Add(electricCompany);
+            utilityGroup.Add(waterWorks);
         }
 
         [TestInitialize]
@@ -41,7 +42,7 @@ namespace MonopolyKata.Tests.Rules
         {
             electricCompany.Owner = hat;
 
-            var rent = rule.Calculate(electricCompany);
+            var rent = electricCompany.CalculateRent();
 
             Assert.AreEqual(4 * fakeDice.CurrentValue, rent);
         }
@@ -52,7 +53,7 @@ namespace MonopolyKata.Tests.Rules
             electricCompany.Owner = hat;
             waterWorks.Owner = hat;
 
-            var rent = rule.Calculate(electricCompany);
+            var rent = electricCompany.CalculateRent();
 
             Assert.AreEqual(10 * fakeDice.CurrentValue, rent);
         }

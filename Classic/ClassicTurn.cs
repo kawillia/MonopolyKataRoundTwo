@@ -1,6 +1,7 @@
 ﻿using MonopolyKata.Core;
 using MonopolyKata.Core.Spaces;
 using System;
+using System.Linq;
 
 namespace MonopolyKata.Classic
 {
@@ -8,15 +9,20 @@ namespace MonopolyKata.Classic
     {
         private Dice dice;
         private Board board;
+        private Banker banker;
+        private PropertyManager propertyManager;
 
-        public ClassicTurn(Dice dice, Board board)
+        public ClassicTurn(Dice dice, Board board, Banker banker, PropertyManager propertyManager)
         {
             this.dice = dice;
             this.board = board;
+            this.banker = banker;
+            this.propertyManager = propertyManager;
         }
 
         public void Take(String player)
         {
+            AllowPlayerToMortgageProperties(player);
             var numberOfRolls = 0;
 
             do
@@ -32,6 +38,18 @@ namespace MonopolyKata.Classic
                 board.MovePlayer(player, dice.CurrentValue);
             }
             while (dice.IsDoubles);
+
+            AllowPlayerToMortgageProperties(player);
+        }
+
+        private void AllowPlayerToMortgageProperties(String player)
+        {
+            var ownedProperties = propertyManager.GetPropertiesOwnedByPlayer(player);
+            var propertiesToMortgage = ownedProperties.Where(p => !p.IsMortgaged);
+
+            foreach (var property in ownedProperties)
+                if (banker.GetBalance(player) < 200)
+                    property.Mortgage();
         }
     }
 }

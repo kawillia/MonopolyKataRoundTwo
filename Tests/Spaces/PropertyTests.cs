@@ -4,6 +4,7 @@ using MonopolyKata.Classic.Rules;
 using MonopolyKata.Core;
 using MonopolyKata.Core.Spaces;
 using System;
+using System.Collections.Generic;
 
 namespace MonopolyKata.Tests.Spaces
 {
@@ -21,12 +22,13 @@ namespace MonopolyKata.Tests.Spaces
             hat = "Hat";
             horse = "Horse";
             banker = new Banker(new[] { hat, horse });
-            mediterraneanAvenue = new Property(ClassicBoardFactory.MediterraneanAvenuePrice, ClassicBoardFactory.MediterraneanAvenueRent, banker);
-            balticAvenue = new Property(ClassicBoardFactory.BalticAvenuePrice, ClassicBoardFactory.BalticAvenueRent, banker);
 
-            var chargeRentRule = new ClassicPropertyRentRule(new[] { mediterraneanAvenue, balticAvenue });
-            mediterraneanAvenue.ChangeChargeRentRule(chargeRentRule);
-            balticAvenue.ChangeChargeRentRule(chargeRentRule);
+            var purpleGroup = new List<Property>();
+            mediterraneanAvenue = new Property(ClassicBoardFactory.MediterraneanAvenuePrice, ClassicBoardFactory.MediterraneanAvenueRent, banker, purpleGroup);
+            balticAvenue = new Property(ClassicBoardFactory.BalticAvenuePrice, ClassicBoardFactory.BalticAvenueRent, banker, purpleGroup);
+
+            purpleGroup.Add(mediterraneanAvenue);
+            purpleGroup.Add(balticAvenue);
         }
 
         [TestMethod]
@@ -51,6 +53,32 @@ namespace MonopolyKata.Tests.Spaces
             Assert.AreEqual(hat, balticAvenue.Owner);
             Assert.AreEqual(horseBalanceBeforeRentPayment - balticAvenue.BaseRent, banker.GetBalance(horse));
             Assert.AreEqual(hatBalanceBeforeRentPayment + balticAvenue.BaseRent, banker.GetBalance(hat));
+        }
+
+        [TestMethod]
+        public void RentForPropertyWhenNoneAreOwnedIsBaseRent()
+        {
+            var rent = mediterraneanAvenue.CalculateRent();
+            Assert.AreEqual(mediterraneanAvenue.BaseRent, rent);
+        }
+
+        [TestMethod]
+        public void RentForPropertyWhenNotAllAreOwnedBySamePlayerIsBaseRent()
+        {
+            mediterraneanAvenue.Owner = hat;
+
+            var rent = mediterraneanAvenue.CalculateRent();
+            Assert.AreEqual(mediterraneanAvenue.BaseRent, rent);
+        }
+
+        [TestMethod]
+        public void RentForPropertyDoublesWhenAllAreOwnedBySamePlayer()
+        {
+            mediterraneanAvenue.Owner = hat;
+            balticAvenue.Owner = hat;
+
+            var rent = mediterraneanAvenue.CalculateRent();
+            Assert.AreEqual(2 * mediterraneanAvenue.BaseRent, rent);
         }
     }
 }
