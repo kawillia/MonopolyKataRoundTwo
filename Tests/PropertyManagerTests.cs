@@ -28,7 +28,7 @@ namespace MonopolyKata.Tests
         [TestMethod]
         public void GetUnmortgagedPropertiesOwnedByPlayerWithOneOwner()
         {
-            properties.ElementAt(0).LandOn(horse);
+            properties.ElementAt(0).Sell(horse);
 
             var ownedProperties = propertyManager.GetUnmortgagedProperties(horse);
 
@@ -38,16 +38,16 @@ namespace MonopolyKata.Tests
         [TestMethod]
         public void GetUnmortgagedPropertiesOwnedByPlayerWithMultipleOwners()
         {
-            properties.ElementAt(0).LandOn(horse);
-            properties.ElementAt(1).LandOn(hat);
+            properties.ElementAt(0).Sell(horse);
+            properties.ElementAt(1).Sell(hat);
 
-            var ownedProperties = propertyManager.GetUnmortgagedProperties(horse);
+            var unmortgagedProperties = propertyManager.GetUnmortgagedProperties(horse);
 
-            Assert.AreEqual(1, ownedProperties.Count());
+            Assert.AreEqual(1, unmortgagedProperties.Count());
         }
 
         [TestMethod]
-        public void GetMortgagedPropertiesWithOneOwners()
+        public void GetMortgagedPropertiesWithOneOwner()
         {
             var propertyOne = properties.ElementAt(0);
             propertyOne.Sell(horse);
