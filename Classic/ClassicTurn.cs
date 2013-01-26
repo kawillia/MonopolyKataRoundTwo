@@ -33,7 +33,7 @@ namespace MonopolyKata.Classic
                     board.MovePlayer(player, dice.CurrentValue);
                 }
             }
-            while (dice.IsDoubles && numberOfRolls < 3);
+            while (dice.IsDoubles);
         }
     }
 }
