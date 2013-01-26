@@ -28,10 +28,8 @@ namespace MonopolyKata.Classic
                     board.TeleportPlayer(player, 10);
                     return;
                 }
-                else
-                {
-                    board.MovePlayer(player, dice.CurrentValue);
-                }
+
+                board.MovePlayer(player, dice.CurrentValue);
             }
             while (dice.IsDoubles);
         }
