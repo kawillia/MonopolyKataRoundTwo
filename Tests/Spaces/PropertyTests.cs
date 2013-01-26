@@ -45,10 +45,11 @@ namespace MonopolyKata.Tests.Spaces
         [TestMethod]
         public void PlayerLandingOnOwnedPropertyPlayerPaysRent()
         {
+            balticAvenue.Sell(hat);
+
             var horseBalanceBeforeRentPayment = banker.GetBalance(horse);
             var hatBalanceBeforeRentPayment = banker.GetBalance(hat);
-
-            balticAvenue.Owner = hat;
+            
             balticAvenue.LandOn(horse);
 
             Assert.AreEqual(hat, balticAvenue.Owner);
@@ -66,7 +67,7 @@ namespace MonopolyKata.Tests.Spaces
         [TestMethod]
         public void RentForPropertyWhenNotAllAreOwnedBySamePlayerIsBaseRent()
         {
-            mediterraneanAvenue.Owner = hat;
+            mediterraneanAvenue.Sell(hat);
 
             var rent = mediterraneanAvenue.CalculateRent();
             Assert.AreEqual(mediterraneanAvenue.BaseRent, rent);
@@ -75,8 +76,8 @@ namespace MonopolyKata.Tests.Spaces
         [TestMethod]
         public void RentForPropertyDoublesWhenAllAreOwnedBySamePlayer()
         {
-            mediterraneanAvenue.Owner = hat;
-            balticAvenue.Owner = hat;
+            mediterraneanAvenue.Sell(hat);
+            balticAvenue.Sell(hat);
 
             var rent = mediterraneanAvenue.CalculateRent();
             Assert.AreEqual(2 * mediterraneanAvenue.BaseRent, rent);

@@ -37,7 +37,7 @@ namespace MonopolyKata.Tests.Spaces
         [TestMethod]
         public void RentForOneOwnedRailroadIsTwentyFiveDollars()
         {
-            readingRailroad.Owner = hat;
+            readingRailroad.Sell(hat);
 
             var rent = readingRailroad.CalculateRent();
 
@@ -47,8 +47,8 @@ namespace MonopolyKata.Tests.Spaces
         [TestMethod]
         public void RentForTwoOwnedRailroadsBySameOwnerPlayerFiftyDollars()
         {
-            readingRailroad.Owner = hat;
-            pennsylvaniaRailroad.Owner = hat;
+            readingRailroad.Sell(hat);
+            pennsylvaniaRailroad.Sell(hat);
 
             var rent = readingRailroad.CalculateRent();
 
@@ -58,9 +58,9 @@ namespace MonopolyKata.Tests.Spaces
         [TestMethod]
         public void RentForThreeOwnedRailroadsBySameOwnerPlayerIsOneHundredDollars()
         {
-            readingRailroad.Owner = hat;
-            pennsylvaniaRailroad.Owner = hat;
-            boRailroad.Owner = hat;
+            readingRailroad.Sell(hat);
+            pennsylvaniaRailroad.Sell(hat);
+            boRailroad.Sell(hat);
 
             var rent = readingRailroad.CalculateRent();
 
@@ -70,10 +70,10 @@ namespace MonopolyKata.Tests.Spaces
         [TestMethod]
         public void RentForFourOwnedRailroadsBySameOwnerPlayerIsTwoHundredDollars()
         {
-            readingRailroad.Owner = hat;
-            pennsylvaniaRailroad.Owner = hat;
-            boRailroad.Owner = hat;
-            shortLine.Owner = hat;
+            readingRailroad.Sell(hat);
+            pennsylvaniaRailroad.Sell(hat);
+            boRailroad.Sell(hat);
+            shortLine.Sell(hat);
 
             var rent = readingRailroad.CalculateRent();
 

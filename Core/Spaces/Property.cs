@@ -9,64 +9,68 @@ namespace MonopolyKata.Core.Spaces
 {
     public class Property : Space
     {
+        private Int32 price;
+        private Int32 baseRent;
+        private String group;
         private Banker banker;
+        private String owner;
+        private Boolean isMortgaged;
         protected PropertyManager propertyManager;
 
-        public Int32 Price { get; private set; }
-        public Int32 BaseRent { get; private set; }
-        public String Group { get; private set; }
-        public Boolean IsMortgaged { get; private set; }
-        public Boolean IsOwned { get { return this.Owner != null; } }        
-        public String Owner { get; set; }
+        public Int32 Price { get { return price; } }
+        public Int32 BaseRent { get { return baseRent; } }
+        public String Group { get { return group; } }
+        public Boolean IsMortgaged { get { return isMortgaged; } }
+        public Boolean IsOwned { get { return this.Owner != null; } }
+        public String Owner { get { return owner; } }
 
         public Property(Int32 price, Int32 baseRent, String group, Banker banker, PropertyManager propertyManager)
             : base()
         {
-            Price = price;
-            BaseRent = baseRent;
-            Group = group;
+            this.price = price;
+            this.baseRent = baseRent;
+            this.group = group;
             this.banker = banker;
             this.propertyManager = propertyManager;
         }
 
         public override void LandOn(String player)
         {
-            if (IsOwned == false && banker.GetBalance(player) >= Price)
+            if (IsOwned == false && banker.GetBalance(player) >= price)
             {
                 Sell(player);
             }
-            else if (IsOwned && player != Owner)
+            else if (IsOwned && player != owner)
             {
-                var rentAmount = CalculateRent();
-                banker.Transfer(player, Owner, rentAmount);
+                banker.Transfer(player, owner, CalculateRent());
             }
         }
 
         public void Sell(String buyer)
         {
-            Owner = buyer;
-            banker.Charge(buyer, Price);
+            banker.Charge(buyer, price);
+            owner = buyer;            
         }
 
         public virtual Int32 CalculateRent()
         {
-            if (propertyManager.GroupIsOwnedByOnePlayer(Group))
-                return BaseRent * 2;
+            if (propertyManager.GroupIsOwnedByOnePlayer(group))
+                return baseRent * 2;
 
-            return BaseRent;
+            return baseRent;
         }
 
         public void Mortgage()
         {
-            var mortgageAmount = Price * 9 / 10;
-            banker.Pay(Owner, mortgageAmount);
-            IsMortgaged = true;
+            var mortgageAmount = price * 9 / 10;
+            banker.Pay(owner, mortgageAmount);
+            isMortgaged = true;
         }
 
         public void Unmortgage()
         {
-            banker.Charge(Owner, Price);
-            IsMortgaged = false;
+            banker.Charge(owner, price);
+            isMortgaged = false;
         }
     }
 }

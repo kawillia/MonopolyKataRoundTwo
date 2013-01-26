@@ -39,7 +39,7 @@ namespace MonopolyKata.Tests.Spaces
         [TestMethod]
         public void RentForOneOwnedUtilityIsFourTimesCurrentDiceValue()
         {
-            electricCompany.Owner = hat;
+            electricCompany.Sell(hat);
 
             var rent = electricCompany.CalculateRent();
 
@@ -49,8 +49,8 @@ namespace MonopolyKata.Tests.Spaces
         [TestMethod]
         public void RentForTwoOwnedUtilitiesIsTenTimesCurrentDiceValue()
         {
-            electricCompany.Owner = hat;
-            waterWorks.Owner = hat;
+            electricCompany.Sell(hat);
+            waterWorks.Sell(hat);
 
             var rent = electricCompany.CalculateRent();
 
