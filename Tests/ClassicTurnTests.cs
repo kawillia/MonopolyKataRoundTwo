@@ -6,15 +6,16 @@ using MonopolyKata.Classic;
 using MonopolyKata.Core;
 using MonopolyKata.Core.Spaces;
 using MonopolyKata.Core.Rules;
-using MonopolyKata.Tests.Fakes;
 using System;
+using Moq;
 
 namespace MonopolyKata.Tests
 {
     [TestClass]
     public class ClassicTurnTests
     {
-        private FakeDice fakeDice;
+        private Mock<Dice> mockDice;
+        private Queue<Int32> dieValues;
         private String horse;
         private Board board;
         private ClassicTurn turn;
@@ -24,7 +25,8 @@ namespace MonopolyKata.Tests
         [TestInitialize]
         public void Initialize()
         {
-            fakeDice = new FakeDice();
+            mockDice = new Mock<Dice>();
+            mockDice.Setup(m => m.RollDie()).Returns(() => dieValues.Dequeue());
             horse = "Horse";
 
             banker = new Banker(new[] { horse });
@@ -33,14 +35,14 @@ namespace MonopolyKata.Tests
             properties = ClassicBoardFactory.CreateProperties(banker, propertyManager);
             propertyManager.ManageProperties(properties);
             
-            board = ClassicBoardFactory.CreateBoard(fakeDice, Enumerable.Empty<IMovementRule>(), properties, banker, new[] { horse });
-            turn = new ClassicTurn(fakeDice, board, banker, propertyManager);
+            board = ClassicBoardFactory.CreateBoard(mockDice.Object, Enumerable.Empty<IMovementRule>(), properties, banker, new[] { horse });
+            turn = new ClassicTurn(mockDice.Object, board, banker, propertyManager);
         }
 
         [TestMethod]
         public void StartOnGoRollDoublesOfSixAndNonDoublesOfFourEndsOnTen()
         {
-            fakeDice.SetDieValues(3, 3, 1, 3);
+            dieValues = new Queue<Int32>(new[] { 3, 3, 1, 3 });
             turn.Take(horse);
 
             Assert.AreEqual(10, board.GetPlayerLocation(horse));
@@ -49,7 +51,7 @@ namespace MonopolyKata.Tests
         [TestMethod]
         public void PlayerDoesNotRollDoublesMovesRollValues()
         {
-            fakeDice.SetDieValues(3, 1);
+            dieValues = new Queue<Int32>(new[] { 3, 1 });
             turn.Take(horse);
 
             Assert.AreEqual(4, board.GetPlayerLocation(horse));
@@ -58,7 +60,7 @@ namespace MonopolyKata.Tests
         [TestMethod]
         public void RollDoublesTwiceMovesThreeRollsTotal()
         {
-            fakeDice.SetDieValues(1, 1, 2, 2, 1, 5);
+            dieValues = new Queue<Int32>(new[] { 1, 1, 2, 2, 1, 5 });
             turn.Take(horse);
 
             Assert.AreEqual(12, board.GetPlayerLocation(horse));
@@ -67,7 +69,7 @@ namespace MonopolyKata.Tests
         [TestMethod]
         public void RollDoublesThreeTimesEndOnJustVisiting()
         {
-            fakeDice.SetDieValues(1, 1, 2, 2, 3, 3);
+            dieValues = new Queue<Int32>(new[] { 1, 1, 2, 2, 3, 3 });
             turn.Take(horse);
 
             Assert.AreEqual(ClassicBoardFactory.JustVisitingLocation, board.GetPlayerLocation(horse));

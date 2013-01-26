@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -55,10 +58,7 @@
     <Compile Include="Spaces\LuxuryTaxTests.cs" />
     <Compile Include="Spaces\GoToJailTests.cs" />
     <Compile Include="Spaces\PropertyTests.cs" />
-    <Compile Include="Fakes\FakeTurn.cs" />
     <Compile Include="DiceTests.cs" />
-    <Compile Include="Fakes\FakeDice.cs" />
-    <Compile Include="Fakes\FakeLocation.cs" />
     <Compile Include="GameTests.cs" />
     <Compile Include="BoardTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,6 +79,9 @@
       <Project>{a77826bc-7917-4643-b6b7-6c73374c725d}</Project>
       <Name>MonopolyKata.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

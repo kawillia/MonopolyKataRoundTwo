@@ -1,30 +1,33 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonopolyKata.Core.Spaces;
-using MonopolyKata.Tests.Fakes;
 using MonopolyKata.Core;
 using MonopolyKata.Classic;
 using System.Collections.Generic;
+using Moq;
 
 namespace MonopolyKata.Tests.Spaces
 {
     [TestClass]
     public class UtilityTests
     {
-       private String hat;
-        private FakeDice fakeDice;
+        private const Int32 DiceValue = 12;
+
+        private String hat;
+        private Dice dice;
         private Utility electricCompany;
         private Utility waterWorks;
 
         public UtilityTests()
         {
-            fakeDice = new FakeDice();            
+            dice = new Dice();
             hat = "Hat";
 
             var banker = new Banker(new[] { hat });
             var propertyManager = new PropertyManager();
-            electricCompany = new Utility(ClassicBoardFactory.UtilityPrice, ClassicBoardFactory.UtilityGroup, banker, propertyManager, fakeDice);
-            waterWorks = new Utility(ClassicBoardFactory.UtilityPrice, ClassicBoardFactory.UtilityGroup, banker, propertyManager, fakeDice);
+            electricCompany = new Utility(ClassicBoardFactory.UtilityPrice, ClassicBoardFactory.UtilityGroup, banker, propertyManager, dice);
+            waterWorks = new Utility(ClassicBoardFactory.UtilityPrice, ClassicBoardFactory.UtilityGroup, banker, propertyManager, dice);
 
             propertyManager.ManageProperties(new[] { electricCompany, waterWorks });
         }
@@ -32,8 +35,7 @@ namespace MonopolyKata.Tests.Spaces
         [TestInitialize]
         public void TestInitialize()
         {
-            fakeDice.SetDieValues(1, 5);
-            fakeDice.Roll();
+            dice.Roll();
         }
 
         [TestMethod]
@@ -43,7 +45,7 @@ namespace MonopolyKata.Tests.Spaces
 
             var rent = electricCompany.CalculateRent();
 
-            Assert.AreEqual(4 * fakeDice.CurrentValue, rent);
+            Assert.AreEqual(4 * dice.CurrentValue, rent);
         }
 
         [TestMethod]
@@ -54,7 +56,7 @@ namespace MonopolyKata.Tests.Spaces
 
             var rent = electricCompany.CalculateRent();
 
-            Assert.AreEqual(10 * fakeDice.CurrentValue, rent);
+            Assert.AreEqual(10 * dice.CurrentValue, rent);
         }
     }
 }

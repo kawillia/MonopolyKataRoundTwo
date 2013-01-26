@@ -5,10 +5,10 @@ using MonopolyKata.Classic;
 using MonopolyKata.Core.Spaces;
 using MonopolyKata.Classic.Rules;
 using MonopolyKata.Core;
-using MonopolyKata.Tests.Fakes;
 using MonopolyKata.Core.Rules;
 using System;
 using System.Collections.Generic;
+using Moq;
 
 namespace MonopolyKata.Tests
 {
@@ -29,7 +29,7 @@ namespace MonopolyKata.Tests
             var banker = new Banker(players);
             var propertyManager = new PropertyManager();
             var properties = ClassicBoardFactory.CreateProperties(banker, propertyManager);
-            board = ClassicBoardFactory.CreateBoard(new FakeDice(), movementRules, properties, banker, players);
+            board = ClassicBoardFactory.CreateBoard(new Mock<Dice>().Object, movementRules, properties, banker, players);
         }
 
         [TestMethod]
