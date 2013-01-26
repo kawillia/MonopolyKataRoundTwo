@@ -27,7 +27,11 @@ namespace MonopolyKata.Core
         public void PlayRound()
         {
             foreach (var player in players)
+            {
+                turn.Begin(player);
                 turn.Take(player);
+                turn.End(player);
+            }
         }
     }
 }

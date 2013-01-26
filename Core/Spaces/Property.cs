@@ -32,14 +32,19 @@ namespace MonopolyKata.Core.Spaces
         {
             if (IsOwned == false)
             {
-                Owner = player;
-                banker.Charge(player, Price);
+                Sell(player);
             }
             else if (player != Owner)
             {
                 var rentAmount = CalculateRent();
                 banker.Transfer(player, Owner, rentAmount);
             }
+        }
+
+        public void Sell(String buyer)
+        {
+            Owner = buyer;
+            banker.Charge(buyer, Price);
         }
 
         public virtual Int32 CalculateRent()

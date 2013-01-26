@@ -21,5 +21,11 @@ namespace MonopolyKata.Tests.Fakes
         {
             turns.Add(player);
         }
+
+        public void Begin(String player)
+        { }
+
+        public void End(String player)
+        { }
     }
 }

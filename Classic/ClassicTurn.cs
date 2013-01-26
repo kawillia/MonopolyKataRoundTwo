@@ -20,9 +20,13 @@ namespace MonopolyKata.Classic
             this.propertyManager = propertyManager;
         }
 
-        public void Take(String player)
+        public void Begin(String player)
         {
             AllowPlayerToMortgageProperties(player);
+        }
+
+        public void Take(String player)
+        {
             var numberOfRolls = 0;
 
             do
@@ -39,6 +43,11 @@ namespace MonopolyKata.Classic
             }
             while (dice.IsDoubles);
 
+            AllowPlayerToMortgageProperties(player);
+        }
+
+        public void End(String player)
+        {
             AllowPlayerToMortgageProperties(player);
         }
 
