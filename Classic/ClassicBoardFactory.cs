@@ -105,7 +105,6 @@ namespace MonopolyKata.Classic
 
         public static IEnumerable<Property> CreateProperties(Banker banker)
         {
-            var properties = new List<Property>();
             var purpleGroup = new List<Property>();
             var lightBlueGroup = new List<Property>();
             var violetGroup = new List<Property>();
@@ -146,6 +145,45 @@ namespace MonopolyKata.Classic
             var parkPlace = new Property(ParkPlacePrice, ParkPlaceRent, banker, darkBlueGroup);
             var boardwalk = new Property(BoardwalkPrice, BoardwalkRent, banker, darkBlueGroup);
 
+            purpleGroup.Add(mediterraneanAvenue);
+            purpleGroup.Add(balticAvenue);
+
+            lightBlueGroup.Add(orientalAvenue);
+            lightBlueGroup.Add(vermontAvenue);
+            lightBlueGroup.Add(connecticutAvenue);
+
+            violetGroup.Add(stCharlesPlace);
+            violetGroup.Add(statesAvenue);
+            violetGroup.Add(virginiaAvenue);
+
+            orangeGroup.Add(stJamesPlace);
+            orangeGroup.Add(tennesseeAvenue);
+            orangeGroup.Add(newYorkAvenue);
+
+            redGroup.Add(kentuckyAvenue);
+            redGroup.Add(indianaAvenue);
+            redGroup.Add(illinoisAvenue);
+
+            yellowGroup.Add(atlanticAvenue);
+            yellowGroup.Add(ventnorAvenue);
+            yellowGroup.Add(marvinGardens);
+
+            darkGreenGroup.Add(pacificAvenue);
+            darkGreenGroup.Add(northCarolinaAvenue);
+            darkGreenGroup.Add(pennsylvaniaAvenue);
+
+            darkBlueGroup.Add(parkPlace);
+            darkBlueGroup.Add(boardwalk);
+
+            railroadGroup.Add(readingRailroad);
+            railroadGroup.Add(pennsylvaniaRailroad);
+            railroadGroup.Add(boRailroad);
+            railroadGroup.Add(shortLine);
+
+            utilitiesGroup.Add(electricCompany);
+            utilitiesGroup.Add(waterWorks);
+
+            var properties = new List<Property>();
             properties.Add(mediterraneanAvenue);
             properties.Add(balticAvenue);
             properties.Add(readingRailroad);
