@@ -30,11 +30,11 @@ namespace MonopolyKata.Core.Spaces
 
         public override void LandOn(String player)
         {
-            if (IsOwned == false)
+            if (IsOwned == false && banker.GetBalance(player) >= Price)
             {
                 Sell(player);
             }
-            else if (player != Owner)
+            else if (IsOwned && player != Owner)
             {
                 var rentAmount = CalculateRent();
                 banker.Transfer(player, Owner, rentAmount);

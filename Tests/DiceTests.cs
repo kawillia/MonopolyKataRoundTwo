@@ -33,7 +33,7 @@ namespace MonopolyKata.Tests
         {
             var rolledValues = new List<Int32>();
 
-            for (var i = 0; i < 100; i++)
+            for (var i = 0; i < 200; i++)
             {
                 dice.Roll();
                 rolledValues.Add(dice.CurrentValue);

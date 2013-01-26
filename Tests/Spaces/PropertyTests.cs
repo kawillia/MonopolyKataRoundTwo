@@ -22,6 +22,8 @@ namespace MonopolyKata.Tests.Spaces
             hat = "Hat";
             horse = "Horse";
             banker = new Banker(new[] { hat, horse });
+            banker.Pay(hat, 2000);
+            banker.Pay(horse, 2000);
 
             var purpleGroup = new List<Property>();
             mediterraneanAvenue = new Property(ClassicBoardFactory.MediterraneanAvenuePrice, ClassicBoardFactory.MediterraneanAvenueRent, banker, purpleGroup);
@@ -79,6 +81,17 @@ namespace MonopolyKata.Tests.Spaces
 
             var rent = mediterraneanAvenue.CalculateRent();
             Assert.AreEqual(2 * mediterraneanAvenue.BaseRent, rent);
+        }
+
+        [TestMethod]
+        public void PlayerDoesNotBuyUnownedPropertyWhenBalanceIsLessThanPrice()
+        {
+            var currentBalance = banker.GetBalance(horse);
+            banker.Charge(horse, currentBalance);
+            balticAvenue.LandOn(horse);
+
+            Assert.IsFalse(balticAvenue.IsOwned);
+            Assert.AreEqual(0, banker.GetBalance(horse));
         }
     }
 }
