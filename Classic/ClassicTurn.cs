@@ -17,21 +17,23 @@ namespace MonopolyKata.Classic
 
         public void Take(String player)
         {
-            var numberOfConsecutiveDoubles = 0;
+            var numberOfRolls = 0;
 
             do
             {
                 dice.Roll();
 
-                if (dice.IsDoubles)
-                    numberOfConsecutiveDoubles++;
-
-                if (numberOfConsecutiveDoubles == 3)
+                if (dice.IsDoubles && ++numberOfRolls == 3)
+                {
                     board.TeleportPlayer(player, 10);
+                    return;
+                }
                 else
+                {
                     board.MovePlayer(player, dice.CurrentValue);
+                }
             }
-            while (dice.IsDoubles && numberOfConsecutiveDoubles < 3);
+            while (dice.IsDoubles && numberOfRolls < 3);
         }
     }
 }
