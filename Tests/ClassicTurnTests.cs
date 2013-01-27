@@ -140,5 +140,27 @@ namespace MonopolyKata.Tests
             Assert.IsFalse(property.IsMortgaged);
             Assert.AreEqual(balanceBeforeTurn - property.Price, banker.GetBalance(horse));
         }
+
+        [TestMethod]
+        public void NoPropertiesAreMortgagedAtBeginningOfTurnWhenPlayerOwnsNothing()
+        {
+            var propertiesToCheck = properties.Take(3);
+            var balanceBeforeTurn = banker.GetBalance(horse);
+            turn.Begin(horse);
+
+            Assert.IsFalse(propertiesToCheck.Any(p => p.IsMortgaged));
+            Assert.AreEqual(balanceBeforeTurn, banker.GetBalance(horse));
+        }
+
+        [TestMethod]
+        public void NoPropertiesAreMortgagedAtEndOfTurnWhenPlayerOwnsNothing()
+        {
+            var propertiesToCheck = properties.Take(3);
+            var balanceBeforeTurn = banker.GetBalance(horse);
+            turn.End(horse);
+
+            Assert.IsFalse(propertiesToCheck.Any(p => p.IsMortgaged));
+            Assert.AreEqual(balanceBeforeTurn, banker.GetBalance(horse));
+        }
     }
 }
