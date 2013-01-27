@@ -62,8 +62,7 @@ namespace MonopolyKata.Core.Spaces
 
         public void Mortgage()
         {
-            var mortgageAmount = price * 9 / 10;
-            banker.Pay(owner, mortgageAmount);
+            banker.Pay(owner, price * 9 / 10);
             isMortgaged = true;
         }
 

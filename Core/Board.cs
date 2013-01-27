@@ -25,13 +25,17 @@ namespace MonopolyKata.Core
         public void MovePlayer(String player, Int32 numberOfSpaces)
         {
             var currentLocation = playerLocations[player];
-
-            foreach (var rule in movementRules)
-                rule.Apply(player, currentLocation, numberOfSpaces);
+            ApplyMovementRules(player, numberOfSpaces, currentLocation);
             
             var newLocation = (currentLocation + numberOfSpaces) % spaces.Count();
             playerLocations[player] = newLocation;
             spaces.ElementAt(newLocation).LandOn(player);
+        }
+
+        private void ApplyMovementRules(String player, Int32 numberOfSpaces, Int32 currentLocation)
+        {
+            foreach (var rule in movementRules)
+                rule.Apply(player, currentLocation, numberOfSpaces);
         }
 
         public void TeleportPlayer(String player, Int32 location)
