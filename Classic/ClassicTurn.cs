@@ -9,11 +9,11 @@ namespace MonopolyKata.Classic
     public class ClassicTurn : ITurn
     {
         private Dice dice;
-        private Board board;
+        private IBoard board;
         private Banker banker;
         private PropertyManager propertyManager;
 
-        public ClassicTurn(Dice dice, Board board, Banker banker, PropertyManager propertyManager)
+        public ClassicTurn(Dice dice, IBoard board, Banker banker, PropertyManager propertyManager)
         {
             this.dice = dice;
             this.board = board;

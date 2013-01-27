@@ -17,7 +17,7 @@ namespace MonopolyKata.Tests
         private Mock<Dice> mockDice;
         private Queue<Int32> dieValues;
         private String horse;
-        private Board board;
+        private Mock<IBoard> mockBoard;
         private ClassicTurn turn;
         private IEnumerable<Property> properties;
         private Banker banker;
@@ -28,24 +28,14 @@ namespace MonopolyKata.Tests
             mockDice = new Mock<Dice>();
             mockDice.Setup(m => m.RollDie()).Returns(() => dieValues.Dequeue());
             horse = "Horse";
-
             banker = new Banker(new[] { horse });
 
             var propertyManager = new PropertyManager();
             properties = ClassicBoardFactory.CreateProperties(banker, propertyManager);
             propertyManager.ManageProperties(properties);
-            
-            board = ClassicBoardFactory.CreateBoard(mockDice.Object, Enumerable.Empty<IMovementRule>(), properties, banker, new[] { horse });
-            turn = new ClassicTurn(mockDice.Object, board, banker, propertyManager);
-        }
 
-        [TestMethod]
-        public void StartOnGoRollDoublesOfSixAndNonDoublesOfFourEndsOnTen()
-        {
-            dieValues = new Queue<Int32>(new[] { 3, 3, 1, 3 });
-            turn.Take(horse);
-
-            Assert.AreEqual(10, board.GetPlayerLocation(horse));
+            mockBoard = new Mock<IBoard>();
+            turn = new ClassicTurn(mockDice.Object, mockBoard.Object, banker, propertyManager);
         }
 
         [TestMethod]
@@ -54,7 +44,17 @@ namespace MonopolyKata.Tests
             dieValues = new Queue<Int32>(new[] { 3, 1 });
             turn.Take(horse);
 
-            Assert.AreEqual(4, board.GetPlayerLocation(horse));
+            mockBoard.Verify(b => b.MovePlayer(horse, 4), Times.Once());
+        }
+
+        [TestMethod]
+        public void RollsDoublesOnceMoveTwice()
+        {
+            dieValues = new Queue<Int32>(new[] { 3, 3, 1, 3 });
+            turn.Take(horse);
+
+            mockBoard.Verify(b => b.MovePlayer(horse, 6), Times.Once());
+            mockBoard.Verify(b => b.MovePlayer(horse, 4), Times.Once());
         }
 
         [TestMethod]
@@ -63,7 +63,9 @@ namespace MonopolyKata.Tests
             dieValues = new Queue<Int32>(new[] { 1, 1, 2, 2, 1, 5 });
             turn.Take(horse);
 
-            Assert.AreEqual(12, board.GetPlayerLocation(horse));
+            mockBoard.Verify(b => b.MovePlayer(horse, 2), Times.Once());
+            mockBoard.Verify(b => b.MovePlayer(horse, 4), Times.Once());
+            mockBoard.Verify(b => b.MovePlayer(horse, 6), Times.Once());
         }
 
         [TestMethod]
@@ -72,7 +74,9 @@ namespace MonopolyKata.Tests
             dieValues = new Queue<Int32>(new[] { 1, 1, 2, 2, 3, 3 });
             turn.Take(horse);
 
-            Assert.AreEqual(ClassicBoardFactory.JustVisitingLocation, board.GetPlayerLocation(horse));
+            mockBoard.Verify(b => b.MovePlayer(horse, 2), Times.Once());
+            mockBoard.Verify(b => b.MovePlayer(horse, 4), Times.Once());
+            mockBoard.Verify(b => b.TeleportPlayer(horse, ClassicBoardFactory.JustVisitingLocation), Times.Once());
         }
 
         [TestMethod]

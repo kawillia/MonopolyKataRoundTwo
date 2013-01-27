@@ -6,7 +6,7 @@ using MonopolyKata.Core.Spaces;
 
 namespace MonopolyKata.Core
 {
-    public class Board
+    public class Board : IBoard
     {
         private IEnumerable<Space> spaces;
         private IEnumerable<IMovementRule> movementRules;

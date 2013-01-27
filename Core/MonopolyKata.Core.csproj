@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Banker.cs" />
+    <Compile Include="IBoard.cs" />
     <Compile Include="ITurn.cs" />
     <Compile Include="PropertyManager.cs" />
     <Compile Include="Spaces\GoToJail.cs" />
