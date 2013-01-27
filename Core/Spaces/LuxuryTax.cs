@@ -7,8 +7,8 @@ namespace MonopolyKata.Core.Spaces
         private Int32 taxAmount;
         private Banker banker;
 
-        public LuxuryTax(Int32 taxAmount, Banker banker)
-            : base()
+        public LuxuryTax(Int32 index, Int32 taxAmount, Banker banker)
+            : base(index)
         {
             this.taxAmount = taxAmount;
             this.banker = banker;

@@ -7,8 +7,8 @@ namespace MonopolyKata.Core.Spaces
         private Int32 jailLocation;
         private Board board;
 
-        public GoToJail(Int32 jailLocation, Board board)
-            : base()
+        public GoToJail(Int32 index, Int32 jailLocation, Board board)
+            : base(index)
         {
             this.jailLocation = jailLocation;
             this.board = board;

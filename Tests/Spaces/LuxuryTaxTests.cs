@@ -17,7 +17,7 @@ namespace MonopolyKata.Tests.Spaces
         {
             horse = "Horse";
             banker = new Banker(new[] { horse });
-            luxuryTax = new LuxuryTax(ClassicGameConstants.LuxuryTaxPaymentAmount, banker);
+            luxuryTax = new LuxuryTax(ClassicBoardFactory.LuxuryTaxIndex, ClassicGameConstants.LuxuryTaxPaymentAmount, banker);
         }
 
         [TestMethod]

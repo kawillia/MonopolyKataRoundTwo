@@ -29,7 +29,7 @@ namespace MonopolyKata.Core
             
             var newLocation = (currentLocation + numberOfSpaces) % spaces.Count();
             playerLocations[player] = newLocation;
-            spaces.ElementAt(newLocation).LandOn(player);
+            spaces.First(s => s.Index == newLocation).LandOn(player);
         }
 
         private void ApplyMovementRules(String player, Int32 numberOfSpaces, Int32 currentLocation)

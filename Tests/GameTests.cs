@@ -1,4 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MonopolyKata.Classic;
+using MonopolyKata.Classic.Rules;
 using MonopolyKata.Core;
 using Moq;
 using System;
@@ -72,6 +74,33 @@ namespace MonopolyKata.Tests
             };
 
             var game = new Game(players, mockTurn.Object, shuffler);
+        }
+
+        [TestMethod]
+        public void FullStackTest()
+        {
+            var players = new[] { "Horse", "Hat" };
+            var mockDice = new Mock<Dice>();
+            var dieValues = new Queue<Int32>(new[] { 1, 2, 3, 5, 5, 6 });
+
+            mockDice.Setup(d => d.RollDie()).Returns(() => dieValues.Dequeue());
+
+            var banker = new Banker(players);
+
+            foreach (var player in players)
+                banker.Pay(player, 2000);
+
+            var propertyManager = new PropertyManager();
+            var properties = ClassicBoardFactory.CreateProperties(banker, propertyManager);
+            propertyManager.ManageProperties(properties);
+
+            var board = ClassicBoardFactory.CreateBoard(mockDice.Object, new[] { new ClassicGoBonusRule(banker) }, properties, banker, players);
+            var turn = new ClassicTurn(mockDice.Object, board, banker, propertyManager);
+            var game =  new Game(players, turn, new GuidShuffler<String>());
+            game.PlayRound();
+
+            Assert.IsTrue(properties.First(p => p.Index == 3).IsOwned);
+            Assert.IsTrue(properties.First(p => p.Index == 8).IsOwned);
         }
     }
 }

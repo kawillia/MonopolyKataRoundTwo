@@ -25,7 +25,7 @@ namespace MonopolyKata.Tests
         {
             horse = "Horse";
             movementRules = new[] { new FakeMovementRule(), new FakeMovementRule() };
-            spaces = new[] { new FakeSpace(), new FakeSpace(), new FakeSpace(), new FakeSpace() };
+            spaces = new[] { new FakeSpace(0), new FakeSpace(1), new FakeSpace(2), new FakeSpace(3) };
             board = new Board(spaces, movementRules, new[] { horse });
         }
 
@@ -78,6 +78,10 @@ namespace MonopolyKata.Tests
         private class FakeSpace : Space
         {
             public Boolean LandedOn { get; private set; }
+
+            public FakeSpace(Int32 index)
+                : base(index)
+            { }
 
             public override void LandOn(String player)
             {

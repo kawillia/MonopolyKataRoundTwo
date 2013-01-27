@@ -19,7 +19,7 @@ namespace MonopolyKata.Tests.Spaces
         {
             horse = "Horse";
             board = new Board(Enumerable.Empty<Space>(), Enumerable.Empty<IMovementRule>(), new[] { horse });
-            goToJail = new GoToJail(ClassicBoardFactory.JustVisitingLocation, board);            
+            goToJail = new GoToJail(ClassicBoardFactory.JustVisitingLocation, ClassicBoardFactory.JustVisitingLocation, board);            
         }
 
         [TestMethod]

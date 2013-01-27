@@ -24,8 +24,8 @@ namespace MonopolyKata.Core.Spaces
         public Boolean IsOwned { get { return this.Owner != null; } }
         public String Owner { get { return owner; } }
 
-        public Property(Int32 price, Int32 baseRent, String group, Banker banker, PropertyManager propertyManager)
-            : base()
+        public Property(Int32 index, Int32 price, Int32 baseRent, String group, Banker banker, PropertyManager propertyManager)
+            : base(index)
         {
             this.price = price;
             this.baseRent = baseRent;

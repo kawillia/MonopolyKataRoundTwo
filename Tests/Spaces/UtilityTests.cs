@@ -26,8 +26,21 @@ namespace MonopolyKata.Tests.Spaces
 
             var banker = new Banker(new[] { hat });
             var propertyManager = new PropertyManager();
-            electricCompany = new Utility(ClassicBoardFactory.UtilityPrice, ClassicBoardFactory.UtilityGroup, banker, propertyManager, dice);
-            waterWorks = new Utility(ClassicBoardFactory.UtilityPrice, ClassicBoardFactory.UtilityGroup, banker, propertyManager, dice);
+            electricCompany = new Utility(
+                ClassicBoardFactory.ElectricCompanyIndex,
+                ClassicBoardFactory.UtilityPrice, 
+                ClassicBoardFactory.UtilityGroup, 
+                banker, 
+                propertyManager, 
+                dice);
+
+            waterWorks = new Utility(
+                ClassicBoardFactory.WaterWorksIndex,
+                ClassicBoardFactory.UtilityPrice, 
+                ClassicBoardFactory.UtilityGroup, 
+                banker, 
+                propertyManager, 
+                dice);
 
             propertyManager.ManageProperties(new[] { electricCompany, waterWorks });
         }

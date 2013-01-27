@@ -6,8 +6,8 @@ namespace MonopolyKata.Core.Spaces
     {
         private Dice dice;
 
-        public Utility(Int32 price, String group, Banker banker, PropertyManager propertyManager, Dice dice) 
-            : base(price, 0, group, banker, propertyManager)
+        public Utility(Int32 index, Int32 price, String group, Banker banker, PropertyManager propertyManager, Dice dice) 
+            : base(index, price, 0, group, banker, propertyManager)
         {
             this.dice = dice;
         }

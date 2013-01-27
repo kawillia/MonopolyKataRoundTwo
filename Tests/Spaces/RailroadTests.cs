@@ -26,10 +26,37 @@ namespace MonopolyKata.Tests.Spaces
             banker = new Banker(new[] { hat, horse });
 
             var propertyManager = new PropertyManager();
-            readingRailroad = new Railroad(ClassicBoardFactory.RailroadPrice, ClassicBoardFactory.BaseRailroadRent, ClassicBoardFactory.RailroadGroup, banker, propertyManager);
-            pennsylvaniaRailroad = new Railroad(ClassicBoardFactory.RailroadPrice, ClassicBoardFactory.BaseRailroadRent, ClassicBoardFactory.RailroadGroup, banker, propertyManager);
-            boRailroad = new Railroad(ClassicBoardFactory.RailroadPrice, ClassicBoardFactory.BaseRailroadRent, ClassicBoardFactory.RailroadGroup, banker, propertyManager);
-            shortLine = new Railroad(ClassicBoardFactory.RailroadPrice, ClassicBoardFactory.BaseRailroadRent, ClassicBoardFactory.RailroadGroup, banker, propertyManager);
+            readingRailroad = new Railroad(
+                ClassicBoardFactory.ReadingRailroadIndex,
+                ClassicBoardFactory.RailroadPrice, 
+                ClassicBoardFactory.BaseRailroadRent, 
+                ClassicBoardFactory.RailroadGroup, 
+                banker, 
+                propertyManager);
+
+            pennsylvaniaRailroad = new Railroad(
+                ClassicBoardFactory.PennsylvaniaRailroadIndex,
+                ClassicBoardFactory.RailroadPrice, 
+                ClassicBoardFactory.BaseRailroadRent, 
+                ClassicBoardFactory.RailroadGroup, 
+                banker, 
+                propertyManager);
+
+            boRailroad = new Railroad(
+                ClassicBoardFactory.BoRailroadIndex,
+                ClassicBoardFactory.RailroadPrice, 
+                ClassicBoardFactory.BaseRailroadRent, 
+                ClassicBoardFactory.RailroadGroup, 
+                banker, 
+                propertyManager);
+
+            shortLine = new Railroad(
+                ClassicBoardFactory.IncomeTaxIndex,
+                ClassicBoardFactory.RailroadPrice, 
+                ClassicBoardFactory.BaseRailroadRent, 
+                ClassicBoardFactory.RailroadGroup, 
+                banker, 
+                propertyManager);
 
             propertyManager.ManageProperties(new[] { readingRailroad, pennsylvaniaRailroad, boRailroad, shortLine });
         }

@@ -8,8 +8,8 @@ namespace MonopolyKata.Core.Spaces
         private Int32 maximumTaxPayment;
         private Banker banker;
 
-        public IncomeTax(Int32 taxPercentage, Int32 maximumTaxPayment, Banker banker)
-            : base()
+        public IncomeTax(Int32 index, Int32 taxPercentage, Int32 maximumTaxPayment, Banker banker)
+            : base(index)
         {
             this.taxPercentage = taxPercentage;
             this.maximumTaxPayment = maximumTaxPayment;

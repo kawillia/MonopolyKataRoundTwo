@@ -26,8 +26,21 @@ namespace MonopolyKata.Tests.Spaces
             banker.Pay(horse, 2000);
 
             var propertyManager = new PropertyManager();
-            mediterraneanAvenue = new Property(ClassicBoardFactory.MediterraneanAvenuePrice, ClassicBoardFactory.MediterraneanAvenueRent, ClassicBoardFactory.PurpleGroup, banker, propertyManager);
-            balticAvenue = new Property(ClassicBoardFactory.BalticAvenuePrice, ClassicBoardFactory.BalticAvenueRent, ClassicBoardFactory.PurpleGroup, banker, propertyManager);
+            mediterraneanAvenue = new Property(
+                ClassicBoardFactory.MediterraneanAvenueIndex,
+                ClassicBoardFactory.MediterraneanAvenuePrice, 
+                ClassicBoardFactory.MediterraneanAvenueRent, 
+                ClassicBoardFactory.PurpleGroup, 
+                banker, 
+                propertyManager);
+
+            balticAvenue = new Property(
+                ClassicBoardFactory.BalticAvenueIndex,
+                ClassicBoardFactory.BalticAvenuePrice, 
+                ClassicBoardFactory.BalticAvenueRent, 
+                ClassicBoardFactory.PurpleGroup, 
+                banker, 
+                propertyManager);
 
             propertyManager.ManageProperties(new[] { mediterraneanAvenue, balticAvenue });
         }
