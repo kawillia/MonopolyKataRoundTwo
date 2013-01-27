@@ -18,18 +18,18 @@ namespace MonopolyKata.Tests
             var mockTurn = new Mock<ITurn>();
             var game = new Game(players, mockTurn.Object, new GuidShuffler<String>());
             var controller = new GameController(game);
-            var turnsBegan = new List<String>();
-            var turnsTaken = new List<String>();
-            var turnsEnded = new List<String>();
+            var turnsBegan = 0;
+            var turnsTaken = 0;
+            var turnsEnded = 0;
 
-            mockTurn.Setup(m => m.Begin(It.IsAny<String>())).Callback((String p) => turnsBegan.Add(p));
-            mockTurn.Setup(m => m.Take(It.IsAny<String>())).Callback((String p) => turnsTaken.Add(p));
-            mockTurn.Setup(m => m.End(It.IsAny<String>())).Callback((String p) => turnsEnded.Add(p));
+            mockTurn.Setup(m => m.Begin(It.IsAny<String>())).Callback(() => turnsBegan++);
+            mockTurn.Setup(m => m.Take(It.IsAny<String>())).Callback(() => turnsTaken++);
+            mockTurn.Setup(m => m.End(It.IsAny<String>())).Callback(() => turnsEnded++);
             controller.Play();
 
-            Assert.AreEqual(GameController.NumberOfRoundsToPlay, turnsBegan.Count / players.Count());
-            Assert.AreEqual(GameController.NumberOfRoundsToPlay, turnsTaken.Count / players.Count());
-            Assert.AreEqual(GameController.NumberOfRoundsToPlay, turnsEnded.Count / players.Count());
+            Assert.AreEqual(GameController.NumberOfRoundsToPlay, turnsBegan / 2);
+            Assert.AreEqual(GameController.NumberOfRoundsToPlay, turnsTaken / 2);
+            Assert.AreEqual(GameController.NumberOfRoundsToPlay, turnsEnded / 2);
         }
 
         [TestMethod]

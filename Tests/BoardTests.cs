@@ -16,6 +16,7 @@ namespace MonopolyKata.Tests
     public class BoardTests
     {
         private String horse;
+        private IEnumerable<FakeSpace> spaces;
         private Board board;
         private IEnumerable<FakeMovementRule> movementRules;
 
@@ -24,12 +25,8 @@ namespace MonopolyKata.Tests
         {
             horse = "Horse";
             movementRules = new[] { new FakeMovementRule(), new FakeMovementRule() };
-
-            var players = new[] { horse };
-            var banker = new Banker(players);
-            var propertyManager = new PropertyManager();
-            var properties = ClassicBoardFactory.CreateProperties(banker, propertyManager);
-            board = ClassicBoardFactory.CreateBoard(new Mock<Dice>().Object, movementRules, properties, banker, players);
+            spaces = new[] { new FakeSpace(), new FakeSpace(), new FakeSpace(), new FakeSpace() };
+            board = new Board(spaces, movementRules, new[] { horse });
         }
 
         [TestMethod]
@@ -38,15 +35,16 @@ namespace MonopolyKata.Tests
             board.MovePlayer(horse, 3);
 
             Assert.AreEqual(3, board.GetPlayerLocation(horse));
+            Assert.IsTrue(spaces.ElementAt(3).LandedOn);
         }
 
         [TestMethod]
         public void PlayerPositionWrapsAtEndOfBoard()
         {
-            board.TeleportPlayer(horse, 38);
-            board.MovePlayer(horse, 4);
+            board.MovePlayer(horse, 5);
 
-            Assert.AreEqual(2, board.GetPlayerLocation(horse));
+            Assert.AreEqual(1, board.GetPlayerLocation(horse));
+            Assert.IsTrue(spaces.ElementAt(1).LandedOn);
         }
 
         [TestMethod]
@@ -61,8 +59,10 @@ namespace MonopolyKata.Tests
         [TestMethod]
         public void PlayerIsMovedDirectlyToPosition()
         {
-            board.TeleportPlayer(horse, 20);
-            Assert.AreEqual(20, board.GetPlayerLocation(horse));
+            board.TeleportPlayer(horse, 3);
+
+            Assert.AreEqual(3, board.GetPlayerLocation(horse));
+            Assert.IsFalse(spaces.ElementAt(0).LandedOn);
         }
 
         private class FakeMovementRule : IMovementRule
@@ -72,6 +72,16 @@ namespace MonopolyKata.Tests
             public void Apply(String player, Int32 currentLocation, Int32 numberOfSpaces)
             {
                 Applied = true;
+            }
+        }
+
+        private class FakeSpace : Space
+        {
+            public Boolean LandedOn { get; private set; }
+
+            public override void LandOn(String player)
+            {
+                LandedOn = true;
             }
         }
     }
